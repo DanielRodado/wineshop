@@ -32,7 +32,7 @@ public class Order {
     private Set<WineOrder> wineOrders = new HashSet<>();
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private Set<AccessoriesOrder> accessoriesOrders = new HashSet<>();
+    private Set<AccessorieOrder> accessorieOrders = new HashSet<>();
 
     // Methods
 
@@ -86,9 +86,9 @@ public class Order {
 
     // other methods
 
-    public void addAccessoriesOrder (AccessoriesOrder accessoriesOrder) {
-        this.accessoriesOrders.add(accessoriesOrder);
-        accessoriesOrder.setOrder(this);
+    public void addAccessoriesOrder (AccessorieOrder accessorieOrder) {
+        this.accessorieOrders.add(accessorieOrder);
+        accessorieOrder.setOrder(this);
     }
 
     public void addWineOrder (WineOrder wineOrder) {

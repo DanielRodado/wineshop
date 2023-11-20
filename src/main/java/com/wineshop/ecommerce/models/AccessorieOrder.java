@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-public class AccessoriesOrder {
+public class AccessorieOrder {
 
     // Properties
 
@@ -22,14 +22,14 @@ public class AccessoriesOrder {
     private Order order;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Accesories accessories;
+    private Accesorie accessorie;
 
     // Constructors
 
-    public AccessoriesOrder() {
+    public AccessorieOrder() {
     }
 
-    public AccessoriesOrder(int amount, Double subTotal) {
+    public AccessorieOrder(int amount, Double subTotal) {
         this.amount = amount;
         this.subTotal = subTotal;
     }
@@ -62,7 +62,7 @@ public class AccessoriesOrder {
         this.order = order;
     }
 
-    public void setAccessories(Accesories accessories) {
-        this.accessories = accessories;
+    public void setAccessorie(Accesorie accessorie) {
+        this.accessorie = accessorie;
     }
 }
