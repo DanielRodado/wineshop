@@ -6,8 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -31,10 +29,10 @@ public class Order {
     private Client client;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private Set<WineOrder> wineOrder = new HashSet<>();
+    private Set<WineOrder> wineOrders = new HashSet<>();
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private Set<AccessoriesOrder> accessoriesOrder = new HashSet<>();
+    private Set<AccessoriesOrder> accessoriesOrders = new HashSet<>();
 
     // Methods
 
@@ -84,5 +82,17 @@ public class Order {
 
     public void setPriceOrder(Double priceOrder) {
         this.priceOrder = priceOrder;
+    }
+
+    // other methods
+
+    public void addAccessoriesOrder (AccessoriesOrder accessoriesOrder) {
+        this.accessoriesOrders.add(accessoriesOrder);
+        accessoriesOrder.setOrder(this);
+    }
+
+    public void addWineOrder (WineOrder wineOrder) {
+        this.wineOrders.add(wineOrder);
+        wineOrder.setOrder(this);
     }
 }

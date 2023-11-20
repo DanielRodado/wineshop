@@ -3,7 +3,9 @@ package com.wineshop.ecommerce.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Accesories {
@@ -23,6 +25,9 @@ public class Accesories {
     private Double price;
 
     private int stock;
+
+    @OneToMany(mappedBy = "accessories", fetch = FetchType.EAGER)
+    private Set<AccessoriesOrder> accessoriesOrders = new HashSet<>();
 
     // Methods
 
@@ -82,5 +87,12 @@ public class Accesories {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    // other methods
+
+    public void addAccessoriesOrder (AccessoriesOrder accessoriesOrder) {
+        this.accessoriesOrders.add(accessoriesOrder);
+        accessoriesOrder.setAccessories(this);
     }
 }
