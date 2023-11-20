@@ -5,8 +5,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Order {
@@ -22,11 +24,17 @@ public class Order {
 
     private LocalDate date;
 
+    private Double priceOrder;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    private Long client;
+    private Client client;
 
-    private Double priceOrder;
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private Set<WineOrder> wineOrder = new HashSet<>();
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private Set<AccessoriesOrder> accessoriesOrder = new HashSet<>();
 
     // Methods
 
@@ -62,11 +70,11 @@ public class Order {
     }
 
     @JsonIgnore
-    public Long getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(Long client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
@@ -77,5 +85,4 @@ public class Order {
     public void setPriceOrder(Double priceOrder) {
         this.priceOrder = priceOrder;
     }
-
 }
