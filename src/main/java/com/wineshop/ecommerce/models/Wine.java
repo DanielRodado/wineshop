@@ -11,7 +11,6 @@ import java.util.Set;
 public class Wine {
 
     // Properties
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

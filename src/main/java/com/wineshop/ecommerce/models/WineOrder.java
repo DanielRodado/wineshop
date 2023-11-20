@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 public class WineOrder {
 
+    // Properties
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -22,6 +24,8 @@ public class WineOrder {
     // Falta el la propiedad order, su relacion, get and set
 
 
+    // Constructors
+
     public WineOrder() {
     }
 
@@ -29,6 +33,8 @@ public class WineOrder {
         this.amount = amount;
         this.subTotal = subTotal;
     }
+
+    // Getters
 
     public Long getId() {
         return id;
@@ -45,6 +51,8 @@ public class WineOrder {
     public Wine getWine() {
         return wine;
     }
+
+    // Setters
 
     public void setAmount(int amount) {
         this.amount = amount;

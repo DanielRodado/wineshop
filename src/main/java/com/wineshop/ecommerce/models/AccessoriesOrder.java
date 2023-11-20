@@ -10,6 +10,8 @@ import javax.persistence.Id;
 @Entity
 public class AccessoriesOrder {
 
+    // Properties
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -21,6 +23,8 @@ public class AccessoriesOrder {
 
     // propiedad de accesorios y order
 
+    // Constructors
+
     public AccessoriesOrder() {
     }
 
@@ -28,6 +32,8 @@ public class AccessoriesOrder {
         this.amount = amount;
         this.subTotal = subTotal;
     }
+
+    // Getters
 
     public Long getId() {
         return id;
@@ -40,6 +46,8 @@ public class AccessoriesOrder {
     public Double getSubTotal() {
         return subTotal;
     }
+
+    // Setters
 
     public void setAmount(int amount) {
         this.amount = amount;
