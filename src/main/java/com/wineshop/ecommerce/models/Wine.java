@@ -27,6 +27,8 @@ public class Wine {
 
     private Variety variety;
 
+    private WineType wineType;
+
     @OneToMany(mappedBy = "wine", fetch = FetchType.EAGER)
     private Set<WineOrder> wineOrders = new HashSet<>();
 
@@ -36,7 +38,8 @@ public class Wine {
     public Wine() {
     }
 
-    public Wine(String name, String description, String area, String vineyard, Double price, List<String> imgURL, int stock, int cc, Variety variety) {
+    public Wine(String name, String description, String area, String vineyard, Double price, List<String> imgURL,
+                int stock, int cc, Variety variety, WineType wineType) {
         this.name = name;
         this.description = description;
         this.area = area;
@@ -90,6 +93,9 @@ public class Wine {
         return variety;
     }
 
+    public WineType getWineType() {
+        return wineType;
+    }
 
     // Setters
 
@@ -127,6 +133,10 @@ public class Wine {
 
     public void setVariety(Variety variety) {
         this.variety = variety;
+    }
+
+    public void setWineType(WineType wineType) {
+        this.wineType = wineType;
     }
 
     // Methods
