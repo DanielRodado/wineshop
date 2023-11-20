@@ -21,7 +21,8 @@ public class WineOrder {
     @ManyToOne(fetch = FetchType.EAGER)
     private Wine wine;
 
-    // Falta el la propiedad order, su relacion, get and set
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Order order;
 
 
     // Constructors
@@ -52,6 +53,10 @@ public class WineOrder {
         return wine;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
     // Setters
 
     public void setAmount(int amount) {
@@ -64,5 +69,9 @@ public class WineOrder {
 
     public void setWine(Wine wine) {
         this.wine = wine;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
