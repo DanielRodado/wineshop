@@ -2,10 +2,7 @@ package com.wineshop.ecommerce.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class AccessoriesOrder {
@@ -21,7 +18,11 @@ public class AccessoriesOrder {
 
     private Double subTotal;
 
-    // propiedad de accesorios y order
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Accesories accessories;
 
     // Constructors
 
@@ -55,5 +56,13 @@ public class AccessoriesOrder {
 
     public void setSubTotal(Double subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public void setAccessories(Accesories accessories) {
+        this.accessories = accessories;
     }
 }
