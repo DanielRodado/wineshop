@@ -3,6 +3,7 @@ package com.wineshop.ecommerce.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +29,9 @@ public class Wine {
     private Variety variety;
 
     private WineType wineType;
+
+    @ElementCollection
+    private List<Byte> valuations = new ArrayList<>(); // 1 - 10
 
     @OneToMany(mappedBy = "wine", fetch = FetchType.EAGER)
     private Set<WinePurchase> winePurchases = new HashSet<>();
@@ -97,6 +101,10 @@ public class Wine {
         return wineType;
     }
 
+    public List<Byte> getValuations() {
+        return valuations;
+    }
+
     // Setters
 
     public void setName(String name) {
@@ -143,5 +151,9 @@ public class Wine {
     public void addWinePurchase(WinePurchase winePurchase) {
         winePurchases.add(winePurchase);
         winePurchase.setWine(this);
+    }
+
+    public void addValuation(Byte valuation) {
+        valuations.add(valuation);
     }
 }
