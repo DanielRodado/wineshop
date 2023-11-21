@@ -18,10 +18,10 @@ public class AccessoryPurchase {
 
     private Double subTotal;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // FALTA @JoinColumn("purchase_id")?
     private Purchase purchase;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // FALTA @JoinColumn("accessory_id")?
     private Accessory accessory;
 
     // Constructors
@@ -46,6 +46,14 @@ public class AccessoryPurchase {
 
     public Double getSubTotal() {
         return subTotal;
+    }
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public Accessory getAccessory() {
+        return accessory;
     }
 
     // Setters

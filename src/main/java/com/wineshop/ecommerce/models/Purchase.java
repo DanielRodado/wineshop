@@ -84,6 +84,14 @@ public class Purchase {
         this.priceOrder = priceOrder;
     }
 
+    public Set<WinePurchase> getWinePurchases() {
+        return winePurchases;
+    }
+
+    public Set<AccessoryPurchase> getAccessoryPurchases() {
+        return accessoryPurchases;
+    }
+
     // other methods
 
     public void addAccessoryPurchases(AccessoryPurchase accessoryPurchase) {

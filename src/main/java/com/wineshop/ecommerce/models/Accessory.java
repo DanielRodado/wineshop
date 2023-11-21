@@ -89,6 +89,10 @@ public class Accessory {
         this.stock = stock;
     }
 
+    public Set<AccessoryPurchase> getAccessoryPurchases() {
+        return accessoryPurchases;
+    }
+
     // other methods
 
     public void addAccessoryPurchase(AccessoryPurchase accessoryPurchase) {

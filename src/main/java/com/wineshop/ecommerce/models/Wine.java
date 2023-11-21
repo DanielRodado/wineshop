@@ -12,6 +12,7 @@ import java.util.Set;
 public class Wine {
 
     // Properties
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -145,6 +146,10 @@ public class Wine {
 
     public void setWineType(WineType wineType) {
         this.wineType = wineType;
+    }
+
+    public Set<WinePurchase> getWinePurchases() {
+        return winePurchases;
     }
 
     // Methods
