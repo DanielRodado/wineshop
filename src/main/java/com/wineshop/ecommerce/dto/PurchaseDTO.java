@@ -19,8 +19,6 @@ public class PurchaseDTO {
 
     private Double priceOrder;
 
-    private Client client;
-
     private Set<WinePurchaseDTO> winePurchases;
 
     private Set<AccessoryPurchaseDTO> accessoryPurchases;
@@ -32,7 +30,6 @@ public class PurchaseDTO {
         this.deliveryAddress = purchase.getDeliveryAddress();
         this.date = purchase.getDate();
         this.priceOrder = purchase.getPriceOrder();
-        this.client = purchase.getClient();
         this.winePurchases = purchase.getWinePurchases().stream().map(WinePurchaseDTO::new).collect(Collectors.toSet());
         this.accessoryPurchases = purchase.getAccessoryPurchases().stream().map(AccessoryPurchaseDTO::new).collect(Collectors.toSet());
     }
@@ -53,10 +50,6 @@ public class PurchaseDTO {
 
     public Double getPriceOrder() {
         return priceOrder;
-    }
-
-    public Client getClient() {
-        return client;
     }
 
     public Set<WinePurchaseDTO> getWinePurchases() {

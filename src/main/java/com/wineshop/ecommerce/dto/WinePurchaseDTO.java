@@ -14,9 +14,7 @@ public class WinePurchaseDTO {
 
     private Double subTotal;
 
-    private Wine wine;
-
-    private Purchase purchase;
+    private Long wineId;
 
     // Constructor
 
@@ -24,8 +22,7 @@ public class WinePurchaseDTO {
         this.id = winePurchase.getId();
         this.amount = winePurchase.getAmount();
         this.subTotal = winePurchase.getSubTotal();
-        this.wine = winePurchase.getWine();
-        this.purchase = winePurchase.getPurchase();
+        this.wineId = winePurchase.getWine().getId();
     }
 
     // Getters
@@ -43,11 +40,7 @@ public class WinePurchaseDTO {
         return subTotal;
     }
 
-    public Wine getWine() {
-        return wine;
-    }
-
-    public Purchase getPurchase() {
-        return purchase;
+    public Long getWineId() {
+        return wineId;
     }
 }

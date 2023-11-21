@@ -14,9 +14,7 @@ public class AccessoryPurchaseDTO {
 
     private Double subTotal;
 
-    private Purchase purchase;
-
-    private Accessory accessory;
+    private Long accessoryId;
 
     // Constructor
 
@@ -24,8 +22,7 @@ public class AccessoryPurchaseDTO {
         this.id = accessoryPurchase.getId();
         this.amount = accessoryPurchase.getAmount();
         this.subTotal = accessoryPurchase.getSubTotal();
-        this.purchase = accessoryPurchase.getPurchase();
-        this.accessory = accessoryPurchase.getAccessory();
+        this.accessoryId = accessoryPurchase.getAccessory().getId();
     }
 
     // Getters
@@ -42,11 +39,7 @@ public class AccessoryPurchaseDTO {
         return subTotal;
     }
 
-    public Purchase getPurchase() {
-        return purchase;
-    }
-
-    public Accessory getAccessory() {
-        return accessory;
+    public Long getAccessoryId() {
+        return accessoryId;
     }
 }
