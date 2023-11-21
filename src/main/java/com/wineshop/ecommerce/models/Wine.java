@@ -30,7 +30,7 @@ public class Wine {
     private WineType wineType;
 
     @OneToMany(mappedBy = "wine", fetch = FetchType.EAGER)
-    private Set<WineOrder> wineOrders = new HashSet<>();
+    private Set<WinePurchase> winePurchases = new HashSet<>();
 
 
     // Constructors
@@ -140,8 +140,8 @@ public class Wine {
     }
 
     // Methods
-    public void addWineOrder(WineOrder wineOrder) {
-        wineOrders.add(wineOrder);
-        wineOrder.setWine(this);
+    public void addWinePurchase(WinePurchase winePurchase) {
+        winePurchases.add(winePurchase);
+        winePurchase.setWine(this);
     }
 }

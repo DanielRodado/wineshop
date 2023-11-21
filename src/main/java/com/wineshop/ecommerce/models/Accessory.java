@@ -27,7 +27,7 @@ public class Accessory {
     private int stock;
 
     @OneToMany(mappedBy = "accessory", fetch = FetchType.EAGER)
-    private Set<AccessoryOrder> accessoryOrders = new HashSet<>();
+    private Set<AccessoryPurchase> accessoryPurchases = new HashSet<>();
 
     // Methods
 
@@ -91,8 +91,8 @@ public class Accessory {
 
     // other methods
 
-    public void addAccessoryOrder (AccessoryOrder accessoryOrder) {
-        this.accessoryOrders.add(accessoryOrder);
-        accessoryOrder.setAccessory(this);
+    public void addAccessoryPurchase(AccessoryPurchase accessoryPurchase) {
+        this.accessoryPurchases.add(accessoryPurchase);
+        accessoryPurchase.setAccessory(this);
     }
 }

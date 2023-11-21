@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Order {
+public class Purchase {
 
     // Properties
 
@@ -28,19 +28,19 @@ public class Order {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private Set<WineOrder> wineOrders = new HashSet<>();
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.EAGER)
+    private Set<WinePurchase> winePurchases = new HashSet<>();
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private Set<AccessoryOrder> accessoryOrders = new HashSet<>();
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.EAGER)
+    private Set<AccessoryPurchase> accessoryPurchases = new HashSet<>();
 
     // Methods
 
     // Constructors
 
-    public Order() { }
+    public Purchase() { }
 
-    public Order(String deliveryAddress, LocalDate date, Long client) {
+    public Purchase(String deliveryAddress, LocalDate date) {
         this.deliveryAddress = deliveryAddress;
         this.date = date;
     }
@@ -86,13 +86,13 @@ public class Order {
 
     // other methods
 
-    public void addAccessoryOrder(AccessoryOrder accessoryOrder) {
-        this.accessoryOrders.add(accessoryOrder);
-        accessoryOrder.setOrder(this);
+    public void addAccessoryPurchases(AccessoryPurchase accessoryPurchase) {
+        this.accessoryPurchases.add(accessoryPurchase);
+        accessoryPurchase.setPurchase(this);
     }
 
-    public void addWineOrder (WineOrder wineOrder) {
-        this.wineOrders.add(wineOrder);
-        wineOrder.setOrder(this);
+    public void addWinePurchase(WinePurchase winePurchase) {
+        this.winePurchases.add(winePurchase);
+        winePurchase.setPurchase(this);
     }
 }

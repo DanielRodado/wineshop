@@ -5,8 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -26,7 +24,7 @@ public class Client {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<Order> orders = new HashSet<>();
+    private Set<Purchase> purchases = new HashSet<>();
 
     // Methods
 
@@ -97,8 +95,8 @@ public class Client {
         this.birthDate = birthDate;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
+    public Set<Purchase> getPurchases() {
+        return purchases;
     }
 
     // Other methods
@@ -107,8 +105,8 @@ public class Client {
         return this.firstName + " " + this.lastName;
     }
 
-    public void addOrder(Order order) {
-        order.setClient(this);
-        this.orders.add(order);
+    public void addPurchase(Purchase purchase) {
+        purchase.setClient(this);
+        this.purchases.add(purchase);
     }
 }
