@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Accesorie {
+public class Accessory {
 
     // Properties
 
@@ -26,16 +26,16 @@ public class Accesorie {
 
     private int stock;
 
-    @OneToMany(mappedBy = "accessories", fetch = FetchType.EAGER)
-    private Set<AccessorieOrder> accessorieOrders = new HashSet<>();
+    @OneToMany(mappedBy = "accessory", fetch = FetchType.EAGER)
+    private Set<AccessoryOrder> accessoryOrders = new HashSet<>();
 
     // Methods
 
     // Constructors
 
-    public Accesorie() { }
+    public Accessory() { }
 
-    public Accesorie(String name, String description, List<String> imagesURL, Double price, int stock) {
+    public Accessory(String name, String description, List<String> imagesURL, Double price, int stock) {
         this.name = name;
         this.description = description;
         this.imagesURL = imagesURL;
@@ -91,8 +91,8 @@ public class Accesorie {
 
     // other methods
 
-    public void addAccessoriesOrder (AccessorieOrder accessorieOrder) {
-        this.accessorieOrders.add(accessorieOrder);
-        accessorieOrder.setAccessorie(this);
+    public void addAccessoryOrder (AccessoryOrder accessoryOrder) {
+        this.accessoryOrders.add(accessoryOrder);
+        accessoryOrder.setAccessory(this);
     }
 }
