@@ -27,7 +27,6 @@ public class WinePurchaseDTO {
 
     // Getters
 
-
     public Long getId() {
         return id;
     }
