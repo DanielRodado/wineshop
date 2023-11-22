@@ -14,4 +14,6 @@ public interface AccessoryService {
 
     void updateStockAccessoryById(Long id, int amount);
 
+    void saveAccessory(Accessory accessory);
+
 }

@@ -20,7 +20,7 @@ public class Accessory {
     private String name, description;
 
     @ElementCollection
-    private List<String> imagesURL;
+    private List<String> imgURL;
 
     private Double price;
 
@@ -38,7 +38,7 @@ public class Accessory {
     public Accessory(String name, String description, List<String> imagesURL, Double price, int stock) {
         this.name = name;
         this.description = description;
-        this.imagesURL = imagesURL;
+        this.imgURL = imagesURL;
         this.price = price;
         this.stock = stock;
     }
@@ -65,12 +65,12 @@ public class Accessory {
         this.description = description;
     }
 
-    public List<String> getImagesURL() {
-        return imagesURL;
+    public List<String> getImgURL() {
+        return imgURL;
     }
 
-    public void setImagesURL(List<String> imagesURL) {
-        this.imagesURL = imagesURL;
+    public void setImgURL(List<String> imgURL) {
+        this.imgURL = imgURL;
     }
 
     public Double getPrice() {

@@ -36,4 +36,9 @@ public class AccessoryImplement implements AccessoryService {
     public void updateStockAccessoryById(Long id, int amount) {
         accessoryRepository.updateStockAccessoryById(id, amount);
     }
+
+    @Override
+    public void saveAccessory(Accessory accessory) {
+        accessoryRepository.save(accessory);
+    }
 }

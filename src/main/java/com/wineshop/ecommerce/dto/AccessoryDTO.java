@@ -28,7 +28,7 @@ public class AccessoryDTO {
         this.id = accessory.getId();
         this.name = accessory.getName();
         this.description = accessory.getDescription();
-        this.imagesURL = accessory.getImagesURL();
+        this.imagesURL = accessory.getImgURL();
         this.price = accessory.getPrice();
         this.stock = accessory.getStock();
         this.accessoryPurchases = accessory.getAccessoryPurchases().stream().map(AccessoryPurchaseDTO::new).collect(Collectors.toSet());

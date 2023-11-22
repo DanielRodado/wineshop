@@ -14,4 +14,6 @@ public interface WineService {
 
     Wine findWineById(Long id);
 
+    void saveWine(Wine wine);
+
 }

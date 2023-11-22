@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class WineController {
@@ -55,6 +57,16 @@ public class WineController {
 
 
         return new ResponseEntity<>(wineValuation, HttpStatus.OK);
+    }
+
+    @PostMapping("/wines/create")
+    public ResponseEntity<String> createWines(@RequestBody List<Wine> wines) {
+
+        for (Wine wine: wines) {
+            wineService.saveWine(wine);
+        }
+
+        return new ResponseEntity<>("Wines created successfully!", HttpStatus.CREATED);
     }
 
 
