@@ -9,6 +9,8 @@ public interface ClientService {
 
     List<ClientDTO> getAllClientsDTO();
 
+    Client findClientById(Long id);
+
     boolean existsClientByEmail(String email);
 
     void saveClient(Client client);

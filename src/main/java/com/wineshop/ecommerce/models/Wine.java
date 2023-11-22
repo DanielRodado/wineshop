@@ -55,6 +55,7 @@ public class Wine {
         this.stock = stock;
         this.cc = cc;
         this.variety = variety;
+        this.wineType = wineType;
     }
 
     // Getters and setters
@@ -152,12 +153,6 @@ public class Wine {
     }
 
     // Other methods
-
-    public void addWinePurchase(WinePurchase winePurchase) {
-        winePurchases.add(winePurchase);
-        winePurchase.setWine(this);
-    }
-
     public void addValuation(Byte valuation) {
         valuations.add(valuation);
     }

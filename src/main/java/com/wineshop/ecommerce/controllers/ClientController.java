@@ -55,7 +55,7 @@ public class ClientController {
 
         // ver que el cliente sea mayor de 18 años
 
-        if (newClientApp.getBirthDate().plusYears(18).isBefore(LocalDate.now())) {
+        if (newClientApp.getBirthDate().plusYears(18).isAfter(LocalDate.now())) {
             return new ResponseEntity<>("You have to be 18 or older to register", HttpStatus.FORBIDDEN);
         }
 

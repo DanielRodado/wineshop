@@ -1,5 +1,6 @@
 package com.wineshop.ecommerce.services.implement;
 
+import com.wineshop.ecommerce.models.Wine;
 import com.wineshop.ecommerce.repositories.WineRepository;
 import com.wineshop.ecommerce.services.WineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,20 @@ public class WineImplement implements WineService {
     @Override
     public Double getPriceWineById(Long id) {
         return wineRepository.getPriceWineById(id);
+    }
+
+    @Override
+    public boolean existsWineByIdAndStockGreaterThan(Long id, int amount) {
+        return wineRepository.existsByIdAndStockGreaterThan(id, amount);
+    }
+
+    @Override
+    public void updateStockWineById(Long id, int amount) {
+        wineRepository.updateStockWineById(id, amount);
+    }
+
+    @Override
+    public Wine findWineById(Long id) {
+        return wineRepository.findById(id).orElse(null);
     }
 }

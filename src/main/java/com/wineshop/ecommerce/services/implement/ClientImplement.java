@@ -23,6 +23,11 @@ public class ClientImplement implements ClientService {
     }
 
     @Override
+    public Client findClientById(Long id) {
+        return clientRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public boolean existsClientByEmail(String email) {
         return clientRepository.existsByEmail(email);
     }
