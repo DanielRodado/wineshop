@@ -24,6 +24,8 @@ public class AccessoryPurchase {
     @ManyToOne(fetch = FetchType.EAGER) // FALTA @JoinColumn("accessory_id")?
     private Accessory accessory;
 
+    // Methods
+
     // Constructors
 
     public AccessoryPurchase() {
@@ -34,7 +36,7 @@ public class AccessoryPurchase {
         this.subTotal = subTotal;
     }
 
-    // Getters
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -55,8 +57,6 @@ public class AccessoryPurchase {
     public Accessory getAccessory() {
         return accessory;
     }
-
-    // Setters
 
     public void setAmount(int amount) {
         this.amount = amount;

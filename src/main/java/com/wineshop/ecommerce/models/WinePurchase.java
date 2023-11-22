@@ -24,6 +24,7 @@ public class WinePurchase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Purchase purchase;
 
+    // Methods
 
     // Constructors
 
@@ -35,7 +36,7 @@ public class WinePurchase {
         this.subTotal = subTotal;
     }
 
-    // Getters
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -56,8 +57,6 @@ public class WinePurchase {
     public Purchase getPurchase() {
         return purchase;
     }
-
-    // Setters
 
     public void setAmount(int amount) {
         this.amount = amount;

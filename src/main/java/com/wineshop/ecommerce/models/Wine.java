@@ -37,6 +37,7 @@ public class Wine {
     @OneToMany(mappedBy = "wine", fetch = FetchType.EAGER)
     private Set<WinePurchase> winePurchases = new HashSet<>();
 
+    // Methods
 
     // Constructors
 
@@ -56,7 +57,7 @@ public class Wine {
         this.variety = variety;
     }
 
-    // Getters
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -106,8 +107,6 @@ public class Wine {
         return valuations;
     }
 
-    // Setters
-
     public void setName(String name) {
         this.name = name;
     }
@@ -152,7 +151,8 @@ public class Wine {
         return winePurchases;
     }
 
-    // Methods
+    // Other methods
+
     public void addWinePurchase(WinePurchase winePurchase) {
         winePurchases.add(winePurchase);
         winePurchase.setWine(this);
