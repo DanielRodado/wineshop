@@ -29,7 +29,11 @@ public class ECommerceApplication {
 					true, LocalDate.of(2005,7, 14));
 			clientRepository.save(clientOne);
 
-			Wine wineOne = new Wine("Vinos Daniel", "Es un vino", "Barranquilla", "Las Nieves", 22.6, List.of("add",
+			Client clientTwo = new Client("Marcos", "Rodriguez", "pass123", "marcos@gmail.com",
+					true, LocalDate.of(2002,9, 12));
+			clientRepository.save(clientTwo);
+
+			/*Wine wineOne = new Wine("Vinos Daniel", "Es un vino", "Barranquilla", "Las Nieves", 22.6, List.of("add",
 					"ass.com"), 100, 750, Variety.MALBEC, WineType.SPARKLING);
 			wineRepository.save(wineOne);
 
@@ -43,7 +47,7 @@ public class ECommerceApplication {
 
 			Accessory accessoryTwo = new Accessory("Metallic corkscrew", "I's a corkscrew", List.of("imagen3.url", "imagen4.url"),
 					9.95, 25);
-			accessoryRepository.save(accessoryTwo);
+			accessoryRepository.save(accessoryTwo);*/
 
 		};
 	}
