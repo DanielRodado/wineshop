@@ -2,6 +2,7 @@ package com.wineshop.ecommerce.models;
 
 public enum Variety {
 
+    ASSEMBLY,
     BRUT,
     BRUT_NATURE,
     CABERNET_SAUVIGNON,
@@ -11,7 +12,6 @@ public enum Variety {
     CHAMPAGNE,
     CHARDONNAY,
     COASTAL_BRUT,
-    ENSAMBLAJE,
     EXTRA_BRUT,
     MALBEC,
     MERLOT,

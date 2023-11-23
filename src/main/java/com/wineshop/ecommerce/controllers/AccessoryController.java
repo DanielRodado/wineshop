@@ -21,7 +21,7 @@ public class AccessoryController {
     private AccessoryService accessoryService;
 
     @PostMapping("/accessories/create")
-    public ResponseEntity<String> createWines(@RequestBody List<Accessory> accessories) {
+    public ResponseEntity<String> createAccessories(@RequestBody List<Accessory> accessories) {
 
         for (Accessory accessory: accessories) {
             accessoryService.saveAccessory(accessory);

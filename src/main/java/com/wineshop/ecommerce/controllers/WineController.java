@@ -31,7 +31,7 @@ public class WineController {
         Wine wine = wineService.findWineById(wineId);
         wine.addValuation(valuation);
 
-        return new ResponseEntity<>("Valuation recieved. Thanks!" ,HttpStatus.OK);
+        return new ResponseEntity<>("Valuation received. Thanks!" ,HttpStatus.OK);
     }
 
     @GetMapping("/wines/ranking")
@@ -68,7 +68,5 @@ public class WineController {
 
         return new ResponseEntity<>("Wines created successfully!", HttpStatus.CREATED);
     }
-
-
 
 }
