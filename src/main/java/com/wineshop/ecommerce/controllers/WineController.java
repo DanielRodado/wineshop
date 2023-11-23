@@ -1,5 +1,6 @@
 package com.wineshop.ecommerce.controllers;
 
+import com.wineshop.ecommerce.dto.WineDTO;
 import com.wineshop.ecommerce.dto.WineValuationDTO;
 import com.wineshop.ecommerce.models.Variety;
 import com.wineshop.ecommerce.models.Wine;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -17,6 +19,11 @@ public class WineController {
 
     @Autowired
     private WineService wineService;
+
+    @GetMapping("/wines")
+    public Set<WineDTO> getAllWinesDTO() {
+        return wineService.getAllWinesDTO();
+    }
 
     @PatchMapping("/wines/ranking")
     public ResponseEntity<String> valuateWine(@RequestParam Long wineId, @RequestParam Byte valuation) {

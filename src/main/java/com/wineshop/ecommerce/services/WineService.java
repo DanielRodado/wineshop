@@ -1,8 +1,15 @@
 package com.wineshop.ecommerce.services;
 
+import com.wineshop.ecommerce.dto.WineDTO;
 import com.wineshop.ecommerce.models.Wine;
 
+import java.util.Set;
+
 public interface WineService {
+
+    Set<Wine> getAllWines();
+
+    Set<WineDTO> getAllWinesDTO();
 
     boolean existsWineById(Long id);
 
