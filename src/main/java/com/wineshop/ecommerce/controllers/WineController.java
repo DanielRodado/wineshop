@@ -1,6 +1,7 @@
 package com.wineshop.ecommerce.controllers;
 
 import com.wineshop.ecommerce.dto.WineValuationDTO;
+import com.wineshop.ecommerce.models.Variety;
 import com.wineshop.ecommerce.models.Wine;
 import com.wineshop.ecommerce.services.WineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class WineController {
         wine.addValuation(valuation);
 
         return new ResponseEntity<>("Valuation received. Thanks!" ,HttpStatus.OK);
+    }
+
+    @GetMapping("/wines/varieties")
+    public ResponseEntity<Object> getWineVarieties() {
+
+        return new ResponseEntity<>(Variety.values(), HttpStatus.OK);
     }
 
     @GetMapping("/wines/ranking")
