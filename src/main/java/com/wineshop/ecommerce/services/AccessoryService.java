@@ -1,8 +1,15 @@
 package com.wineshop.ecommerce.services;
 
+import com.wineshop.ecommerce.dto.AccessoryDTO;
 import com.wineshop.ecommerce.models.Accessory;
 
+import java.util.Set;
+
 public interface AccessoryService {
+
+    Set<Accessory> getAllAccessories();
+
+    Set<AccessoryDTO> getAllAccessoriesDTO();
 
     Double getPriceAccessoryById(Long id);
 
