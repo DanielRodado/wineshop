@@ -31,6 +31,8 @@ public class Wine {
 
     private WineType wineType;
 
+    private Boolean isOnOffer = false;
+
     @ElementCollection
     private List<Byte> valuations = new ArrayList<>(); // 1 - 10
 
@@ -150,6 +152,14 @@ public class Wine {
 
     public Set<WinePurchase> getWinePurchases() {
         return winePurchases;
+    }
+
+    public Boolean isOnOffer() {
+        return isOnOffer;
+    }
+
+    public void setOnOffer(Boolean onOffer) {
+        isOnOffer = onOffer;
     }
 
     // Other methods

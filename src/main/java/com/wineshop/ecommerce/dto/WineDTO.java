@@ -26,9 +26,11 @@ public class WineDTO {
 
     private WineType wineType;
 
-    private int valuations;
+    private int valuations, numberOfValuations;
 
     private Set<WinePurchase> winePurchases;
+
+    private Boolean isOnOffer;
 
     // Constructor
 
@@ -48,7 +50,9 @@ public class WineDTO {
                 0
                 :
                 (wine.getValuations().stream().reduce((byte) 0, (acc, num) -> (byte) (acc + num)))/wine.getValuations().size();
+        this.numberOfValuations = wine.getValuations().size();
         this.winePurchases = wine.getWinePurchases();
+        this.isOnOffer = wine.isOnOffer();
     }
 
     // Getters
@@ -103,5 +107,13 @@ public class WineDTO {
 
     public Set<WinePurchase> getWinePurchases() {
         return winePurchases;
+    }
+
+    public int getNumberOfValuations() {
+        return numberOfValuations;
+    }
+
+    public Boolean getOnOffer() {
+        return isOnOffer;
     }
 }
