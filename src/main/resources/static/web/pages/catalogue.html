@@ -206,21 +206,19 @@
   
           <!-- cards| -->
 
-          
-  
+        
           <div class="contenedor d-flex col m-1">
-             
-            <div class="card m-4 d-flex justify-content-center card-hover" style="width: 18rem;">
-              <img v-if="showOfferImage" src="../images/new-offer.png" alt="" class="offer-image">
-              <img src="../images/01PR24_1.jpg" class="card-img-top" alt="...">
+            <div class="card m-4 d-flex justify-content-center card-hover" v-for="wine of wines" style="width: 18rem;">
+              <img v-if="wine.isOnOffer==true" src="../images/new-offer.png" alt="" class="offer-image">
+              <img :src="wine.imgURL[0]" class="card-img-top" :alt="wine.name">
               <div class="card-body">
-                  <h6 class="card-title align-content-center">Von Siebenthal Tatay De Cristóbal Carménère</h6>
+                  <h6 class="card-title align-content-center">{{wine.name}}</h6>
                   <div class="d-flex justify-content-center">
-                      <h4 class="card-price">US$ {{ productPrice }}</h4>
+                      <h4 class="card-price">US$ {{wine.price }}</h4>
                   </div>
                   <div class="ratings d-flex justify-content-end">
                       <div class="stars m-2" v-html="starRating"></div>
-                      <div class="percentage m-2">{{ productRating }}%</div>
+                      <div class="percentage m-2">{{productRating}}</div>
                   </div>
                   <div class="d-flex justify-content-between">
                       <button type="button" class="button">

@@ -30,7 +30,7 @@ body, html {
 .contenedor{
     display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end; /* Alinea las tarjetas hacia la derecha */
+  justify-content: center; /* Alinea las tarjetas hacia la derecha */
 }
 
 .footer {
