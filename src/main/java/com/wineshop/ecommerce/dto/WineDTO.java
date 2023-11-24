@@ -26,7 +26,7 @@ public class WineDTO {
 
     private WineType wineType;
 
-    private List<Byte> valuations;
+    private int valuations;
 
     private Set<WinePurchase> winePurchases;
 
@@ -44,7 +44,10 @@ public class WineDTO {
         this.cc = wine.getCc();
         this.variety = wine.getVariety();
         this.wineType = wine.getWineType();
-        this.valuations = wine.getValuations();
+        this.valuations = wine.getValuations().isEmpty() ?
+                0
+                :
+                (wine.getValuations().stream().reduce((byte) 0, (acc, num) -> (byte) (acc + num)))/wine.getValuations().size();
         this.winePurchases = wine.getWinePurchases();
     }
 
@@ -94,7 +97,7 @@ public class WineDTO {
         return wineType;
     }
 
-    public List<Byte> getValuations() {
+    public int getValuations() {
         return valuations;
     }
 
