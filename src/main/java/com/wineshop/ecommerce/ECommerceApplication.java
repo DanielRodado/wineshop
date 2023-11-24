@@ -25,13 +25,13 @@ public class ECommerceApplication {
 									  WineRepository wineRepository, AccessoryRepository accessoryRepository) {
 		return args -> {
 
-			Client clientOne = new Client("Daniel", "Rodado", "pass123", "daniel@gmail.com",
+			/*Client clientOne = new Client("Daniel", "Rodado", "pass123", "daniel@gmail.com",
 					true, LocalDate.of(2005,7, 14));
 			clientRepository.save(clientOne);
 
 			Client clientTwo = new Client("Marcos", "Rodriguez", "pass123", "marcos@gmail.com",
 					true, LocalDate.of(2002,9, 12));
-			clientRepository.save(clientTwo);
+			clientRepository.save(clientTwo);*/
 
 			/*Wine wineOne = new Wine("Vinos Daniel", "Es un vino", "Barranquilla", "Las Nieves", 22.6, List.of("add",
 					"ass.com"), 100, 750, Variety.MALBEC, WineType.SPARKLING);
