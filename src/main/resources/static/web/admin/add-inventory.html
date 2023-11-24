@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+    crossorigin="anonymous">
+    <!--Sweet Alert-->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/resources/Images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="add-inventory-style.css">
+    <title>Products Manager | Wine Lovers Society</title>
+</head>
+<body class="bg-body-tertiary">
+    <div id="app">
+        <div class="d-flex justify-content-center align-items-center">
+            <h1 class="m-5">WLS Admin Product Manager</h1>
+        </div>
+        <!--
+        <div class="d-flex justify-content-center">
+            <a href="/web/accounts.html" style="color: black !important; text-decoration: none;">Go back to accounts</a>
+        </div>
+        -->
+        <main>
+            <div class="d-flex justify-content-around p-3">
+                <section class="col-4">
+                    <h1>Add wines</h1>
+                    
+                    <div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="wineNameInput" class="form-label">Wine name</label>
+                                <input type="text" class="form-control" id="wineNameInput" v-model="wineName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="wineDescriptionInput" class="form-label">Wine description</label>
+                                <input type="text" class="form-control" id="wineDescriptionInput" v-model="wineDescription">
+                            </div>
+                            <div class="mb-3">
+                                <label for="wineAreaInput" class="form-label">Wine area</label>
+                                <input type="text" class="form-control" id="wineAreaInput" v-model="wineArea">
+                            </div>
+                            <div class="mb-3">
+                                <label for="wineVineyardInput" class="form-label">Wine vineyard</label>
+                                <input type="text" class="form-control" id="wineVineyardInput" v-model="wineVineyard">
+                            </div>
+                            <div class="mb-3">
+                                <label for="winePriceInput" class="form-label">Wine price ($US dollars)</label>
+                                <input type="number" min="0" class="form-control" id="winePriceInput" v-model="winePrice">
+                            </div>
+                            <div class="mb-3">
+                                <label for="wineStockInput" class="form-label">Wine stock</label>
+                                <input type="number" min="0" class="form-control" id="wineStockInput" v-model="wineStock">
+                            </div>
+                            <div class="mb-3">
+                                <label for="wineStockInput" class="form-label">Wine CC</label>
+                                <input type="number" min="0" class="form-control" id="wineStockInput" v-model="wineCC">
+                            </div>
+                            <div class="mb-3 d-flex gap-3">
+                                <label for="wineVarietyInput">Wine variety</label>
+                                <select id="wineVarietyInput" name="wineVariety" v-model="wineVariety">
+                                    <option v-for="variety of wineVarietiesList" value="variety">{{variety}}</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 d-flex gap-3">
+                                <label for="wineTypeInput">Wine type</label>
+                                <select id="wineTypeInput" name="wineType" v-model="wineType">
+                                    <option value="WINE">Wine</option>
+                                    <option value="SPSRKLING">Sparkling</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newWineImg" class="form-label">Wine image URL</label>
+                                <input type="text" class="form-control" id="newWineImg" v-model="newWineImg">
+                            </div>
+                            <div class="d-flex gap-3">
+                                <button type="button" class="btn btn-primary" @click="addNewWineImgURL">Add wine image</button>
+                                <button type="button" class="btn btn-secondary" @click="resetWineImages">Reset wine images</button>
+                            </div>
+                            <div class="d-flex flex-column gap-3 justify-content-center align-items-center mt-5">
+                                <div class="imagesURLbox align-self-center mt-3">
+                                    <p>{{wineImgURLs}}</p>
+                                </div>
+                                <button style="height: auto; width: auto;" type="button" class="btn btn-primary" @click="createNewWine">Create new wine</button>
+                            </div>
+                        </form>
+                    </div>  
+                </section>
+
+                <section class="col-4">
+                    <h1>Add Accessories</h1>
+                    
+                    <div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="accessoryNameInput" class="form-label">Accessory name</label>
+                                <input type="text" class="form-control" id="accessoryNameInput" v-model="accessoryName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="accessoryDescriptionInput" class="form-label">Accessory description</label>
+                                <input type="text" class="form-control" id="accessoryDescriptionInput" v-model="accessoryDescription">
+                            </div>
+                            <div class="mb-3">
+                                <label for="accessoryPriceInput" class="form-label">Accessory price ($US dollars)</label>
+                                <input type="number" min="0" class="form-control" id="accessoryPriceInput" v-model="accessoryPrice">
+                            </div>
+                            <div class="mb-3">
+                                <label for="accessoryStockInput" class="form-label">Accessory stock</label>
+                                <input type="number" min="0" class="form-control" id="accessoryStockInput" v-model="accessoryStock">
+                            </div>
+                            <div class="mb-3">
+                                <label for="newAccessoryImg" class="form-label">Accessory image URL</label>
+                                <input type="text" class="form-control" id="newAccessoryImg" v-model="newAccessoryImg">
+                            </div>
+                            <div class="d-flex gap-3">
+                                <button type="button" class="btn btn-primary" @click="addNewAccessoryImgURL">Add accessory image</button>
+                                <button type="button" class="btn btn-secondary" @click="resetAccessoryImages">Reset accessory images</button>
+                            </div>
+                            <div class="d-flex flex-column gap-3 justify-content-center align-items-center mt-5">
+                                <div class="imagesURLbox align-self-center mt-3">
+                                    <p>{{accessoryImgURLs}}</p>
+                                </div>
+                                <button style="height: auto; width: auto;" type="button" class="btn btn-primary" @click="createNewAccessory">Create new accessory</button>
+                            </div>
+                        </form>
+                    </div>  
+                </section>
+
+            </div>
+            
+            <div class="d-flex justify-content-around p-3">
+                <section class="col-5 mt-5">
+                    <h2>Wines List</h2>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Variety</th>
+                            <th scope="col">Area</th>
+                            <th scope="col">Vineyard</th>
+                            <th scope="col">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody v-for="wine in wines">
+                            <tr>
+                                <th scope="row">{{wine.id}}</th>
+                                <td>{{wine.name}}</td>
+                                <td>{{wine.price}}</td>
+                                <td>{{wine.stock}}</td>
+                                <td>{{wine.variety}}</td>
+                                <td>{{wine.area}}</td>
+                                <td>{{wine.vineyard}}</td>
+                                <td>{{wine.description}}</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                </section>
+
+                <section class="col-5 mt-5">
+                    <h2>Accesories List</h2>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Stock</th>
+                          </tr>
+                        </thead>
+                        <tbody v-for="accessory in accessories">
+                            <tr>
+                                <th scope="row">{{accessory.id}}</th>
+                                <td>{{accessory.name}}</td>
+                                <td>{{accessory.price}}</td>
+                                <td>{{accessory.stock}}</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                </section>
+            </div>
+            
+        </main>
+    </div>
+    <!-- VUE -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+    crossorigin="anonymous">
+    </script>
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--Sweet Alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="add-inventory.js"></script>
+</body>
+</html>
