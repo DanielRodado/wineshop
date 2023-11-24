@@ -19,7 +19,7 @@ body, html {
 
 }
 .imgcarrusel{
-min-height: 20rem;
+max-height: 20rem;
 
 
 }
