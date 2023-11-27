@@ -3,7 +3,8 @@ new Vue({
     data: {
         id:"",
         wines: [],
-        accessories: []
+        accessories: [],
+        quantity: 1
     },
 
     created() {
@@ -27,6 +28,19 @@ new Vue({
                     console.log("error")
                     console.log(error)
                 });
+        },
+
+        addToCart() {
+            // Lógica para agregar al carrito
+            console.log('Producto agregado al carrito');
+        },
+        decreaseQuantity() {
+            if (this.quantity > 1) {
+                this.quantity--;
+            }
+        },
+        increaseQuantity() {
+            this.quantity++;
         },
 
     },

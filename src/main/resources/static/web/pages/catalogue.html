@@ -28,19 +28,19 @@
         <!-- Modal -->
         <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
           <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header bg-black">
+            <div class="modal-content ">
+              <!-- <div class="modal-header bg-black">
                 <h5 class="modal-title text-light" id="carritoModalLabel">Cart</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
 
-              <!-- productos del carrito -->
+
               <div class="modal-body d-flex justify-content-sm-start align-content-center">
                 <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
                 <div class="d-flex flex-column">
                   <h4>Wineas</h4>
                   <h6>US$ 12000</h6>
-                  <h7>Quantity: </h7>
+                  <h7>Quantity: </h>
                 </div>
                 <button class="deleted">
                   <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
@@ -49,6 +49,50 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-success">Buy</button>
+              </div> -->
+              <div class="master-container">
+                <div class="ca cart">
+                  <label class="title">Your cart</label>
+                  <div class="products">
+                    <div class="product">
+                        <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+
+                      <div>
+                        <span>Wine Tinto</span>
+                        <p>varietales</p>
+                        <p>viña</p>
+                      </div>
+                      <div class="align-self-center">
+                        <label class="price small">$23.99</label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="ca coupons">
+                  <label class="title">Apply coupons</label>
+                  <form class="form">
+                      <input type="text" placeholder="Apply your coupons here" class="input_field">
+                      <button>Apply</button>
+                  </form>
+                </div>
+              
+                <div class="ca checkout">
+                  <label class="title">Checkout</label>
+                  <div class="details">
+                    <span>Your cart subtotal:</span>
+                    <span>47.99$</span>
+                    <span>Discount through applied coupons:</span>
+                    <span>3.99$</span>
+                    <span>Shipping fees:</span>
+                    <span>4.99$</span>
+                  </div>
+                  <div class="checkout--footer">
+                    <label class="price"><sup>$</sup>57.99</label>
+                    <button class="checkout-btn">Checkout</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
