@@ -4,6 +4,14 @@ import com.wineshop.ecommerce.models.Purchase;
 
 public interface PurchaseService {
 
+    Purchase getPurchaseById(Long id);
+
     void savePurchase(Purchase purchase);
+
+    void deletePurchaseById(Long id);
+
+    Long savePurchaseAndGetId(Purchase purchase);
+
+    Double getPriceOrderOfPurchaseById(Long id);
 
 }
