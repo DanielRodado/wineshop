@@ -561,7 +561,7 @@ background: rgb(136, 0, 0);
 
 
 .img-detalle{
-  width: 15rem;
+  width: 20rem;
 }
 
 /* modal */
@@ -800,4 +800,10 @@ background: rgb(136, 0, 0);
 
 .img-cart{
   width: 5rem;
+}
+
+.text-center{
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 }
