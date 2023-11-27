@@ -9,7 +9,7 @@ new Vue({
         username: '',
         password: '',
         wines: [],
-        accessories: []
+        accessories: [],
     },
 
     created() {
@@ -64,7 +64,8 @@ new Vue({
         },
         increaseQuantity() {
             this.quantity++;
-        }
+        },
+
     },
     computed: {
         starRating() {

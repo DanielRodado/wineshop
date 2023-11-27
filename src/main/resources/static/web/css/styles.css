@@ -493,3 +493,68 @@ background: rgb(136, 0, 0);
   line-height: 1.25rem;
   color: rgba(107, 114, 128, 1);
 } */
+
+.img-cart{
+  width: 6rem;
+}
+
+
+/* boton delete cart */
+
+
+.deleted{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+  margin-left: 8rem;
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.deleted:hover {
+  width: 70px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.deleted:hover .svgIcon {
+  width: 20px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.deleted::before {
+  position: absolute;
+  top: -35px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.deleted:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
