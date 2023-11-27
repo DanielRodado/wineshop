@@ -1,6 +1,7 @@
 package com.wineshop.ecommerce.controllers;
 
 import com.wineshop.ecommerce.dto.NewPurchaseApplicationDTO;
+import com.wineshop.ecommerce.dto.PayWithCardApplicationDTO;
 import com.wineshop.ecommerce.dto.ProductRecieverDTO;
 import com.wineshop.ecommerce.models.*;
 import com.wineshop.ecommerce.services.*;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDate;
 
@@ -140,6 +144,33 @@ public class PurchaseController {
         return new ResponseEntity<>("Order recieved", HttpStatus.CREATED);
 
     }
+
+    @PostMapping("/purchase/pay")
+    public ResponseEntity<String> payWithCard(@RequestBody PayWithCardApplicationDTO payWithCardApp) {
+
+        // Aquí se crea una instancia de WebClient, que es la clase principal para hacer solicitudes
+        // HTTP en Spring WebFlux. Se configura con la URL base de la API a la que vamos a realizar solicitudes.
+        WebClient webClient = WebClient.create("https://finovate-bank.onrender.com");
+
+        // Se realiza la solicitud POST con el objeto en el cuerpo
+        ClientResponse response = webClient.post()
+                .uri("/api/cards/pay")
+                .body(BodyInserters.fromValue(payWithCardApp))
+                .exchange()
+                .block();
+
+        try {
+            assert response != null;
+        } catch(Exception e) {
+            return new ResponseEntity<>("Internal server error: " + e, HttpStatus.FORBIDDEN);
+        }
+
+        String responseBody = response.bodyToMono(String.class).block();
+
+        return new ResponseEntity<>(
+                responseBody, response.statusCode().value() == 200 ? HttpStatus.OK : HttpStatus.FORBIDDEN);
+    }
+
 
 
 }
