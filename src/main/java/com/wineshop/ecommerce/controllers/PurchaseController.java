@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import static com.wineshop.ecommerce.utils.ProductUtil.calculatePriceOrder;
+import static com.wineshop.ecommerce.utils.PurchaseUtil.deletePurchaseAndProductPurchase;
 
 @RestController
 @RequestMapping("/api")
@@ -182,30 +183,25 @@ public class PurchaseController {
 
         Double priceOrderPurchase = purchaseService.getPriceOrderOfPurchaseById((Long) purchaseResponse.getBody());
 
+        Purchase purchase = purchaseService.getPurchaseById((Long) purchaseResponse.getBody());
+
         if (!Objects.equals(priceOrderPurchase, purchasePaymentWithCardApp.getPayWithCardApp().getAmount())) {
 
-            Purchase purchase = purchaseService.getPurchaseById((Long) purchaseResponse.getBody());
+            deletePurchaseAndProductPurchase(winePurchaseService, accessoryPurchaseService, purchaseService,
+                    purchasePaymentWithCardApp.getNewPurchaseApp().getWines(),
+                    purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories(), purchase);
 
-            // Deleted Wines
-            if (!purchasePaymentWithCardApp.getNewPurchaseApp().getWines().isEmpty()) {
-                winePurchaseService.deleteWinePurchasesByPurchase(purchase);
-            }
-
-            // Deleted Accessories
-            if (!purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories().isEmpty()) {
-                accessoryPurchaseService.deleteAccessoryPurchasesByPurchase(purchase);
-            }
-
-            // Deleted Purchase
-            purchaseService.deletePurchaseById((Long) purchaseResponse.getBody());
             return new ResponseEntity<>("Payment amount doesn't match the order's price", HttpStatus.FORBIDDEN);
         }
 
         ResponseEntity<Object> paymentResponse = payWithCard(purchasePaymentWithCardApp.getPayWithCardApp());
 
         if (paymentResponse.getStatusCode().value() == 200) {
-            return new ResponseEntity<>("", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Payments received, your order was requested successfully!", HttpStatus.OK);
         } else {
+            deletePurchaseAndProductPurchase(winePurchaseService, accessoryPurchaseService, purchaseService,
+                    purchasePaymentWithCardApp.getNewPurchaseApp().getWines(),
+                    purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories(), purchase);
             return paymentResponse;
         }
     }
