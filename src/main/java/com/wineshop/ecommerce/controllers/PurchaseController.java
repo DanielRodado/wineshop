@@ -136,10 +136,8 @@ public class PurchaseController {
         client.addPurchase(purchase);
         purchaseService.savePurchase(purchase);
 
-
         return new ResponseEntity<>("Order recieved", HttpStatus.CREATED);
 
     }
-
 
 }

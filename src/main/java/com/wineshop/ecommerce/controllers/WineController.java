@@ -5,6 +5,7 @@ import com.wineshop.ecommerce.dto.WineValuationDTO;
 import com.wineshop.ecommerce.models.Variety;
 import com.wineshop.ecommerce.models.Wine;
 import com.wineshop.ecommerce.services.WineService;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,4 +86,33 @@ public class WineController {
         return new ResponseEntity<>("Wines created successfully!", HttpStatus.CREATED);
     }
 
+    @PatchMapping("wines/edit/stock")
+    public ResponseEntity<Object> editStock(@RequestParam Long wineId, @RequestParam int newStock) {
+        if (newStock < 0) {
+            return new ResponseEntity<>("stock cannot be less than 0", HttpStatus.FORBIDDEN);
+        }
+        if (!wineService.existsWineById(wineId)){
+            return new ResponseEntity<>("This wine doesn't exist", HttpStatus.FORBIDDEN);
+        }
+
+        Wine wine = wineService.findWineById(wineId);
+        wine.setStock(newStock);
+
+        return new ResponseEntity<>("Stock updated", HttpStatus.OK);
+    }
+
+    @PatchMapping("wines/edit/price")
+    public ResponseEntity<Object> editPrice(@RequestParam Long wineId, @RequestParam Double newPrice) {
+        if (newPrice < 0) {
+            return new ResponseEntity<>("price cannot be less than 0", HttpStatus.FORBIDDEN);
+        }
+        if (!wineService.existsWineById(wineId)){
+            return new ResponseEntity<>("This wine doesn't exist", HttpStatus.FORBIDDEN);
+        }
+
+        Wine wine = wineService.findWineById(wineId);
+        wine.setPrice(newPrice);
+
+        return new ResponseEntity<>("Price updated", HttpStatus.OK);
+    }
 }
