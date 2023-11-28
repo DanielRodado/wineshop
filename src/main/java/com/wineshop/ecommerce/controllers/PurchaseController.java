@@ -1,9 +1,10 @@
 package com.wineshop.ecommerce.controllers;
 
-import com.wineshop.ecommerce.dto.NewPurchaseApplicationDTO;
-import com.wineshop.ecommerce.dto.PayWithCardApplicationDTO;
-import com.wineshop.ecommerce.dto.ProductRecieverDTO;
-import com.wineshop.ecommerce.dto.PurchasePaymentWithCardApplicationDTO;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import com.wineshop.ecommerce.dto.*;
 import com.wineshop.ecommerce.models.*;
 import com.wineshop.ecommerce.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,15 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
+
 
 import static com.wineshop.ecommerce.utils.ProductUtil.calculatePriceOrder;
 import static com.wineshop.ecommerce.utils.PurchaseUtil.deletePurchaseAndProductPurchase;
+import static java.awt.Color.BLACK;
 
 @RestController
 @RequestMapping("/api")
@@ -75,7 +80,7 @@ public class PurchaseController {
                     }
 
                     // Comprobar si la cantidad a comprar no supere el stock del 'Wine';
-                    if (!wineService.existsWineByIdAndStockGreaterThan(wine.getProductId(), wine.getAmount())) {
+                    if (!wineService.existsWineByIdAndStockGreaterThan(wine.getProductId(), wine.getAmount() - 1)) {
                         return new ResponseEntity<>("Right now, we don't have wines in stock to supply your order.",
                                 HttpStatus.FORBIDDEN);
                     }
@@ -114,7 +119,7 @@ public class PurchaseController {
 
                     // Comprobar si la cantidad a comprar no supere el stock del 'Wine';
                     if (!accessoryService.existsAccessoryByIdAndStockGreaterThan(accessory.getProductId(),
-                            accessory.getAmount())) {
+                            accessory.getAmount()-1)) {
                         return new ResponseEntity<>("Right now, we don't have accessories in stock to supply your order.",
                                 HttpStatus.FORBIDDEN);
                     }
@@ -144,7 +149,6 @@ public class PurchaseController {
 
             return new ResponseEntity<>(purchaseId, HttpStatus.CREATED);
 
-
     }
 
     public ResponseEntity<Object> payWithCard(PayWithCardApplicationDTO payWithCardApp) {
@@ -173,7 +177,8 @@ public class PurchaseController {
 
     @PostMapping("/purchase")
     @Transactional
-    public ResponseEntity<Object> payAndCreatePurchase(@RequestBody PurchasePaymentWithCardApplicationDTO purchasePaymentWithCardApp) {
+    public ResponseEntity<Object> payAndCreatePurchase(@RequestBody PurchasePaymentWithCardApplicationDTO purchasePaymentWithCardApp)
+    throws Exception {
 
         ResponseEntity<Object> purchaseResponse = createPurchase(purchasePaymentWithCardApp.getNewPurchaseApp());
 
@@ -194,10 +199,114 @@ public class PurchaseController {
             return new ResponseEntity<>("Payment amount doesn't match the order's price", HttpStatus.FORBIDDEN);
         }
 
+        // crear pdf
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("Order receipt.pdf"));
+
+        document.open();
+        Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, BLACK);
+        Font notBoldFont = FontFactory.getFont(FontFactory.HELVETICA, 16, BLACK);
+
+        // agregamos logo
+        PdfPTable logo = new PdfPTable(1);
+        logo.setWidthPercentage(100);
+
+        Image img = Image.getInstance(Objects.requireNonNull(getClass().getResource("/static/web/images/main-logo.png")));
+
+        img.scaleToFit(200, 56);
+        img.setAlignment(Image.ALIGN_BASELINE);
+        PdfPCell imageCell = new PdfPCell(img);
+        imageCell.setBorder(PdfPCell.NO_BORDER);
+        logo.addCell(imageCell);
+
+        document.add(logo);
+
+        // tabla para los vinos
+        if ( !purchasePaymentWithCardApp.getNewPurchaseApp().getWines().isEmpty() ) {
+            // agregamos tabla
+            PdfPTable tableTitle = new PdfPTable(1);
+            PdfPCell cell = new PdfPCell();
+            cell.setBorder(PdfPCell.NO_BORDER);
+            cell.setPaddingBottom(20);
+            cell.addElement(new Paragraph("Your wines:", boldFont));
+            tableTitle.addCell(cell);
+            document.add(tableTitle);
+
+            PdfPTable table = new PdfPTable(3);
+            table.addCell("Wine name");
+            table.addCell("Amount");
+            table.addCell("Price");
+
+            Set<ProductRecieverDTO> wines = purchasePaymentWithCardApp.getNewPurchaseApp().getWines();
+
+            for (ProductRecieverDTO wine : wines) {
+                table.addCell(wineService.getWineNameById(wine.getProductId()));
+                table.addCell("" +  wine.getAmount());
+                table.addCell("$" + calculatePriceOrder(wine.getAmount(), wineService.getPriceWineById(wine.getProductId())));
+            }
+            document.add(table);
+        }
+
+        // salto de linea
+        document.add(new Paragraph("\n"));
+        document.add(new Paragraph("\n"));
+
+        // tabla para los accesorios
+        if ( !purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories().isEmpty() ) {
+            // agregamos tabla
+            PdfPTable tableTitle = new PdfPTable(1);
+            PdfPCell cell = new PdfPCell();
+            cell.setBorder(PdfPCell.NO_BORDER);
+            cell.setPaddingBottom(20);
+            cell.addElement(new Paragraph("Your accessories:", boldFont));
+            tableTitle.addCell(cell);
+            document.add(tableTitle);
+
+            PdfPTable table = new PdfPTable(3);
+            table.addCell("Accessory name");
+            table.addCell("Amount");
+            table.addCell("Price");
+
+            Set<ProductRecieverDTO> accessories = purchasePaymentWithCardApp.getNewPurchaseApp().getWines();
+
+            for (ProductRecieverDTO accessory : accessories) {
+                table.addCell(accessoryService.getAccessoryNameById(accessory.getProductId()));
+                table.addCell("" +  accessory.getAmount());
+                Double accessoryPrice = accessoryService.getPriceAccessoryById(accessory.getProductId());
+                table.addCell("$" + accessory.getAmount() * accessoryPrice);
+            }
+            document.add(table);
+        }
+
+        // salto de linea
+        document.add(new Paragraph("\n"));
+
+        // valor total de la compra
+
+        Paragraph totalPrice = new Paragraph("Order total price: $" + priceOrderPurchase);
+
+        document.add(totalPrice);
+
+        // salto de linea
+        document.add(new Paragraph("\n"));
+        document.add(new Paragraph("\n"));
+
+        // direccion de envio
+
+        Paragraph deliveryAddress = new Paragraph("Delivery address: " + purchase.getDeliveryAddress());
+
+        document.add(deliveryAddress);
+
+        // cerramos el documento
+
+        document.close();
+
         ResponseEntity<Object> paymentResponse = payWithCard(purchasePaymentWithCardApp.getPayWithCardApp());
 
         if (paymentResponse.getStatusCode().value() == 200) {
-            return new ResponseEntity<>("Payments received, your order was requested successfully!", HttpStatus.OK);
+
+            // enviamos la respuesta en el body
+            return new ResponseEntity<>(document, HttpStatus.OK);
         } else {
             deletePurchaseAndProductPurchase(winePurchaseService, accessoryPurchaseService, purchaseService,
                     purchasePaymentWithCardApp.getNewPurchaseApp().getWines(),

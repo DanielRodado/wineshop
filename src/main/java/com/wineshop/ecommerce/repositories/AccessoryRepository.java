@@ -21,4 +21,6 @@ public interface AccessoryRepository extends JpaRepository<Accessory, Long> {
 
     boolean existsByIdAndStockGreaterThan(Long id, int amount);
 
+    @Query("SELECT a.name FROM Accessory a WHERE a.id = :accessoryId")
+    String getNameById(@Param("accessoryId")Long id);
 }

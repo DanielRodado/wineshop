@@ -21,4 +21,6 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
 
     boolean existsByIdAndStockGreaterThan(Long id, int amount);
 
+    @Query("SELECT w.name FROM Wine w WHERE w.id = :wineId")
+    String getNameById(@Param("wineId")Long id);
 }

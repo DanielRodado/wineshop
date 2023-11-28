@@ -23,4 +23,5 @@ public interface AccessoryService {
 
     void saveAccessory(Accessory accessory);
 
+    String getAccessoryNameById(Long id);
 }
