@@ -17,7 +17,7 @@
   <div id="app">
     <nav class="navbar bg-body-tertiary   d-flex justify-content-end m-0">
       <div class="container  d-flex justify-content-end m-0">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="../pages/login.html">
           <img src="../images/account.svg " alt="Bootstrap" width="45" height="45">
         </a>
         <a class="navbar-brand" href="#">
@@ -160,14 +160,11 @@
                 <li><a class="dropdown-item" href="#">CAVA</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+            <li class="nav-item">
+              <a class="nav-link text-light" href="../pages/accessories.html" role="button"
                 aria-expanded="false">
                 ACCESSORIES
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">x</a></li>
-              </ul>
             </li>
 
           </ul>
@@ -183,8 +180,8 @@
 
 
 
-      <div class="d-flex justify-content-center">
-        <div class="col-2 m-3">
+
+        <div class=" m-1 scrollable-container justify-content-end">
           <div class="card ">
             <div class="card-header bg-filter text-light  d-flex justify-content-center">
               FILTERS
@@ -290,7 +287,7 @@
 
         <!-- cards| -->
 
-
+        <div class="d-flex justify-content-center">
         <div class="contenedor d-flex col m-1">
           <div class="card m-4 d-flex justify-content-center card-hover" v-for="wine of wines" style="width: 18rem;">
             <div v-if="wine.showOffer==true"><img  src="../images/new-offer.png" alt="" class="offer-image"></div>
@@ -330,6 +327,7 @@
             </div>
           </div>
         </div>
+      </div>
     </main>
   </div>
 

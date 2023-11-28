@@ -809,3 +809,10 @@ background: rgb(136, 0, 0);
   margin-bottom: 5rem;
 }
 
+.scrollable-container {
+  justify-content: center;
+  width: 300px; /* Ancho del contenedor */
+  height: 200px; /* Altura del contenedor */
+  overflow: auto; /* Hacer el contenedor scrollable */
+  border: 1px solid #ccc; /* Borde para visualización */
+}
