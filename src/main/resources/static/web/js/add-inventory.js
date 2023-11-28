@@ -103,7 +103,7 @@ createApp({
 
     updateWineStock(){
       axios
-        .patch("/api/wines/edit/stock", `stock=${wineToEditNewStock}`)
+        .patch("/api/wines/edit/stock", `wineId=${this.wineToEdit.id}&newStock=${this.wineToEditNewStock}`)
         .then(response => {
           Swal.fire({
             icon: "success",
