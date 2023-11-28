@@ -24,6 +24,8 @@ public class Purchase {
 
     private Double priceOrder;
 
+    private PurchaseStatus status;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
@@ -43,6 +45,7 @@ public class Purchase {
     public Purchase(String deliveryAddress, LocalDate date) {
         this.deliveryAddress = deliveryAddress;
         this.date = date;
+        this.status = PurchaseStatus.RECEIVED;
     }
 
     // Getters and Setters
@@ -92,6 +95,14 @@ public class Purchase {
         return accessoryPurchases;
     }
 
+    public PurchaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PurchaseStatus status) {
+        this.status = status;
+    }
+
     // other methods
 
     public void addAccessoryPurchases(AccessoryPurchase accessoryPurchase) {
@@ -103,4 +114,6 @@ public class Purchase {
         this.winePurchases.add(winePurchase);
         winePurchase.setPurchase(this);
     }
+
+
 }

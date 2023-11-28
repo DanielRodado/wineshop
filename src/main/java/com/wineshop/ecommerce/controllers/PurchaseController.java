@@ -10,17 +10,16 @@ import com.wineshop.ecommerce.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
@@ -375,4 +374,44 @@ public class PurchaseController {
         }
     }
 
+    // servlet para cambiar el status
+    @PatchMapping("/purchase/status")
+    public ResponseEntity<Object> changePurchaseStatus(@RequestParam Long purchaseId,
+                                                       @RequestParam String purchaseStatus){
+
+        if (!purchaseService.existsPurchaseById(purchaseId)){
+            return new ResponseEntity<>("This order does not exist", HttpStatus.FORBIDDEN);
+        }
+
+        if (Arrays.stream(PurchaseStatus.values()).anyMatch(status -> status.equals(purchaseStatus))) {
+            return new ResponseEntity<>("The status doesn't match a valid option", HttpStatus.FORBIDDEN);
+        }
+
+        Purchase purchase = purchaseService.getPurchaseById(purchaseId);
+        purchase.setStatus(PurchaseStatus.valueOf(purchaseStatus));
+        purchaseService.savePurchase(purchase);
+
+        return  new ResponseEntity<>("Order status updated", HttpStatus.OK);
+    }
+
+    // servlet para enviar el status
+    // Authentication authentication
+    // Client client = clientService.findClientByEmail(authentication.getName());
+    //
+    //        if (!purchaseService.existsPurchaseByIdAndClient(purchaseId, client)) {
+    //            return new ResponseEntity<>("This order does not belong to you!", HttpStatus.FORBIDDEN);
+    //        }
+    @GetMapping("/purchase/status")
+    public ResponseEntity<Object> getPurchaseStatus (@RequestParam Long purchaseId){
+
+        if (!purchaseService.existsPurchaseById(purchaseId)){
+            return new ResponseEntity<>("This order does not exist", HttpStatus.FORBIDDEN);
+        }
+
+        Purchase purchase = purchaseService.getPurchaseById(purchaseId);
+
+        PurchaseStatus purchaseStatus = purchase.getStatus();
+
+        return new ResponseEntity<>(purchaseStatus, HttpStatus.OK);
+    }
 }
