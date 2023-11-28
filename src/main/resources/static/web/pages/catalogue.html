@@ -293,7 +293,7 @@
 
         <div class="contenedor d-flex col m-1">
           <div class="card m-4 d-flex justify-content-center card-hover" v-for="wine of wines" style="width: 18rem;">
-            <div v-if="wine.showOffer"><img  src="../images/new-offer.png" alt="" class="offer-image"></div>
+            <div v-if="wine.showOffer==true"><img  src="../images/new-offer.png" alt="" class="offer-image"></div>
             <a class="text-decoration-none" :href="`./details.html?id=${wine.id}`"><img :src="wine.imgURL[0]"
                 class="card-img-top" :alt="wine.name"></a>
             <div class="card-body">
@@ -328,9 +328,8 @@
                 </div>
               </div>
             </div>
-
           </div>
-
+        </div>
     </main>
   </div>
 

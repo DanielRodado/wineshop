@@ -15,10 +15,6 @@ new Vue({
     created() {
 
         this.getWines();
-        this.getAccessories();
-
-
-
     },
 
     methods: {
@@ -34,19 +30,6 @@ new Vue({
                     // this.showOfferImage = 
 
     
-                })
-                .catch((error) => {
-                    console.log("error")
-                    console.log(error)
-                });
-        },
-
-
-        getAccessories() {
-            axios
-                .get("/api/accessories")
-                .then((response) => {
-                    this.accessories = response.data;
                 })
                 .catch((error) => {
                     console.log("error")
