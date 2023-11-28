@@ -359,6 +359,7 @@ background: rgb(136, 0, 0);
 .card-hover:hover {
   transform: scale(1.05);
   transition: transform 0.4s ease-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra: offsetX offsetY blurRadius color */
 }
 
 
@@ -807,3 +808,4 @@ background: rgb(136, 0, 0);
   margin-top: 2rem;
   margin-bottom: 5rem;
 }
+

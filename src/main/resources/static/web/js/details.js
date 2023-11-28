@@ -2,13 +2,13 @@ new Vue({
     el: '#app',
     data: {
         id:"",
-        wines: [],
+        wine: [],
         accessories: [],
         quantity: 1
     },
 
     created() {
-
+        
         this.id =  new URLSearchParams(location.search).get("id");
         this.loadAccount();
 
@@ -17,9 +17,9 @@ new Vue({
     },
 
     methods: {
-        loadWines() {
+        loadAccount() {
             axios
-                .get("/api/wines/current")
+                .get("/api/wines")
                 .then((response) => {
                     console.log(response);
                     this.wine = response.data.find(a => a.id == this.id);

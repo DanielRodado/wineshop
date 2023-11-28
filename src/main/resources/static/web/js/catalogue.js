@@ -1,7 +1,7 @@
 new Vue({
     el: '#app',
     data: {
-        showOfferImage: [],
+        showOffer: [],
         productPrice: 329,
         productRating: "",
         quantity: 1,
@@ -30,6 +30,7 @@ new Vue({
                     console.log(response);
                     this.wines = response.data;
                     this.productRating = response.data.valuations;
+                    this.showOffer = response.data.showOffer;
                     // this.showOfferImage = 
 
     
@@ -39,6 +40,7 @@ new Vue({
                     console.log(error)
                 });
         },
+
 
         getAccessories() {
             axios

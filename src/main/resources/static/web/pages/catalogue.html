@@ -293,8 +293,8 @@
 
         <div class="contenedor d-flex col m-1">
           <div class="card m-4 d-flex justify-content-center card-hover" v-for="wine of wines" style="width: 18rem;">
-            <img v-if="wine.isOnOffer==true" src="../images/new-offer.png" alt="" class="offer-image">
-            <a class="text-decoration-none" :href="'./details.html?id=${wine.id}'"><img :src="wine.imgURL[0]"
+            <div v-if="wine.showOffer"><img  src="../images/new-offer.png" alt="" class="offer-image"></div>
+            <a class="text-decoration-none" :href="`./details.html?id=${wine.id}`"><img :src="wine.imgURL[0]"
                 class="card-img-top" :alt="wine.name"></a>
             <div class="card-body">
               <h6 class="card-title align-content-center">{{wine.name}}</h6>
