@@ -5,7 +5,14 @@ createApp({
   data() {
     return {
         wines: [],
+        filteredWines: [],
         accessories: [],
+
+        wineSearchByName: "",
+        wineToEdit: [],
+
+        wineToEditNewStock: 0,
+        wineToEditNewPrice: 0,
 
         wineName: "",
         wineDescription: "",
@@ -44,7 +51,8 @@ createApp({
     axios
         .get("/api/wines")
         .then((response) => {
-          this.wines = response.data;
+          this.wines = response.data.sort(this.compareIds);
+          this.filteredWines = this.wines;
         })
         .catch((error) => {
           console.log("error")
@@ -54,7 +62,7 @@ createApp({
     axios
         .get("/api/accessories")
         .then((response) => {
-          this.accessories = response.data;
+          this.accessories = response.data.sort(this.compareIds);
         })
         .catch((error) => {
           console.log("error")
@@ -70,11 +78,10 @@ createApp({
         this.wineImgURLs.push(this.newWineImg);
         this.newWineImg = "";
       }
-        
     },
 
     resetWineImages() {
-        this.wineImgURLs = [];
+      this.wineImgURLs = [];
     },
 
     addNewAccessoryImgURL() {
@@ -84,6 +91,58 @@ createApp({
 
     resetAccessoryImages() {
         this.accessoryImgURLs = [];
+    },
+
+    compareIds(a, b) {
+      return a.id - b.id;
+    },
+
+    setWineToEdit(wine){
+      this.wineToEdit = wine
+    },
+
+    updateWineStock(){
+      axios
+        .patch("/api/wines/edit/stock", `stock=${wineToEditNewStock}`)
+        .then(response => {
+          Swal.fire({
+            icon: "success",
+            title: "Wine edited",
+            text: "Stock updated",
+            color: "#fff",
+            background: "#1c2754",
+            confirmButtonColor: "#17acc9",
+        });
+        })
+        .catch(error =>{
+          this.errorMessage(error.response.data)
+        })
+    },
+
+    updateWinePrice(){
+      axios
+        .patch("/api/wines/edit/price")
+        .then(response => {
+          Swal.fire({
+            icon: "success",
+            title: "Wine edited",
+            text: "Price updated",
+            color: "#fff",
+            background: "#1c2754",
+            confirmButtonColor: "#17acc9",
+        });
+        })
+        .catch(error =>{
+          this.errorMessage(error.response.data)
+        })
+    },
+
+    filterWines(){
+      if(this.wineSearchByName == "") {
+        this.filteredWines = this.wines
+      }
+      this.filteredWines = this.wines.filter(wine => 
+        wine.name.toLowerCase().includes(this.wineSearchByName.toLowerCase()))
     },
 
     createNewWine() {

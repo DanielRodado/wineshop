@@ -9,8 +9,8 @@
     crossorigin="anonymous">
     <!--Sweet Alert-->
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <link rel="shortcut icon" href="/resources/Images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="add-inventory-style.css">
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/add-inventory-style.css">
     <title>Products Manager | Wine Lovers Society</title>
 </head>
 <body class="bg-body-tertiary">
@@ -18,12 +18,45 @@
         <div class="d-flex justify-content-center align-items-center">
             <h1 class="m-5">WLS Admin Product Manager</h1>
         </div>
-        <!--
-        <div class="d-flex justify-content-center">
-            <a href="/web/accounts.html" style="color: black !important; text-decoration: none;">Go back to accounts</a>
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="../images/logo-2.png" alt="wineshop logo" style="width: 250px;">
         </div>
-        -->
         <main>
+            <!--Modals-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit wine</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{wineToEdit.name}}</p>
+                        <p>Actual stock: {{wineToEdit.stock}}</p>
+                        <div class="mb-3">
+                            <label for="newWineStock" class="form-label">New wine stock</label>
+                            <input type="number" min="0" class="form-control" id="newWineStock" v-model="wineToEditNewStock">
+                        </div>
+                        <button type="button" class="btn btn-primary" @click="updateWineStock">
+                            Update stock
+                        </button>
+                        <p>Actual price: {{wineToEdit.price}}</p>
+                        <div class="mb-3">
+                            <label for="newWinePrice" class="form-label">New wine price ($US dollars)</label>
+                            <input type="number" min="0" class="form-control" id="newWinePrice" v-model="wineToEditNewPrice">
+                        </div>
+                        <button type="button" class="btn btn-primary" @click="updateWinePrice">
+                            Update price
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--Modals-->
             <div class="d-flex justify-content-around p-3">
                 <section class="col-4">
                     <h1>Add wines</h1>
@@ -89,6 +122,52 @@
                     </div>  
                 </section>
 
+                <section class="col-5 mt-5">
+                    <h2>Wines List</h2>
+                    <input v-model="wineSearchByName" @input="filterWines" class="form-control me-2 mb-3" type="search" placeholder="Search by name" aria-label="Search">
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Variety</th>
+                                <th scope="col">Area</th>
+                                <th scope="col">Vineyard</th>
+                                <th scope="col">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody v-for="wine in filteredWines">
+                                <tr>
+                                    <th scope="row">{{wine.id}}</th>
+                                    <td>{{wine.name}}</td>
+                                    <td>${{wine.price}}</td>
+                                    <td>{{wine.stock}}</td>
+                                    <td class="d-flex flex-column justify-content-around" style="height: 100%;">
+                                        <div class="p-3">
+                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="setWineToEdit(wine)">
+                                                Edit item
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>{{wine.variety}}</td>
+                                    <td>{{wine.area}}</td>
+                                    <td>{{wine.vineyard}}</td>
+                                    <td class="wine-description">{{wine.description.substring(0, 70) + '...'}}</td>
+                                </tr>
+                                    
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </section>
+
+            </div>
+            
+            <div class="d-flex justify-content-around p-3 gap-5">
                 <section class="col-4">
                     <h1>Add Accessories</h1>
                     
@@ -128,61 +207,31 @@
                     </div>  
                 </section>
 
-            </div>
-            
-            <div class="d-flex justify-content-around p-3 gap-5">
-                <section class="col-5 mt-5">
-                    <h2>Wines List</h2>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Variety</th>
-                            <th scope="col">Area</th>
-                            <th scope="col">Vineyard</th>
-                            <th scope="col">Description</th>
-                          </tr>
-                        </thead>
-                        <tbody v-for="wine in wines">
-                            <tr>
-                                <th scope="row">{{wine.id}}</th>
-                                <td>{{wine.name}}</td>
-                                <td>{{wine.price}}</td>
-                                <td>{{wine.stock}}</td>
-                                <td>{{wine.variety}}</td>
-                                <td>{{wine.area}}</td>
-                                <td>{{wine.vineyard}}</td>
-                                <td>{{wine.description}}</td>
-                            </tr>
-                        </tbody>
-                      </table>
-                </section>
-
                 <section class="col-5 mt-5">
                     <h2>Accesories List</h2>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Description</th>
-                          </tr>
-                        </thead>
-                        <tbody v-for="accessory in accessories">
-                            <tr>
-                                <th scope="row">{{accessory.id}}</th>
-                                <td>{{accessory.name}}</td>
-                                <td>{{accessory.price}}</td>
-                                <td>{{accessory.stock}}</td>
-                                <td>{{accessory.description}}</td>
-                            </tr>
-                        </tbody>
-                      </table>
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody v-for="accessory in accessories">
+                                <tr>
+                                    <th scope="row">{{accessory.id}}</th>
+                                    <td>{{accessory.name}}</td>
+                                    <td>${{accessory.price}}</td>
+                                    <td>{{accessory.stock}}</td>
+                                    <td>{{accessory.description}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </section>
             </div>
             
@@ -199,6 +248,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--Sweet Alert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script src="add-inventory.js"></script>
+    <script src="../js/add-inventory.js"></script>
 </body>
 </html>

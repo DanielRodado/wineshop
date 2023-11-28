@@ -1,5 +1,6 @@
 package com.wineshop.ecommerce.services.implement;
 
+import com.wineshop.ecommerce.models.Purchase;
 import com.wineshop.ecommerce.models.WinePurchase;
 import com.wineshop.ecommerce.repositories.WinePurchaseRepository;
 import com.wineshop.ecommerce.services.WinePurchaseService;
@@ -15,5 +16,10 @@ public class WinePurchaseImplement implements WinePurchaseService {
     @Override
     public void saveWinePurchase(WinePurchase winePurchase) {
         winePurchaseRepository.save(winePurchase);
+    }
+
+    @Override
+    public void deleteWinePurchasesByPurchase(Purchase purchase) {
+        winePurchaseRepository.deleteWinePurchasesByPurchase(purchase);
     }
 }

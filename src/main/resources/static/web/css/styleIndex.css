@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.style-logo{
+    height: 8rem;
+
+}
+.nav_2{
+
+    background: linear-gradient(to right, rgb(136, 0, 0), black);
+
+}
+.imgcarrusel{
+max-height: 20rem;
+
+
+}
+
+.suscribe{
+    min-height: 15rem;
+    background-color: #80144C;
+}
+
