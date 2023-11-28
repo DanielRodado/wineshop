@@ -7,6 +7,7 @@ import com.wineshop.ecommerce.models.WineType;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WineDTO {
 
@@ -28,7 +29,7 @@ public class WineDTO {
 
     private int valuations, numberOfValuations;
 
-    private Set<WinePurchase> winePurchases;
+    private Set<WinePurchaseDTO> winePurchases;
 
     private Boolean isOnOffer;
 
@@ -51,7 +52,7 @@ public class WineDTO {
                 :
                 (wine.getValuations().stream().reduce((byte) 0, (acc, num) -> (byte) (acc + num)))/wine.getValuations().size();
         this.numberOfValuations = wine.getValuations().size();
-        this.winePurchases = wine.getWinePurchases();
+        this.winePurchases = wine.getWinePurchases().stream().map(WinePurchaseDTO::new).collect(Collectors.toSet());
         this.isOnOffer = wine.isOnOffer();
     }
 
@@ -105,7 +106,7 @@ public class WineDTO {
         return valuations;
     }
 
-    public Set<WinePurchase> getWinePurchases() {
+    public Set<WinePurchaseDTO> getWinePurchases() {
         return winePurchases;
     }
 
