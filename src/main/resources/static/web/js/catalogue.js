@@ -16,9 +16,6 @@ new Vue({
 
         this.getWines();
         this.getAccessories();
-
-
-
     },
 
     methods: {
