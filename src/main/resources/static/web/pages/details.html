@@ -142,11 +142,12 @@
                 <img :src="wine.imgURL[1]" class="card-img-top img-detalle" :alt="wine.name">
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+
+            <button v-if="wine.imgURL.length > 1" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
               <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <button v-if="wine.imgURL.length > 1" class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
               <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
