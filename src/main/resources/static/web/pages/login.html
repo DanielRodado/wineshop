@@ -23,10 +23,10 @@
                 <span class="subtitle">Welcome!</span>
                 <div class="form-container">
 
-                    <input type="email" class="input" placeholder="Email">
-                    <input type="password" class="input" placeholder="Password">
+                    <input type="email" class="input" placeholder="Email" v-model="email">
+                    <input type="password" class="input" placeholder="Password" v-model="password">
             </div>
-                <button>Log in</button>
+                <button @click.prevent="login">Log in</button>
             </form>
             <div class="form-section">
               <p>You do not have an account? <a href="../pages/register.html">Sign Up</a> </p>

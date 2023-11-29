@@ -6,11 +6,29 @@ createApp({
     return {
         wines: [],
         wineVarietiesList:[],
-        vineyards:new Set()
+        vineyards:new Set(),
+        areas:new Set()
     };
   },
 
   created() {
+  //   $(document).ready(function() {
+
+  //     $('.counter').each(function () {
+  // $(this).prop('Counter',0).animate({
+  //     Counter: $(this).text()
+  // }, {
+  //     duration: 4000,
+  //     easing: 'swing',
+  //     step: function (now) {
+  //         $(this).text(Math.ceil(now));
+  //     }
+  // });
+  // });
+  
+  // }); 
+
+
     axios
         .get('/api/wines/varieties')
         .then((response) => {
@@ -28,8 +46,14 @@ createApp({
           console.log(this.wines);
           for (let wine of this.wines){
                 this.vineyards.add(wine.vineyard)
-          }
+          };
+          
+          for (let wine of this.wines){
+            this.areas.add(wine.area.trim())
+          };
+
           console.log(this.vineyards);
+          console.log(this.areas);
         })
         .catch((error) => {
           console.log("error")
@@ -49,6 +73,17 @@ createApp({
   },
 
   methods: {
+    
+    catalogue(){
+     location.href='/web/pages/catalogue.html'
+    },
+        
+ 
+
+
+
+
+
     errorMessage(message) {
         Swal.fire({
           icon: "error",

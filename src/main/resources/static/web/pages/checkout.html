@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/styleCheckout.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+  <div id="app">    
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-1 d-flex justify-content-center">
+                 <div class="d-flex justify-content-center align-items-center">
+                    <img class=" style-logo rounded-circle" src="../images/1234.png" alt="logo" height="85rem">
+                </div>        
+            </nav>
+        </header>             
+                
+                    
+                    <div class="card">
+                        
+                        <div class="rightside">
+                            <form action="">
+                                <h1>CheckOut</h1>
+                                <h2>Payment Information</h2>
+                                <p>Cardholder Name</p>
+                                <input type="text" class="inputbox" name="name" required />
+                                <p>Card Number</p>
+                                <input type="number" class="inputbox" name="card_number" id="card_number" required />
+                
+                                <p>Card Type</p>
+                                <select class="inputbox" name="card_type" id="card_type" required>
+                                    <option value="">--Select a Card Type--</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="RuPay">RuPay</option>
+                                    <option value="MasterCard">MasterCard</option>
+                                </select>
+                                <div class="expcvv">
+                
+                                    <p class="expcvv_text">Expiry</p>
+                                    <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
+                
+                                    <p class="expcvv_text2">CVV</p>
+                                    <input type="password" class="inputbox" name="cvv" id="cvv" required />
+                                </div>
+                                <p></p>
+                                <button type="submit" class="button">CheckOut</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                  
+                
+                  
+                
+    </div>              
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="../js/checkout.js"></script>
+
+</html>
