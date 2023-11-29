@@ -208,7 +208,7 @@ body, html {
 }
 
 .img-footer{
-   width: 30rem;
+   width: 15rem;
  
 }
 
@@ -816,3 +816,14 @@ background: rgb(136, 0, 0);
   overflow: auto; /* Hacer el contenedor scrollable */
   border: 1px solid #ccc; /* Borde para visualización */
 }
+.img-carru{
+  width: 10rem;
+  margin: 2rem;
+}
+
+
+
+
+
+
+

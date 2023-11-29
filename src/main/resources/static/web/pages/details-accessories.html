@@ -112,7 +112,7 @@
               <a class="nav-link active  text-light" aria-current="page" href="#">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active  text-light" aria-current="page" href="../pages/catalogue.html">CATALOGUE</a>
+              <a class="nav-link active  text-light" aria-current="page" href="../pages/accessories.html">ACCESSORIES</a>
             </li>
 
         </div>
@@ -120,71 +120,71 @@
     </nav>
 
     <main class="">
-      <div>
-        <div class="d-flex justify-content-center">
-          <h1 class="card-title mt-5">{{wine.name}}</h1>
-
-        </div>
-        <div class="d-flex justify-content-center">
-          <h6>{{wine.vineyard}}</h6>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-center">
-          <p class="card-text"><strong>US$ {{wine.price}}</strong></p>
-        </div>
-        <div class="d-flex justify-content-center flex-wrap">
-          <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img :src="wine.imgURL[0]" class="card-img-top img-detalle" :alt="wine.name">
+        <div>
+            <div class="d-flex justify-content-center">
+              <h1 class="card-title mt-5">{{accessorie.name}}</h1>
+    
+            </div>
+            <div class="d-flex justify-content-center">
+              <h6>{{accessorie.price}}</h6>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-center">
+              <p class="card-text"><strong>US$ {{accessorie.price}}</strong></p>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap">
+              <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img :src="accessorie.imagesURL[0]" class="card-img-top img-detalle" :alt="accessorie.name">
+                  </div>
+                  <div class="carousel-item">
+                    <img :src="accessorie.imagesURL[1]" class="card-img-top img-detalle" :alt="accessorie.name">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
               </div>
-              <div class="carousel-item">
-                <img :src="wine.imgURL[1]" class="card-img-top img-detalle" :alt="wine.name">
+    
+    
+            </div>
+    
+            <div class="card m-3">
+              <div class="card-header bg-body-1 text-light">
+                DESCRIPTION
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p>{{accessorie.description}}</p>
+                  <footer class="blockquote-footer">WINE LOVERS SOCIETY<cite title="Source Title"></cite></footer>
+                </blockquote>
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-
-
-        </div>
-
-        <div class="card m-3">
-          <div class="card-header bg-body-1 text-light">
-            DESCRIPTION
-          </div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <p>{{wine.description}}</p>
-              <footer class="blockquote-footer">WINE LOVERS SOCIETY<cite title="Source Title"></cite></footer>
-            </blockquote>
-          </div>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-center">
-
-
-
-
-            <button type="button" class="button m-2">
-              <span class="button__text">Add Item</span>
-              <span class="button__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2"
-                  stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none"
-                  class="svg">
-                  <line y2="19" y1="5" x2="12" x1="12"></line>
-                  <line y2="12" y1="12" x2="19" x1="5"></line>
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
+            <hr>
+            <div class="d-flex justify-content-center">
+    
+    
+    
+    
+                <button type="button" class="button m-2">
+                  <span class="button__text">Add Item</span>
+                  <span class="button__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2"
+                      stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none"
+                      class="svg">
+                      <line y2="19" y1="5" x2="12" x1="12"></line>
+                      <line y2="12" y1="12" x2="19" x1="5"></line>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </div>
 
 
 
@@ -325,7 +325,6 @@
     </div>
   </footer>
 
-
 </body>
 
 
@@ -334,7 +333,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="../js/details.js"></script>
+<script src="../js/details-accessories.js"></script>
 
 
 </html>
