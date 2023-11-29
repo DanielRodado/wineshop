@@ -187,12 +187,15 @@
                 <div class="contenedor d-flex col m-1">
                     <div class="card m-4 d-flex justify-content-center card-hover" v-for="accessorie of accessories"
                         style="width: 18rem;">
+                        <a class="text-decoration-none" :href="`./details.html?id=${accessorie.id}`"><img :src="accessorie.imagesURL[0]"
+                            class="card-img-top" :alt="accessorie.name"></a>
                         
 
                             <h6 class="card-title align-content-center">{{accessorie.name}}</h6>
                             <div class="d-flex justify-content-center">
                                 <h4 class="card-price">US$ {{accessorie.price }}</h4>
                             </div>
+                            
                             <!-- <div class="ratings d-flex justify-content-end">
                     <div class="stars m-2" v-html="starRating"></div>
                     <div class="percentage m-2">{{productRating}}</div>
