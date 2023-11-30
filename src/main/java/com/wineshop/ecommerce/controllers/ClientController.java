@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ public class ClientController {
 
     @Autowired
     ClientService clientService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/clients")
     public List<ClientDTO> getAllClientsDTO() {
@@ -59,6 +63,12 @@ public class ClientController {
             return new ResponseEntity<>("Your password doesn't match the requirements", HttpStatus.FORBIDDEN);
         }
 
+        // ver que la fecha no este vacia
+
+        if (newClientApp.getBirthDate() == null || newClientApp.getBirthDate().equals(LocalDate.MIN)) {
+            return new ResponseEntity<>("Birth date needs to be filled in", HttpStatus.FORBIDDEN);
+        }
+
         // ver que el cliente sea mayor de 18 años
 
         if (newClientApp.getBirthDate().plusYears(18).isAfter(LocalDate.now())) {
@@ -72,7 +82,7 @@ public class ClientController {
         }
 
         Client client = new Client(newClientApp.getFirstName(), newClientApp.getLastName(),
-                newClientApp.getPassword(), newClientApp.getEmail(),
+                passwordEncoder.encode(newClientApp.getPassword()), newClientApp.getEmail(),
                 false,newClientApp.getBirthDate());
 
         clientService.saveClient(client);
