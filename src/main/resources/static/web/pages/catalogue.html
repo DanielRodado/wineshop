@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/product-cards.css">
 
   <title>Document</title>
 </head>
@@ -17,88 +18,89 @@
   <div id="app">
     <nav class="navbar bg-body-tertiary   d-flex justify-content-end m-0">
       <div class="container  d-flex justify-content-end m-0">
-        <a class="navbar-brand" href="#">
-          <img src="../images/account.svg " alt="Bootstrap" width="45" height="45">
-        </a>
-        <a class="navbar-brand" href="#">
-          <img src="../images/canasta.svg" alt="Bootstrap" width="45" height="45" data-bs-toggle="modal"
-            data-bs-target="#carritoModal">
-        </a>
+          <a class="navbar-brand" href="#">
+              <img src="../images/account.svg " alt="Bootstrap" width="45" height="45">
+          </a>
+          <a class="navbar-brand" href="#">
+              <img src="../images/canasta.svg" alt="Bootstrap" width="45" height="45" data-bs-toggle="modal"
+                  data-bs-target="#carritoModal">
+          </a>
 
-        <!-- Modal -->
-        <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content ">
-              <!-- <div class="modal-header bg-black">
-                <h5 class="modal-title text-light" id="carritoModalLabel">Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-
-
-              <div class="modal-body d-flex justify-content-sm-start align-content-center">
-                <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
-                <div class="d-flex flex-column">
-                  <h4>Wineas</h4>
-                  <h6>US$ 12000</h6>
-                  <h7>Quantity: </h>
-                </div>
-                <button class="deleted">
-                  <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
-                </button>
-                <hr>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success">Buy</button>
-              </div> -->
-              <div class="master-container">
-                <div class="ca cart">
-                  <label class="title">Your cart</label>
-                  <div class="products">
-                    <div class="product">
-                        <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
-
-                      <div>
-                        <span>Wine Tinto</span>
-                        <p>varietales</p>
-                        <p>viña</p>
-                      </div>
-                      <div class="align-self-center">
-                        <label class="price small">$23.99</label>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="ca coupons">
-                  <label class="title">Apply coupons</label>
-                  <form class="form">
-                      <input type="text" placeholder="Apply your coupons here" class="input_field">
-                      <button>Apply</button>
-                  </form>
-                </div>
-              
-                <div class="ca checkout">
-                  <label class="title">Checkout</label>
-                  <div class="details">
-                    <span>Your cart subtotal:</span>
-                    <span>47.99$</span>
-                    <span>Discount through applied coupons:</span>
-                    <span>3.99$</span>
-                    <span>Shipping fees:</span>
-                    <span>4.99$</span>
-                  </div>
-                  <div class="checkout--footer">
-                    <label class="price"><sup>$</sup>57.99</label>
-                    <button class="checkout-btn">Checkout</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content ">
+                      <!-- <div class="modal-header bg-black">
+          <h5 class="modal-title text-light" id="carritoModalLabel">Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
+
+        <div class="modal-body d-flex justify-content-sm-start align-content-center">
+          <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+          <div class="d-flex flex-column">
+            <h4>Wineas</h4>
+            <h6>US$ 12000</h6>
+            <h7>Quantity: </h>
+          </div>
+          <button class="deleted">
+            <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+          </button>
+          <hr>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success">Buy</button>
+        </div> -->
+                      <div class="master-container">
+                          <div class="ca cart">
+                              <label class="title">Your cart</label>
+                              <div class="products">
+                                  <div class="product">
+                                      <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+
+                                      <div>
+                                          <span>Wine Tinto</span>
+                                          <p>varietales</p>
+                                          <p>viña</p>
+                                      </div>
+                                      <div class="align-self-center">
+                                          <label class="price small">$23.99</label>
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="ca coupons">
+                              <label class="title">Apply coupons</label>
+                              <form class="form">
+                                  <input type="text" placeholder="Apply your coupons here" class="input_field">
+                                  <button>Apply</button>
+                              </form>
+                          </div>
+
+                          <div class="ca checkout">
+                              <label class="title">Checkout</label>
+                              <div class="details">
+                                  <span>Your cart subtotal:</span>
+                                  <span>47.99$</span>
+                                  <span>Discount through applied coupons:</span>
+                                  <span>3.99$</span>
+                                  <span>Shipping fees:</span>
+                                  <span>4.99$</span>
+                              </div>
+                              <div class="checkout--footer">
+                                  <label class="price"><sup>$</sup>57.99</label>
+                                  <button class="checkout-btn">Checkout</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    </nav>
+  </nav>
     <nav class="navbar navbar-expand-lg bg-body-1 d-flex justify-content-center">
       <div class=""><a class="navbar-brand" href="#"><img class=" style-logo rounded-circle" src="../images/1234.png"
             alt=""></a></div>
@@ -160,14 +162,11 @@
                 <li><a class="dropdown-item" href="#">CAVA</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+            <li class="nav-item">
+              <a class="nav-link text-light" href="../pages/accessories.html" role="button"
                 aria-expanded="false">
                 ACCESSORIES
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">x</a></li>
-              </ul>
             </li>
 
           </ul>
@@ -183,8 +182,8 @@
 
 
 
-      <div class="d-flex justify-content-center">
-        <div class="col-2 m-3">
+
+        <div class=" m-1 scrollable-container justify-content-end">
           <div class="card ">
             <div class="card-header bg-filter text-light  d-flex justify-content-center">
               FILTERS
@@ -290,47 +289,48 @@
 
         <!-- cards| -->
 
-
-        <div class="contenedor d-flex col m-1">
-          <div class="card m-4 d-flex justify-content-center card-hover" v-for="wine of wines" style="width: 18rem;">
-            <div v-if="wine.showOffer"><img  src="../images/new-offer.png" alt="" class="offer-image"></div>
-            <a class="text-decoration-none" :href="`./details.html?id=${wine.id}`"><img :src="wine.imgURL[0]"
-                class="card-img-top" :alt="wine.name"></a>
-            <div class="card-body">
-              <h6 class="card-title align-content-center">{{wine.name}}</h6>
-              <div class="d-flex justify-content-center">
-                <h4 class="card-price">US$ {{wine.price }}</h4>
-              </div>
-              <div class="ratings d-flex justify-content-end">
-                <div class="stars m-2" v-html="starRating"></div>
-                <div class="percentage m-2">{{productRating}}</div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <button type="button" class="button">
-                  <span class="button__text">Add Item</span>
-                  <span class="button__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2"
-                      stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none"
-                      class="svg">
-                      <line y2="19" y1="5" x2="12" x1="12"></line>
-                      <line y2="12" y1="12" x2="19" x1="5"></line>
-                    </svg>
-                  </span>
-                </button>
-                <div class="quantity-container">
-                  <div class="quantity-buttons d-flex justify-content-center m-1">
-                    <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold"
-                      @click="decreaseQuantity">-</button>
-                    <div class="quantity d-flex align-content-centerc m-1 fw-bold"><span>{{ quantity }}</span></div>
-                    <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold"
-                      @click="increaseQuantity">+</button>
+        <div class="d-flex justify-content-center">
+        <div class=" contenedor d-flex col m-1">
+          <div class=" m-2 d-flex justify-content-center " v-for="wine of wines" style="width: 18rem;">
+            <div class="container3 page-wrapper m-2"  style="width: 400px;">
+              <div class="page-inner m-3">
+                  <div class="d-flex justify-content-center m-3">
+                      <div class="el-wrapper">
+                          <div class="box-up">
+                            <img :src="wine.imgURL[0]"
+                            class="card-img-top" :alt="wine.name">
+                              <div class="img-info">
+                              <div class="info-inner">
+                                  <span class="p-name">{{wine.name}}</span>
+                                  <span class="p-company">{{wine.area}}</span>
+                              </div>
+                              <div class="a-size">
+                                  Stock: <span class="size">{{wine.stock}}</span>
+                                  <br>
+                                  CC: <span class="size">{{wine.cc}}</span>
+                              </div>
+                              </div>
+                          </div>
+                  
+                          <div class="box-down">
+                              <div class="h-bg">
+                              <div class="h-bg-inner"></div>
+                              </div>
+                  
+                              <a class="cart3" href="#">
+                              <span class="price">${{wine.price}}</span>
+                              <span class="add-to-cart3">
+                                  <span class="txt">Add in cart</span>
+                              </span>
+                              </a>
+                          </div>
+                      </div>
                   </div>
-                </div>
               </div>
-            </div>
-
+          </div>   
           </div>
-
+        </div>
+      </div>
     </main>
   </div>
 
@@ -340,49 +340,49 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="d-flex justify-content-sm-center">
-            <img src="../images/TERRAPURA.png" class="d-block w-10" alt="...">
-            <img src="../images/APALTAGUA.png" class="d-block w-10" alt="...">
-            <img src="../images/CASASDELBOSQUE.png" class="d-block w-10" alt="...">
+            <img src="../images/TERRAPURA.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/APALTAGUA.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/CASASDELBOSQUE.png" class="d-block img-carru m-2" alt="...">
           </div>
         </div>
 
         <div class="carousel-item">
           <div class="d-flex justify-content-sm-center">
-            <img src="../images/chocalan-2023.png" class="d-block w-10" alt="...">
-            <img src="../images/freixenet-2023.png" class="d-block w-10" alt="...">
-            <img src="../images/GARCESSILVA.png" class="d-block w-10" alt="...">
-          </div>
-
-        </div>
-
-        <div class="carousel-item">
-          <div class="d-flex justify-content-sm-center">
-            <img src="../images/JBOUCHON.png" class="d-block w-10" alt="...">
-            <img src="../images/KOYLE.png" class="d-block w-10" alt="...">
-            <img src="../images/MATETIC.png" class="d-block w-10" alt="...">
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <div class="d-flex justify-content-sm-center">
-            <img src="../images/morande-2023.png" class="d-block w-10" alt="...">
-            <img src="../images/PATRONALES.png" class="d-block w-10" alt="...">
-            <img src="../images/REQUINGUA.png" class="d-block w-10" alt="...">
+            <img src="../images/chocalan-2023.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/freixenet-2023.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/GARCESSILVA.png" class="d-block img-carru m-2" alt="...">
           </div>
 
         </div>
 
         <div class="carousel-item">
           <div class="d-flex justify-content-sm-center">
-            <img src="../images/SANTAEMA.png" class="d-block w-10" alt="...">
-            <img src="../images/VERAMONTE.png" class="d-block w-10" alt="...">
-            <img src="../images/VONSIEBENTHAL.png" class="d-block w-1 0" alt="...">
+            <img src="../images/JBOUCHON.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/KOYLE.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/MATETIC.png" class="d-block img-carru m-2" alt="...">
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/morande-2023.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/PATRONALES.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/REQUINGUA.png" class="d-block img-carru m-2" alt="...">
+          </div>
+
+        </div>
+
+        <div class="carousel-item">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/SANTAEMA.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/VERAMONTE.png" class="d-block img-carru m-2" alt="...">
+            <img src="../images/VONSIEBENTHAL.png" class="d-block img-carru m-2" alt="...">
           </div>
 
         </div>
 
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+      <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -391,7 +391,7 @@
         data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
-      </button>
+      </button> -->
     </div>
 
 
@@ -408,9 +408,9 @@
 
 
 
-    <div class="row">
+    <div class="m-2 row">
 
-      <div class="col-sm-12 col-md-6">
+      <div class="col-sm-12 col-md-6 m-2">
         <h6>About</h6>
         <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club
           where you can find the best of wine in different formats and only the best in the world. We also have our own
@@ -419,7 +419,7 @@
           members.</p>
       </div>
 
-      <div class="col-xs-6 col-md-3">
+      <!-- <div class="col-xs-6 col-md-3">
         <h6>Categories</h6>
         <ul class="footer-links">
           <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
@@ -429,9 +429,9 @@
           <li><a href="http://scanfcode.com/category/android/">Android</a></li>
           <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
         </ul>
-      </div>
+      </div> -->
 
-      <div class="col-xs-6 col-md-3">
+      <!-- <div class="col-xs-6 col-md-3">
         <h6>Quick Links</h6>
         <ul class="footer-links">
           <li><a href="http://scanfcode.com/about/">About Us</a></li>
@@ -440,7 +440,7 @@
           <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
           <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <hr>
     </div>
