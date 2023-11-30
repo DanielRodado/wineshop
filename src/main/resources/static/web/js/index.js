@@ -150,7 +150,7 @@ createApp({
             timer: 2000,
           });
           setTimeout(() => {
-            location.pathname = "/web/pages/catalogue.html";
+            location.pathname = "/web/pages/catalo.html";
           }, 1500);
         })
         .catch((err) => {
@@ -209,7 +209,7 @@ createApp({
           axios.post("/api/login", infoLogin).then((response) => {
             
 
-            location.pathname = "/web/pages/catalogue.html";
+            location.pathname = "/web/pages/catalo.html";
           });
         })
         .catch((err) => {
@@ -225,15 +225,6 @@ createApp({
         });
     },
 
-    errorMessage(message) {
-      Swal.fire({
-        icon: "error",
-        title: "An error has occurred",
-        text: message,
-        color: "#fff",
-        background: "#1c2754",
-        confirmButtonColor: "#17acc9",
-      });
-    },
+    
   },
 }).mount("#app");
