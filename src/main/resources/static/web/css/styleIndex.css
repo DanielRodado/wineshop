@@ -340,3 +340,7 @@ max-height: 30rem;
 .form button:hover {
   background-color: #005ce6;
 }
+
+.fade.show{
+  opacity:0.5!important;
+}

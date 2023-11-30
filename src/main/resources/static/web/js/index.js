@@ -23,21 +23,21 @@ createApp({
   },
 
   created() {
-    //   $(document).ready(function() {
+      $(document).ready(function() {
 
-    //     $('.counter').each(function () {
-    // $(this).prop('Counter',0).animate({
-    //     Counter: $(this).text()
-    // }, {
-    //     duration: 4000,
-    //     easing: 'swing',
-    //     step: function (now) {
-    //         $(this).text(Math.ceil(now));
-    //     }
-    // });
-    // });
+        $('.counter').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+    });
 
-    // });
+    });
 
     axios
       .get("/api/wines/varieties")
@@ -71,7 +71,8 @@ createApp({
         });
 
         for (let wine of this.wines) {
-          this.varieties.add(wine.variety.trim());
+          const formattedVariety = wine.variety.trim().toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
+          this.varieties.add(formattedVariety);
         }
         this.varieties = Array.from(this.varieties).sort(
           (variety1, variety2) => {
@@ -106,6 +107,8 @@ createApp({
       .get("/api/accessories")
       .then((response) => {
         this.accessories = response.data;
+        console.log(this.accessories)
+
       })
       .catch((error) => {
         console.log("error");
@@ -130,7 +133,7 @@ createApp({
     },
 
     catalogue() {
-      location.href = "/web/pages/catalogue.html";
+      location.pathname = "/web/pages/catalo.html";
     },
 
     login() {
@@ -195,13 +198,7 @@ createApp({
         .then((response) => {
           console.log("registered");
 
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your register was successful",
-            showConfirmButton: false,
-            timer: 2000,
-          });
+          
 
           
           let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
