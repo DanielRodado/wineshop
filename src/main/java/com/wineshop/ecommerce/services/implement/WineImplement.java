@@ -56,4 +56,9 @@ public class WineImplement implements WineService {
     public void saveWine(Wine wine) {
         wineRepository.save(wine);
     }
+
+    @Override
+    public String getWineNameById(Long id) {
+        return wineRepository.getNameById(id);
+    }
 }

@@ -97,6 +97,7 @@ public class WineController {
 
         Wine wine = wineService.findWineById(wineId);
         wine.setStock(newStock);
+        wineService.saveWine(wine);
 
         return new ResponseEntity<>("Stock updated", HttpStatus.OK);
     }

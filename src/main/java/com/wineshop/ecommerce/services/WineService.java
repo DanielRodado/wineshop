@@ -23,5 +23,5 @@ public interface WineService {
 
     void saveWine(Wine wine);
 
-
+    String getWineNameById(Long id);
 }

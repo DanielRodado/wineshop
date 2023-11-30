@@ -56,4 +56,9 @@ public class AccessoryImplement implements AccessoryService {
     public void saveAccessory(Accessory accessory) {
         accessoryRepository.save(accessory);
     }
+
+    @Override
+    public String getAccessoryNameById(Long id) {
+        return accessoryRepository.getNameById(id);
+    }
 }
