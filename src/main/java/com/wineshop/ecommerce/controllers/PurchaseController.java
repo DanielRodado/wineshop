@@ -50,7 +50,8 @@ public class PurchaseController {
     @Autowired
     private ClientService clientService;
 
-    public ResponseEntity<Object> createPurchase(NewPurchaseApplicationDTO newPurchaseApp) {
+    public ResponseEntity<Object> createPurchase(Authentication authentication,
+                                                 NewPurchaseApplicationDTO newPurchaseApp) {
 
             // si las dos listas están vacias, manda un error
             if (newPurchaseApp.getWines().isEmpty() && newPurchaseApp.getAccessories().isEmpty()) {
@@ -141,7 +142,7 @@ public class PurchaseController {
             }
 
             purchase.setPriceOrder(priceTotalOrder);
-            Client client = clientService.findClientById(46L);
+            Client client = clientService.findClientByEmail(authentication.getName());
             client.addPurchase(purchase);
             purchaseService.savePurchase(purchase);
 
@@ -176,10 +177,11 @@ public class PurchaseController {
 
     @PostMapping("/purchase")
     @Transactional
-    public ResponseEntity<Object> payAndCreatePurchase(@RequestBody PurchasePaymentWithCardApplicationDTO purchasePaymentWithCardApp)
+    public ResponseEntity<Object> payAndCreatePurchase(Authentication authentication,
+                                                       @RequestBody PurchasePaymentWithCardApplicationDTO purchasePaymentWithCardApp)
     throws Exception {
 
-        ResponseEntity<Object> purchaseResponse = createPurchase(purchasePaymentWithCardApp.getNewPurchaseApp());
+        ResponseEntity<Object> purchaseResponse = createPurchase(authentication, purchasePaymentWithCardApp.getNewPurchaseApp());
 
         if (purchaseResponse.getStatusCode().value() != 201) {
             return purchaseResponse;
@@ -395,17 +397,19 @@ public class PurchaseController {
     }
 
     // servlet para enviar el status
-    // Authentication authentication
-    // Client client = clientService.findClientByEmail(authentication.getName());
-    //
-    //        if (!purchaseService.existsPurchaseByIdAndClient(purchaseId, client)) {
-    //            return new ResponseEntity<>("This order does not belong to you!", HttpStatus.FORBIDDEN);
-    //        }
+
     @GetMapping("/purchase/status")
-    public ResponseEntity<Object> getPurchaseStatus (@RequestParam Long purchaseId){
+    public ResponseEntity<Object> getPurchaseStatus (Authentication authentication,
+                                                     @RequestParam Long purchaseId){
 
         if (!purchaseService.existsPurchaseById(purchaseId)){
             return new ResponseEntity<>("This order does not exist", HttpStatus.FORBIDDEN);
+        }
+
+        Client client = clientService.findClientByEmail(authentication.getName());
+
+        if (!purchaseService.existsPurchaseByIdAndClient(purchaseId, client)) {
+            return new ResponseEntity<>("This order does not belong to you!", HttpStatus.FORBIDDEN);
         }
 
         Purchase purchase = purchaseService.getPurchaseById(purchaseId);
