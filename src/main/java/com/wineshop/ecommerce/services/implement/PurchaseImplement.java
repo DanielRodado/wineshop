@@ -1,5 +1,6 @@
 package com.wineshop.ecommerce.services.implement;
 
+import com.wineshop.ecommerce.models.Client;
 import com.wineshop.ecommerce.models.Purchase;
 import com.wineshop.ecommerce.repositories.PurchaseRepository;
 import com.wineshop.ecommerce.services.PurchaseService;
@@ -36,5 +37,15 @@ public class PurchaseImplement implements PurchaseService {
     @Override
     public Double getPriceOrderOfPurchaseById(Long id) {
         return purchaseRepository.getPriceOrderById(id);
+    }
+
+    @Override
+    public Boolean existsPurchaseById(Long id) {
+        return purchaseRepository.existsById(id);
+    }
+
+    @Override
+    public Boolean existsPurchaseByIdAndClient(Long id, Client client) {
+        return purchaseRepository.existsByIdAndClient(id, client);
     }
 }
