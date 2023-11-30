@@ -5,16 +5,22 @@ import com.wineshop.ecommerce.repositories.AccessoryRepository;
 import com.wineshop.ecommerce.repositories.ClientRepository;
 import com.wineshop.ecommerce.repositories.PurchaseRepository;
 import com.wineshop.ecommerce.repositories.WineRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
 public class ECommerceApplication {
+
+	@Autowired
+	//Injects passwordEncoder to encode passwords
+	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ECommerceApplication.class, args);
@@ -25,11 +31,11 @@ public class ECommerceApplication {
 									  WineRepository wineRepository, AccessoryRepository accessoryRepository) {
 		return args -> {
 
-			/*Client clientOne = new Client("Daniel", "Rodado", "pass123", "daniel@gmail.com",
+			/*Client clientOne = new Client("Daniel", "Rodado", passwordEncoder.encode("pass123"), "daniel@gmail.com",
 					true, LocalDate.of(2005,7, 14));
 			clientRepository.save(clientOne);
 
-			Client clientTwo = new Client("Marcos", "Rodriguez", "pass123", "marcos@gmail.com",
+			Client clientTwo = new Client("Marcos", "Rodriguez", passwordEncoder.encode("pass123"), "marcos@gmail.com",
 					true, LocalDate.of(2002,9, 12));
 			clientRepository.save(clientTwo);*/
 
