@@ -1,186 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <title>Document</title>
 </head>
+
 <body>
 
-  
 
+  <div id="app">
     <nav class="navbar bg-body-tertiary   d-flex justify-content-end m-0">
-        <div class="container  d-flex justify-content-end m-0">
-          <a class="navbar-brand" href="#">
-            <img src="../images/account.svg " alt="Bootstrap" width="45" height="45">
-          </a>
-          <a class="navbar-brand" href="#">
-            <img  src="../images/canasta.svg" alt="Bootstrap" width="45" height="45">
-          </a>
-        </div>
-      </nav>
-    <nav class="navbar navbar-expand-lg bg-body-1 d-flex justify-content-center">
-        <div class=""><a class="navbar-brand" href="#"><img class=" style-logo rounded-circle" src="../images/1234.png" alt=""></a></div>
-        <div class="container-fluid">
+      <div class="container  d-flex justify-content-end m-0">
+        <a class="navbar-brand" href="#">
+          <img src="../images/account.svg " alt="Bootstrap" width="45" height="45">
+        </a>
+        <a class="navbar-brand" href="#">
+          <img src="../images/canasta.svg" alt="Bootstrap" width="45" height="45" data-bs-toggle="modal"
+            data-bs-target="#carritoModal">
+        </a>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active  text-light" aria-current="page" href="#">HOME</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    VINEYARDS
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Altair</a></li>
-                  <li><a class="dropdown-item" href="#">Amayna</a></li>
-                  <li><a class="dropdown-item" href="#">Antigal</a></li>
-                  <li><a class="dropdown-item" href="#">Antiyal</a></li>
-                  <li><a class="dropdown-item" href="#">Casa del bosque</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    VALLEYS
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Acouncagua</a></li>
-                  <li><a class="dropdown-item" href="#">Apalta</a></li>
-                  <li><a class="dropdown-item" href="#">Barcelona</a></li>
-                  <li><a class="dropdown-item" href="#">Chile</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    STRAINS
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Cavernet suavigon</a></li>
-                  <li><a class="dropdown-item" href="#">Carignan</a></li>
-                  <li><a class="dropdown-item" href="#">Chardonnay</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    SPARKLING WINES
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Brut</a></li>
-                  <li><a class="dropdown-item" href="#">Brut nature</a></li>
-                  <li><a class="dropdown-item" href="#">CAVA</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ACCESSORIES
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">x</a></li>
-                </ul>
-              </li>
+        <!-- Modal -->
+        <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content ">
+              <!-- <div class="modal-header bg-black">
+                <h5 class="modal-title text-light" id="carritoModalLabel">Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+
+              <div class="modal-body d-flex justify-content-sm-start align-content-center">
+                <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+                <div class="d-flex flex-column">
+                  <h4>Wineas</h4>
+                  <h6>US$ 12000</h6>
+                  <h7>Quantity: </h>
+                </div>
+                <button class="deleted">
+                  <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+                </button>
+                <hr>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success">Buy</button>
+              </div> -->
+              <div class="master-container">
+                <div class="ca cart">
+                  <label class="title">Your cart</label>
+                  <div class="products">
+                    <div class="product">
+                        <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+
+                      <div>
+                        <span>Wine Tinto</span>
+                        <p>varietales</p>
+                        <p>viña</p>
+                      </div>
+                      <div class="align-self-center">
+                        <label class="price small">$23.99</label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
+                <div class="ca coupons">
+                  <label class="title">Apply coupons</label>
+                  <form class="form">
+                      <input type="text" placeholder="Apply your coupons here" class="input_field">
+                      <button>Apply</button>
+                  </form>
+                </div>
+              
+                <div class="ca checkout">
+                  <label class="title">Checkout</label>
+                  <div class="details">
+                    <span>Your cart subtotal:</span>
+                    <span>47.99$</span>
+                    <span>Discount through applied coupons:</span>
+                    <span>3.99$</span>
+                    <span>Shipping fees:</span>
+                    <span>4.99$</span>
+                  </div>
+                  <div class="checkout--footer">
+                    <label class="price"><sup>$</sup>57.99</label>
+                    <button class="checkout-btn">Checkout</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-      <div id="app"> 
-      <main>
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg bg-body-1 d-flex justify-content-center">
+      <div class=""><a class="navbar-brand" href="#"><img class=" style-logo rounded-circle" src="../images/1234.png"
+            alt=""></a></div>
+      <div class="container-fluid">
 
-        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active  text-light" aria-current="page" href="#">HOME</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                VINEYARDS
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Altair</a></li>
+                <li><a class="dropdown-item" href="#">Amayna</a></li>
+                <li><a class="dropdown-item" href="#">Antigal</a></li>
+                <li><a class="dropdown-item" href="#">Antiyal</a></li>
+                <li><a class="dropdown-item" href="#">Casa del bosque</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                VALLEYS
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Acouncagua</a></li>
+                <li><a class="dropdown-item" href="#">Apalta</a></li>
+                <li><a class="dropdown-item" href="#">Barcelona</a></li>
+                <li><a class="dropdown-item" href="#">Chile</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                STRAINS
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Cavernet suavigon</a></li>
+                <li><a class="dropdown-item" href="#">Carignan</a></li>
+                <li><a class="dropdown-item" href="#">Chardonnay</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                SPARKLING WINES
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Brut</a></li>
+                <li><a class="dropdown-item" href="#">Brut nature</a></li>
+                <li><a class="dropdown-item" href="#">CAVA</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle  text-light" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                ACCESSORIES
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">x</a></li>
+              </ul>
+            </li>
 
-        <div class="d-flex justify-content-center">
-          <div class="col-2 m-3">
-            <div class="card ">
-                <div class="card-header bg-filter text-light  d-flex justify-content-center">
-                    FILTERS
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+
+
+
+      <div class="d-flex justify-content-center">
+        <div class="col-2 m-3">
+          <div class="card ">
+            <div class="card-header bg-filter text-light  d-flex justify-content-center">
+              FILTERS
+            </div>
+            <div class="card-body">
+              <!-- Contenido de filtros aquí -->
+              <div class="form-group m-2">
+                <label for="categoria">VINEYARDS:</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Altair</label>
                 </div>
-                <div class="card-body">
-                    <!-- Contenido de filtros aquí -->
-                    <div class="form-group m-2">
-                        <label for="categoria">VINEYARDS:</label>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                          <label class="form-check-label" for="vineyardAltair">Altair</label>
-                      </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                        <label class="form-check-label" for="vineyardAltair">Amayna</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                      <label class="form-check-label" for="vineyardAltair">Antigal</label>
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                    <label class="form-check-label" for="vineyardAltair">Antiyal</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Amayna</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Antigal</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Antiyal</label>
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
                   <label class="form-check-label" for="vineyardAltair">Casa del bosque</label>
                 </div>
-               </div>
-               <hr>
-                    <div class="form-group m-2">
-                      <label for="categoria">VALLEYS:</label>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                        <label class="form-check-label" for="vineyardAltair">Acouncagua</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                      <label class="form-check-label" for="vineyardAltair">Apalta</label>
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                    <label class="form-check-label" for="vineyardAltair">Barcelona</label>
+              </div>
+              <hr>
+              <div class="form-group m-2">
+                <label for="categoria">VALLEYS:</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Acouncagua</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Apalta</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Barcelona</label>
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
                   <label class="form-check-label" for="vineyardAltair">Chile</label>
+                </div>
               </div>
-                  </div>
-                  <hr>
-                  <div class="form-group m-2 ">
-                    <label for="categoria">STRAINS:</label>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                      <label class="form-check-label" for="vineyardAltair">Cavernet suavigon</label>
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                    <label class="form-check-label" for="vineyardAltair">Carignan</label>
+              <hr>
+              <div class="form-group m-2 ">
+                <label for="categoria">STRAINS:</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Cavernet suavigon</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Carignan</label>
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
                   <label class="form-check-label" for="vineyardAltair">Chardonnay</label>
-              </div>
                 </div>
-                <hr>
-                <div class="form-group m-2">
-                  <label for="categoria">SPARKLING WINES:</label>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                    <label class="form-check-label" for="vineyardAltair">Brut</label>
+              </div>
+              <hr>
+              <div class="form-group m-2">
+                <label for="categoria">SPARKLING WINES:</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">Brut</label>
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
                   <label class="form-check-label" for="vineyardAltair">Brut nature</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
-                <label class="form-check-label" for="vineyardAltair">CAVA</label>
-            </div>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
+                  <label class="form-check-label" for="vineyardAltair">CAVA</label>
+                </div>
               </div>
               <hr>
               <div class="form-group m-2">
@@ -188,194 +272,210 @@
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="vineyardAltair" v-model="vineyardAltair">
                   <label class="form-check-label" for="vineyardAltair">X</label>
-              </div>
-            </div>
-            <hr>
-                    <div class="form-group m-2 d-flex justify-content-center">
-                        <label for="precio">Precio:</label>
-                        <input type="range" class="form-control-range" id="precio" min="0" max="1000">
-                    </div>
-                    <div class="d-flex justify-content-center">
-                      <button class="btn btn-danger">APPLY FILTERS</button>
-                    </div>
-                  
                 </div>
-            </div>
-        </div>
-   
-  
-          <!-- cards| -->
-
-          
-  
-          <div class="contenedor d-flex col m-1">
-             
-            <div class="card m-4 d-flex justify-content-center card-hover" style="width: 18rem;">
-              <img v-if="showOfferImage" src="../images/new-offer.png" alt="" class="offer-image">
-              <img src="../images/01PR24_1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h6 class="card-title align-content-center">Von Siebenthal Tatay De Cristóbal Carménère</h6>
-                  <div class="d-flex justify-content-center">
-                      <h4 class="card-price">US$ {{ productPrice }}</h4>
-                  </div>
-                  <div class="ratings d-flex justify-content-end">
-                      <div class="stars m-2" v-html="starRating"></div>
-                      <div class="percentage m-2">{{ productRating }}%</div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <button type="button" class="button">
-                          <span class="button__text">Add Item</span>
-                          <span class="button__icon">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
-                                  <line y2="19" y1="5" x2="12" x1="12"></line>
-                                  <line y2="12" y1="12" x2="19" x1="5"></line>
-                              </svg>
-                          </span>
-                      </button>
-                      <div class="quantity-container">
-                          <div class="quantity-buttons d-flex justify-content-center m-1">
-                              <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold" @click="decreaseQuantity">-</button>
-                              <div class="quantity d-flex align-content-centerc m-1 fw-bold"><span>{{ quantity }}</span></div>
-                              <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold" @click="increaseQuantity">+</button>
-                          </div>
-                      </div>
-                  </div>
               </div>
+              <hr>
+              <div class="form-group m-2 d-flex justify-content-center">
+                <label for="precio">Precio:</label>
+                <input type="range" class="form-control-range" id="precio" min="0" max="1000">
+              </div>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-danger">APPLY FILTERS</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- cards| -->
+
+
+        <div class="contenedor d-flex col m-1">
+          <div class="card m-4 d-flex justify-content-center card-hover" v-for="wine of wines" style="width: 18rem;">
+            <div v-if="wine.showOffer"><img  src="../images/new-offer.png" alt="" class="offer-image"></div>
+            <a class="text-decoration-none" :href="`./details.html?id=${wine.id}`"><img :src="wine.imgURL[0]"
+                class="card-img-top" :alt="wine.name"></a>
+            <div class="card-body">
+              <h6 class="card-title align-content-center">{{wine.name}}</h6>
+              <div class="d-flex justify-content-center">
+                <h4 class="card-price">US$ {{wine.price }}</h4>
+              </div>
+              <div class="ratings d-flex justify-content-end">
+                <div class="stars m-2" v-html="starRating"></div>
+                <div class="percentage m-2">{{productRating}}</div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" class="button">
+                  <span class="button__text">Add Item</span>
+                  <span class="button__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2"
+                      stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none"
+                      class="svg">
+                      <line y2="19" y1="5" x2="12" x1="12"></line>
+                      <line y2="12" y1="12" x2="19" x1="5"></line>
+                    </svg>
+                  </span>
+                </button>
+                <div class="quantity-container">
+                  <div class="quantity-buttons d-flex justify-content-center m-1">
+                    <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold"
+                      @click="decreaseQuantity">-</button>
+                    <div class="quantity d-flex align-content-centerc m-1 fw-bold"><span>{{ quantity }}</span></div>
+                    <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold"
+                      @click="increaseQuantity">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-      </main>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+
+    <div id="carouselExampleAutoplaying" class="carousel slide d-flex justify-content-center" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/TERRAPURA.png" class="d-block w-10" alt="...">
+            <img src="../images/APALTAGUA.png" class="d-block w-10" alt="...">
+            <img src="../images/CASASDELBOSQUE.png" class="d-block w-10" alt="...">
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/chocalan-2023.png" class="d-block w-10" alt="...">
+            <img src="../images/freixenet-2023.png" class="d-block w-10" alt="...">
+            <img src="../images/GARCESSILVA.png" class="d-block w-10" alt="...">
+          </div>
+
+        </div>
+
+        <div class="carousel-item">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/JBOUCHON.png" class="d-block w-10" alt="...">
+            <img src="../images/KOYLE.png" class="d-block w-10" alt="...">
+            <img src="../images/MATETIC.png" class="d-block w-10" alt="...">
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/morande-2023.png" class="d-block w-10" alt="...">
+            <img src="../images/PATRONALES.png" class="d-block w-10" alt="...">
+            <img src="../images/REQUINGUA.png" class="d-block w-10" alt="...">
+          </div>
+
+        </div>
+
+        <div class="carousel-item">
+          <div class="d-flex justify-content-sm-center">
+            <img src="../images/SANTAEMA.png" class="d-block w-10" alt="...">
+            <img src="../images/VERAMONTE.png" class="d-block w-10" alt="...">
+            <img src="../images/VONSIEBENTHAL.png" class="d-block w-1 0" alt="...">
+          </div>
+
+        </div>
+
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
 
-      <footer class="site-footer">
 
-        <div id="carouselExampleAutoplaying" class="carousel slide d-flex justify-content-center" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/TERRAPURA.png" class="d-block w-10" alt="...">
-                <img src="../images/APALTAGUA.png" class="d-block w-10" alt="...">
-                <img src="../images/CASASDELBOSQUE.png" class="d-block w-10" alt="..."></div>
-            </div>
 
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/chocalan-2023.png" class="d-block w-10" alt="...">
-                <img src="../images/freixenet-2023.png" class="d-block w-10" alt="...">
-                <img src="../images/GARCESSILVA.png" class="d-block w-10" alt="...">
-              </div>
+    <div class="container mt-5">
+      <div class="d-flex justify-content-center align-content-center">
+        <img src="../images/SELLO-SIN-FONDO.png" alt="" width="120" height="120">
+        <img src="../images/CCS-LOGOV2.png" alt="" width="120" height="120">
+      </div>
+      <div class="container d-flex justify-content-center">
+        <img src="../images/logo-text-V1.png" alt="" class=" img-footer">
+      </div>
+    </div>
 
-            </div>
 
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/JBOUCHON.png" class="d-block w-10" alt="...">
-                <img src="../images/KOYLE.png" class="d-block w-10" alt="...">
-                <img src="../images/MATETIC.png" class="d-block w-10" alt="...">
-              </div>
-            </div>
 
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/morande-2023.png" class="d-block w-10" alt="...">
-                <img src="../images/PATRONALES.png" class="d-block w-10" alt="...">
-                <img src="../images/REQUINGUA.png" class="d-block w-10" alt="...">
-              </div>
+    <div class="row">
 
-            </div>
+      <div class="col-sm-12 col-md-6">
+        <h6>About</h6>
+        <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club
+          where you can find the best of wine in different formats and only the best in the world. We also have our own
+          online store where you can find the best variety and offers of wines. At WLS we offer you the most
+          entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber
+          members.</p>
+      </div>
 
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/SANTAEMA.png" class="d-block w-10" alt="...">
-                <img src="../images/VERAMONTE.png" class="d-block w-10" alt="...">
-                <img src="../images/VONSIEBENTHAL.png" class="d-block w-1 0" alt="...">
-              </div>
+      <div class="col-xs-6 col-md-3">
+        <h6>Categories</h6>
+        <ul class="footer-links">
+          <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+          <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+          <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+          <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+          <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+          <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+        </ul>
+      </div>
 
-            </div>
-
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+      <div class="col-xs-6 col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="http://scanfcode.com/about/">About Us</a></li>
+          <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+          <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+          <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+            <a href="#">WINE LOVERS SOCIETY</a>.
+          </p>
         </div>
 
-        
-
-        <div class="container mt-5">
-          <div class="d-flex justify-content-center align-content-center">          
-            <img src="../images/SELLO-SIN-FONDO.png" alt="" width="120" height="120">
-            <img src="../images/CCS-LOGOV2.png" alt="" width="120" height="120">
-          </div>
-            <div class="container d-flex justify-content-center">
-            <img src="../images/logo-text-V1.png" alt="" class=" img-footer">
-            </div>
-          </div>
-
-
-
-          <div class="row">
-
-            <div class="col-sm-12 col-md-6">
-              <h6>About</h6>
-              <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club where you can find the best of wine in different formats and only the best in the world. We also have our own online store where you can find the best variety and offers of wines. At WLS we offer you the most entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber members.</p>
-            </div>
-  
-            <div class="col-xs-6 col-md-3">
-              <h6>Categories</h6>
-              <ul class="footer-links">
-                <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-              </ul>
-            </div>
-  
-            <div class="col-xs-6 col-md-3">
-              <h6>Quick Links</h6>
-              <ul class="footer-links">
-                <li><a href="http://scanfcode.com/about/">About Us</a></li>
-                <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-                <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-                <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-                <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-              </ul>
-            </div>
-          </div>
-          <hr>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <ul class="social-icons">
+            <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40"
+                    src="../images/facebook (1).png" alt=""></i></a></li>
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40"
+                    src="../images/twitter.png" alt=""></i></a></li>
+            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40"
+                    src="../images/instagram (1).png" alt=""></i></a></li>
+            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40"
+                    src="../images/linkedin (1).png" alt=""></i></a></li>
+          </ul>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by 
-           <a href="#">WINE LOVERS SOCIETY</a>.
-              </p>
-            </div>
-  
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <ul class="social-icons">
-                <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40" src="../images/facebook (1).png" alt=""></i></a></li>
-                <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40" src="../images/twitter.png" alt=""></i></a></li>
-                <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40" src="../images/instagram (1).png" alt=""></i></a></li>
-                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40" src="../images/linkedin (1).png" alt=""></i></a></li>   
-              </ul>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
   </footer>
 
-    
+
 </body>
 
 
 <!-- AXIOS -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script src="../js/catalogue.js"></script>
 
