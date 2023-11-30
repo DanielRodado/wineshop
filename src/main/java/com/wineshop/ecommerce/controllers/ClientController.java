@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ public class ClientController {
 
     @Autowired
     ClientService clientService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/clients")
     public List<ClientDTO> getAllClientsDTO() {
@@ -72,7 +76,7 @@ public class ClientController {
         }
 
         Client client = new Client(newClientApp.getFirstName(), newClientApp.getLastName(),
-                newClientApp.getPassword(), newClientApp.getEmail(),
+                passwordEncoder.encode(newClientApp.getPassword()), newClientApp.getEmail(),
                 false,newClientApp.getBirthDate());
 
         clientService.saveClient(client);
