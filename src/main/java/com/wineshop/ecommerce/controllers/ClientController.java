@@ -7,6 +7,7 @@ import com.wineshop.ecommerce.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,6 +26,11 @@ public class ClientController {
     @GetMapping("/clients")
     public List<ClientDTO> getAllClientsDTO() {
         return clientService.getAllClientsDTO();
+    }
+
+    @GetMapping("/clients/current")
+    public ClientDTO getCurrentClient(Authentication authentication) {
+        return new ClientDTO( clientService.findClientByEmail(authentication.getName()) );
     }
 
     @PostMapping("/clients")

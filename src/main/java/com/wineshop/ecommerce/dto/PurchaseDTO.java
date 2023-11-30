@@ -2,6 +2,7 @@ package com.wineshop.ecommerce.dto;
 
 import com.wineshop.ecommerce.models.Client;
 import com.wineshop.ecommerce.models.Purchase;
+import com.wineshop.ecommerce.models.PurchaseStatus;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -23,6 +24,8 @@ public class PurchaseDTO {
 
     private Set<AccessoryPurchaseDTO> accessoryPurchases;
 
+    private PurchaseStatus status;
+
     // Constructor
 
     public PurchaseDTO (Purchase purchase) {
@@ -32,6 +35,7 @@ public class PurchaseDTO {
         this.priceOrder = purchase.getPriceOrder();
         this.winePurchases = purchase.getWinePurchases().stream().map(WinePurchaseDTO::new).collect(Collectors.toSet());
         this.accessoryPurchases = purchase.getAccessoryPurchases().stream().map(AccessoryPurchaseDTO::new).collect(Collectors.toSet());
+        this.status = purchase.getStatus();
     }
 
     // Getters
@@ -58,5 +62,9 @@ public class PurchaseDTO {
 
     public Set<AccessoryPurchaseDTO> getAccessoryPurchases() {
         return accessoryPurchases;
+    }
+
+    public PurchaseStatus getStatus() {
+        return status;
     }
 }
