@@ -11,6 +11,7 @@
         />
         <link rel="stylesheet" href="../css/styles.css" />
         <link rel="stylesheet" href="../css/product-card.css">
+        <link rel="stylesheet" href="../css/card-modal.css">
         <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
         <title>Catalogue</title>
     </head>
@@ -401,7 +402,7 @@
                                                   <div class="a-size">
                                                       Stock: <span class="size">{{wine.stock}}</span>
                                                       <br>
-                                                      <span class="size"><a class="text-decoration-none" :href="`./details.html?id=${wine.id}`">See details</a></span>
+                                                      <span class="size" role="button" data-bs-toggle="modal" data-bs-target="#staticDetailsWine" @click="wineDetails(wine)">See details</span>
                                                   </div>
                                                   </div>
                                               </div>
@@ -444,9 +445,53 @@
                       </div>
                   </div>
                 </div>
-            </main>
-        </div>
 
+                <!-- Modal -->
+            </main>
+            
+          <div class="modal fade" id="staticDetailsWine" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="card--modal">
+                    <div class="card--modal__title">
+                      <h3>{{wineDetail.name}}</h3>
+                    </div>
+                    <div class="card--modal__body d-flex flex-column">
+                      <div class="half">
+                        <div class="featured_text">
+                          <p class="price">${{wineDetail.price.toLocaleString()}}</p>
+                        </div>
+                        <div class="image">
+                          <img :src="wineDetail.imgURL[0]" :alt="wineDetail.name+' img'">
+                        </div>
+                      </div>
+                      <div class="half">
+                        <div class="description">
+                          <p class="text-center">{{wineDetail.description}}</p>
+                        </div>
+                        <span v-if="wineDetail.stock >= 1" class="stock">In stock</span>
+                        <span v-else class="text-danger">Not stock</span>
+                      </div>
+                    </div>
+                    <div class="card--modal__footer">
+                      <div class="recommend">
+                        <h3>{{wineDetail.variety.replace("_", " ")}}</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
         <footer class="site-footer">
 
           <div id="carouselExampleAutoplaying" class="carousel slide d-flex justify-content-center" data-bs-ride="carousel">
@@ -506,7 +551,7 @@
               <span class="visually-hidden">Next</span>
             </button> -->
           </div>
-      
+
       
       
           <div class="container mt-5">
@@ -531,20 +576,6 @@
                 entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber
                 members.</p>
             </div>
-      
-            <!-- <div class="col-xs-6 col-md-3">
-              <h6>Categories</h6>
-              <ul class="footer-links">
-                <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-              </ul>
-            </div> -->
-      
-            <!-- <div class="col-xs-6 col-md-3">
               <h6>Quick Links</h6>
               <ul class="footer-links">
                 <li><a href="http://scanfcode.com/about/">About Us</a></li>
@@ -553,7 +584,7 @@
                 <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
                 <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
               </ul>
-            </div> -->
+          </div>
           </div>
           <hr>
           </div>
@@ -580,6 +611,7 @@
             </div>
           </div>
         </footer>
+
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

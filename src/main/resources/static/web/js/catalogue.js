@@ -6,7 +6,13 @@ new Vue({
         loader: true,
         listOfPages: [],
         pageNumber: 1,
-        pagesN: 1
+        pagesN: 1,
+        wineDetail: {
+            imgURL: ["a", "b"],
+            stock: 2,
+            price: 2000,
+            variety: "A_A"
+        }
     },
 
     created() {
@@ -59,6 +65,10 @@ new Vue({
                 behavior: "smooth",
             });
         },
+        wineDetails(wine) {
+            this.wineDetail = wine;
+            console.log(wine);
+        }
     },
     computed: {
         pageNumber() {
