@@ -1,72 +1,73 @@
 new Vue({
-    el: '#app',
+    el: "#app",
     data: {
-        showOffer: [],
-        productPrice: 329,
-        productRating: "",
-        quantity: 1,
-        isLoginPopupOpen: false,
-        username: '',
-        password: '',
         wines: [],
-        accessories: [],
+        winesFilter: [],
+        loader: true,
+        listOfPages: [],
+        pageNumber: 1,
+        pagesN: 1
     },
 
     created() {
-
         this.getWines();
     },
 
     methods: {
-
         getWines() {
             axios
                 .get("/api/wines")
-                .then((response) => {
-                    console.log(response);
-                    this.wines = response.data;
-                    this.productRating = response.data.valuations;
-                    this.showOffer = response.data.showOffer;
-                    // this.showOfferImage = 
-
-    
+                .then(({ data }) => {
+                    this.wines = data;
+                    this.winesFilter = data;
+                    this.winesFilter.sort((a, b) => b.price - a.price);
+                    this.countPages();
+                    this.loader = false;
                 })
                 .catch((error) => {
-                    console.log("error")
-                    console.log(error)
+                    console.log(error);
                 });
         },
-
-
-        addToCart() {
-            // Lógica para agregar al carrito
-            console.log('Producto agregado al carrito');
+        getAccessories() {
+            axios
+                .get("/api/accessories")
+                .then(({ data }) => {
+                    this.accessories = data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
-        decreaseQuantity() {
-            if (this.quantity > 1) {
-                this.quantity--;
+        countPages() {
+            this.listOfPages = [];
+            for (
+                let i = 1;
+                i <= (this.winesFilter.length / 16).toFixed(0);
+                i++
+            ) {
+                this.listOfPages.push(i);
             }
         },
-        increaseQuantity() {
-            this.quantity++;
+        toggleCheckbox(id) {
+            const checkbox = document.getElementById(id);
+            checkbox.checked = !checkbox.checked;
         },
-
+        topWindows(page) {
+            this.pageNumber = page === 0 ? 1 : page;
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        },
     },
     computed: {
-        starRating() {
-            const numberOfStars = Math.round(this.productRating);
-            return '★'.repeat(numberOfStars) + '☆'.repeat(5 - numberOfStars);
-        },
-        openLoginPopup() {
-            this.isLoginPopupOpen = true;
-        },
-        closeLoginPopup() {
-            this.isLoginPopupOpen = false;
-        },
-        login() {
-            // Aquí puedes agregar la lógica de autenticación con Vue.js
-            alert('Login successful!');
-            this.closeLoginPopup();
+        pageNumber() {
+            this.winesFilter = this.winesFilter.slice((pageNumber-1)*16, pageNumber*16)
+        }
+    },
+    watch: {
+        winesFilter() {
+            this.countPages();
         }
     },
 });
