@@ -19,6 +19,7 @@
             </nav>
         </header>             
         <main>
+          {{updateSubtotal}}
             <section class="h-100 h-custom">
                 <div class="container h-100 py-5">
                   <div class="row d-flex justify-content-center align-items-center h-100">
@@ -34,161 +35,39 @@
                             </tr>
                           </thead>
                           <tbody class="tableScroll">                            
-                            <tr>
+                            <tr v-for="product in cart">
                                 <th scope="row" class="border-bottom-0">
                                   <div class="d-flex align-items-center">
-                                    <img src="https://i.imgur.com/Oj1iQUX.webp" class="img-fluid rounded-3 cartImg"
-                                      style="width: 120px;" alt="Book">
+                                    <img :src="product.imgURL[0]" class="img-fluid rounded-3 cartImg"
+                                      style="width: 120px;" :alt="product.name">
                                     <div class="flex-column ms-4">
-                                      <p class="mb-2">Homo Deus: A Brief History of Tomorrow</p>
-                                      <p class="mb-0">Yuval Noah Harari</p>
+                                      <p class="mb-2">{{product.name}}</p>
                                     </div>
                                   </div>
                                 </th>
                                 <td class="align-middle border-bottom-0">
                                   <div class="d-flex flex-row">
                                     <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                      @click="substractOneWine(product)">
                                       <i class="bi bi-dash-circle"></i>
                                     </button>
                 
-                                    <input id="form1" min="0" name="quantity" value="1" type="number"
-                                      class="form-control form-control-sm" style="width: 50px;" />
+                                    <input id="form1" min="0" name="quantity" :value="product.amount" type="number"
+                                      class="form-control form-control-sm" style="width: 50px;" readonly/>
                 
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                    <button v-if="product.stock >= product.amount" class="btn btn-link px-2"
+                                      @click="addMoreWinesToCart(product)">
                                       <i class="bi bi-plus-circle"></i>
+                                    </button>
+                                    <button v-else class="btn btn-link px-2">
+                                      <i class="bi bi-plus-circle text-danger"></i>
                                     </button>
                                   </div>
                                 </td>
                                 <td class="align-middle border-bottom-0">
-                                  <p class="mb-0" style="font-weight: 500;">$13.50</p>
+                                  <p class="mb-0" style="font-weight: 500;">${{product.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                                 </td>
                             </tr>
-                            <tr>
-                              <th scope="row" class="border-bottom-0">
-                                <div class="d-flex align-items-center">
-                                  <img src="https://i.imgur.com/Oj1iQUX.webp" class="img-fluid rounded-3 cartImg"
-                                    style="width: 120px;" alt="Book">
-                                  <div class="flex-column ms-4">
-                                    <p class="mb-2">Homo Deus: A Brief History of Tomorrow</p>
-                                    <p class="mb-0">Yuval Noah Harari</p>
-                                  </div>
-                                </div>
-                              </th>
-                              <td class="align-middle border-bottom-0">
-                                <div class="d-flex flex-row">
-                                  <button class="btn btn-link px-2"
-                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                    <i class="bi bi-dash-circle"></i>
-                                  </button>
-              
-                                  <input id="form1" min="0" name="quantity" value="1" type="number"
-                                    class="form-control form-control-sm" style="width: 50px;" />
-              
-                                  <button class="btn btn-link px-2"
-                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                    <i class="bi bi-plus-circle"></i>
-                                  </button>
-                                </div>
-                              </td>
-                              <td class="align-middle border-bottom-0">
-                                <p class="mb-0" style="font-weight: 500;">$13.50</p>
-                              </td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="border-bottom-0">
-                                  <div class="d-flex align-items-center">
-                                    <img src="https://i.imgur.com/Oj1iQUX.webp" class="img-fluid rounded-3 cartImg"
-                                      style="width: 120px;" alt="Book">
-                                    <div class="flex-column ms-4">
-                                      <p class="mb-2">Homo Deus: A Brief History of Tomorrow</p>
-                                      <p class="mb-0">Yuval Noah Harari</p>
-                                    </div>
-                                  </div>
-                                </th>
-                                <td class="align-middle border-bottom-0">
-                                  <div class="d-flex flex-row">
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                      <i class="bi bi-dash-circle"></i>
-                                    </button>
-                
-                                    <input id="form1" min="0" name="quantity" value="1" type="number"
-                                      class="form-control form-control-sm" style="width: 50px;" />
-                
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                      <i class="bi bi-plus-circle"></i>
-                                    </button>
-                                  </div>
-                                </td>
-                                <td class="align-middle border-bottom-0">
-                                  <p class="mb-0" style="font-weight: 500;">$13.50</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="border-bottom-0">
-                                  <div class="d-flex align-items-center">
-                                    <img src="https://i.imgur.com/Oj1iQUX.webp" class="img-fluid rounded-3 cartImg"
-                                      style="width: 120px;" alt="Book">
-                                    <div class="flex-column ms-4">
-                                      <p class="mb-2">Homo Deus: A Brief History of Tomorrow</p>
-                                      <p class="mb-0">Yuval Noah Harari</p>
-                                    </div>
-                                  </div>
-                                </th>
-                                <td class="align-middle border-bottom-0">
-                                  <div class="d-flex flex-row">
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                      <i class="bi bi-dash-circle"></i>
-                                    </button>
-                
-                                    <input id="form1" min="0" name="quantity" value="1" type="number"
-                                      class="form-control form-control-sm" style="width: 50px;" />
-                
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                      <i class="bi bi-plus-circle"></i>
-                                    </button>
-                                  </div>
-                                </td>
-                                <td class="align-middle border-bottom-0">
-                                  <p class="mb-0" style="font-weight: 500;">$13.50</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row" class="border-bottom-0">
-                                  <div class="d-flex align-items-center">
-                                    <img src="https://i.imgur.com/Oj1iQUX.webp" class="img-fluid rounded-3 cartImg"
-                                      style="width: 120px;" alt="Book">
-                                    <div class="flex-column ms-4">
-                                      <p class="mb-2">Homo Deus: A Brief History of Tomorrow</p>
-                                      <p class="mb-0">Yuval Noah Harari</p>
-                                    </div>
-                                  </div>
-                                </th>
-                                <td class="align-middle border-bottom-0">
-                                  <div class="d-flex flex-row">
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                      <i class="bi bi-dash-circle"></i>
-                                    </button>
-                
-                                    <input id="form1" min="0" name="quantity" value="1" type="number"
-                                      class="form-control form-control-sm" style="width: 50px;" />
-                
-                                    <button class="btn btn-link px-2"
-                                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                      <i class="bi bi-plus-circle"></i>
-                                    </button>
-                                  </div>
-                                </td>
-                                <td class="align-middle border-bottom-0">
-                                  <p class="mb-0" style="font-weight: 500;">$13.50</p>
-                                </td>
-                              </tr>
                           </tbody>
                         </table>
                       </div>
@@ -209,18 +88,17 @@
                                       placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" v-model="cvv"/>
                                     <label class="form-label">CVV</label>
                                   </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3">
-                              <div class="form-outline mb-4 mb-xl-5">
-                                <input type="text" class="form-control form-control-lg" v-model="deliveryAddress"/>
-                                <label class="form-label">Delivery Address</label>
-                              </div>
+
+                                  <div class="form-outline mb-4 mb-xl-5">
+                                    <input type="text" class="form-control form-control-lg" v-model="deliveryAddress"/>
+                                    <label class="form-label">Delivery Address</label>
+                                  </div>
+                                </div>         
                             </div>
                             <div class="col-lg-4 col-xl-3">
                               <div class="d-flex justify-content-between" style="font-weight: 500;">
                                 <p class="mb-2">Subtotal</p>
-                                <p class="mb-2">$23.49</p>
+                                <p class="mb-2">${{checkoutSubtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                               </div>
                               
                               <div class="d-flex justify-content-between" style="font-weight: 500;">
@@ -232,12 +110,12 @@
               
                               <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
                                 <p class="mb-2">Total (tax included)</p>
-                                <p class="mb-2">$26.48</p>
+                                <p class="mb-2">${{(checkoutSubtotal + 2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                               </div>
               
-                              <button type="button" class="btn btn-primary btn-block btn-lg">
+                              <button type="button" class="btn btn-primary btn-block btn-lg" @click="createPurchase">
                                 <div class="d-flex justify-content-between">
-                                  <span>Checkout $26.48</span>
+                                  <span>Checkout ${{(checkoutSubtotal + 2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</span>
                                 </div>
                               </button>
               
