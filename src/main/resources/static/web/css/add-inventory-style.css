@@ -18,3 +18,8 @@ th {
   position: sticky;
   top: 0px;
 }
+
+.adminSearchBtn {
+  border-radius: 5px;
+  border: 1px solid black;
+}
