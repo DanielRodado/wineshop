@@ -11,8 +11,8 @@
         />
         <link rel="stylesheet" href="../css/styles.css" />
         <link rel="stylesheet" href="../css/product-card.css">
-
-        <title>Document</title>
+        <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+        <title>Catalogue</title>
     </head>
 
     <body>
@@ -296,7 +296,7 @@
                             <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushFilterWine">
                               <div class="accordion-body position-relative options-filter-md--max" :class="{'loader-hg-max-md': loader}">
                                 <fieldset class="form-check" v-for="variety of new Set(wines.map(wine => wine.variety.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox" :id="variety">
+                                  <input class="form-check-input" type="checkbox">
                                   <label  class="form-check-label" :for="variety">{{variety.slice(0, 1)}}{{variety.slice(1).replace("_", " ").toLowerCase()}}</label>
                                 </fieldset>
                                 <div v-if="loader" class="loader--loader">
@@ -387,7 +387,7 @@
                       <div class="col-12 col-lg-8">
                         <section>
                           <div class="d-flex flex-column flex-md-row flex-wrap mt-3 position-relative" :class="{'hg-loading': loader}">
-                              <div v-for="wine of winesFilter" class="container-lg page-wrapper border-style-filter mb-3">
+                              <div v-for="wine of winesFilter.slice((pageNumber-1)*16, pageNumber*16)" class="container-lg page-wrapper border-style-filter mb-3">
                                   <div class="page-inner">
                                       <div class="row">
                                           <div class="el-wrapper">
@@ -431,12 +431,12 @@
                         <div class="btn-group d-flex justify-content-center mt-4 mt-md-5" role="group" aria-label="Basic example">
                           <nav aria-label="Page navigation example" v-if="!loader">
                             <ul class="pagination justify-content-center">
-                              <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                              </li>
-                              <li class="page-item" v-for="pagesIndex in listOfPages"><button type="button" class="page-link btn btn-primary rounded-0">{{pagesIndex}}</button></li>
                               <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                                <button type="button" class="page-link btn btn-primary rounded-0" :class="{'disabled': !listOfPages.includes(pageNumber-1)}" @click="topWindows(pageNumber-1)">Prev</button>
+                              </li>
+                              <li class="page-item" v-for="pagesIndex in listOfPages"><button type="button" class="page-link btn btn-primary rounded-0" @click="topWindows(pagesIndex)" :disabled="pagesIndex===pageNumber">{{pagesIndex}}</button></li>
+                              <li class="page-item">
+                                <button type="button" class="page-link btn btn-primary rounded-0" :class="{'disabled': !listOfPages.includes(pageNumber+1)}" @click="topWindows(pageNumber+1)">Next</button>
                               </li>
                             </ul>
                           </nav>

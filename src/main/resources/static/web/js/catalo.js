@@ -4,7 +4,9 @@ new Vue({
         wines: [],
         winesFilter: [],
         loader: true,
-        listOfPages:[]
+        listOfPages: [],
+        pageNumber: 1,
+        pagesN: 1
     },
 
     created() {
@@ -38,15 +40,34 @@ new Vue({
         },
         countPages() {
             this.listOfPages = [];
-            for (let i = 1; i <= (this.winesFilter.length / 16).toFixed(0); i++) {
+            for (
+                let i = 1;
+                i <= (this.winesFilter.length / 16).toFixed(0);
+                i++
+            ) {
                 this.listOfPages.push(i);
             }
         },
+        toggleCheckbox(id) {
+            const checkbox = document.getElementById(id);
+            checkbox.checked = !checkbox.checked;
+        },
+        topWindows(page) {
+            this.pageNumber = page === 0 ? 1 : page;
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        },
     },
-    computed: {},
+    computed: {
+        pageNumber() {
+            this.winesFilter = this.winesFilter.slice((pageNumber-1)*16, pageNumber*16)
+        }
+    },
     watch: {
         winesFilter() {
             this.countPages();
-        },
+        }
     },
 });
