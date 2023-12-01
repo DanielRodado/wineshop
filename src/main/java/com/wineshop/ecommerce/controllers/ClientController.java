@@ -63,6 +63,12 @@ public class ClientController {
             return new ResponseEntity<>("Your password doesn't match the requirements", HttpStatus.FORBIDDEN);
         }
 
+        // ver que la fecha no este vacia
+
+        if (newClientApp.getBirthDate() == null || newClientApp.getBirthDate().equals(LocalDate.MIN)) {
+            return new ResponseEntity<>("Birth date needs to be filled in", HttpStatus.FORBIDDEN);
+        }
+
         // ver que el cliente sea mayor de 18 años
 
         if (newClientApp.getBirthDate().plusYears(18).isAfter(LocalDate.now())) {

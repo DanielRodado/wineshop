@@ -14,8 +14,8 @@ body {
 }
 
 
-.card {
-	width: 60rem;
+.cardCvv {
+	width: 30vw;
     margin: auto;
     background: white;
     position:center;
@@ -42,7 +42,7 @@ body {
 
 .rightside {
     background-color: #ffffff;
-	width: 35rem;
+	width: 100%;
 	border-bottom-right-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     padding: 1rem 2rem 3rem 3rem;
@@ -128,4 +128,8 @@ p{
       border-radius:0;
     }
 }
-
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }

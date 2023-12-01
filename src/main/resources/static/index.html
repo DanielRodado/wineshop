@@ -5,28 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wine Lovers Society</title>
     <link rel="shortcut icon" href="web/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="web/css/styleIndex.css">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link rel="stylesheet" href="web/css/styleIndex.css">
 </head>
 <body>
 <div id="app" v-cloak>
     <header>
         
-      <div class="d-flex justify-content-end align-items-center mt-2 nav_1  " >
-        <div class=" iconNav ">  
-          <a href="web/pages/login.html" class="d-flex flex-column justify-content-center align-items-center text-white text-decoration-none">
-            <img src="/web/images/account (2).svg" alt="Bootstrap" width="40" height="40">
-            <p class="m-0" > MY ACCOUNT</p>
-            </a>
-        </div>
+      <div class="d-flex justify-content-end align-items-center m-1 nav_1  " >
         <div class=" iconNav">
-            <a href="/contacto" class="d-flex flex-column justify-content-center align-items-center text-white text-decoration-none">
-            <img src="/web/images/canasta.svg" alt="Bootstrap" width="40" height="40" data-bs-toggle="modal"
-            data-bs-target="#carritoModal">
-            <p class="m-0" >CART</p>
+            <img src="/web/images/account.svg" alt="Bootstrap" width="30" height="30">
+            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ACCOUNT
             </a>
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-box m-5">
+                  <form class="form">
+                      <span class="title">Log in</span>
+                      <span class="subtitle">Welcome!</span>
+                      <div class="form-container">
+      
+                          <input type="email" class="input" placeholder="Email" v-model="email">
+                          <input type="password" class="input" placeholder="Password" v-model="password">
+                  </div>
+                      <button @click.prevent="login">Log in</button>
+                  </form>
+                  <div class="form-section">
+                    <p>You do not have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</a></p>
+                  </div>
+                  </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-box m-5">
+                  <form class="form">
+                      <span class="title">Sign up</span>
+                      <span class="subtitle">Create a free account with your email.</span>
+                      <div class="form-container">
+                              <input type="name" class="input" placeholder="First name" v-model="registerName">
+                              <input type="lastName" class="input" placeholder="Last name" v-model="registerLastName">
+                              <input type="email" class="input" placeholder="Email" v-model="registerEmail">
+                              <input type="password" class="input" placeholder="Password" v-model="registerPass">
+                              <input type="date" class="input" placeholder="BirthDay" v-model="registerBirthDate">
+                      </div>
+                      <button @click.prevent="register" >Sign up</button>
+                  </form>
+                  <div class="form-section">
+                    <p>Have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</a> </p>
+                  </div>
+                  </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+    
+      
+    
+        <div class=" iconNav">
+          
+            <a type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="d-flex  justify-content-center align-items-center text-white text-decoration-none">
+              
+            <img src="/web/images/canasta.svg" alt="Bootstrap" width="30" height="30" >
+            <p class="m-1 text-dark" >CART</p>
+            </a>
+        </div>  
       </div>
     <nav class="navbar navbar-expand-lg  d-flex justify-content-center nav_2  ">
         
@@ -39,9 +106,6 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="#">HOME</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     VINEYARDS
@@ -64,10 +128,7 @@
                     VARIETY
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li v-for = "variety of varieties"><a class="dropdown-item" href="#">{{variety}}</a></li>               
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -75,28 +136,19 @@
                     SPARKLING WINES
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li v-for = "variety of wineSparkling"><a class="dropdown-item" href="#">{{variety}}</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ACCESORIES
+                    ACCESSORIES
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li v-for = "accessory of accessories"><a class="dropdown-item" href="#">{{accessory.name}}</a></li>
                 </ul>
               </li>
             </ul>
-            <form class="d-flex m-2" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-danger" type="submit">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
@@ -106,7 +158,7 @@
         <P class="fw-normal fs-6 m-2 "> ON ALL ORDERS OVER US$ 45,00</P>
       </div>
     </header>
-    <main>
+    <main >
         <div class=" container-fluid mt-1">
             
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" >
@@ -132,41 +184,29 @@
                 </div>
             
           </div>
-                <div class=" d-flex ">                 
+                <div class=" d-flex">                 
                         <div class="m-2" >
-                            <img src="web/images/image-banner-8.png " class="img-fluid rounded h-100 " @click="catalogue" >
+                            <img src="web/images/image-banner-8.png " class="card-img-top rounded h-100 " @click="catalogue" >
                         </div>                                           
                         <div class="m-2">
-                          <img src="web/images/img-4.png " class="img-fluid rounded w-auto" @click="catalogue" >
+                          <img src="web/images/img-4.png " class="card-img-top rounded h-100" @click="catalogue" >
                         </div>      
                 </div>
-
-                <!-- <div class="slider">
-                  <div class="slide-track">
-                    <div class="slide">
-                      <img src="/web/images/4661_1.jpg" height="100" width="250" alt="" />
-                    </div>
-                    <div class="slide">
-                      <img src="/web/images/6851_1.jpg" height="100" width="250" alt="" />
-                    </div>
-                    <div class="slide">
-                      <img src="/web/images/1234.png" height="100" width="250" alt="" />
-                    </div>                    
-                  </div>
-                </div> -->
-            
+                  
+  
+              </div>
             <div class="col-sm-6 d-lg-flex justify-content-center mt-3 p-2 mx-2  "style="min-width:100vw">
-                <div class="d-flex justify-content-center align-items-center m-2 " style="min-width:8px;">
+                <div class="d-flex justify-content-center align-items-center m-2 " style="min-width:6px;">
                     <img src="web/images/camion-24-02-2022.png" style="height: 3rem;">
                     <p class="m-2 fst-italic fs-6">FREE DELIVERY FOR PURCHASES OVER US$45</p>
                 </div>
-                <div class="d-flex justify-content-center align-items-center m-2" style="min-width: 8px;">
+                <div class="d-flex justify-content-center align-items-center m-2" style="min-width: 6px;">
                     <img src="web/images/tarjeta-de-credito-24-02-2022.png" style="height: 3rem;">
                     <p class="m-2 fst-italic fs-6">3 INTEREST-FREE INSTALLMENTS</p>
                 </div>
-                <div class="d-flex justify-content-center align-items-center m-2"style="min-width: 8px;">
+                <div class="d-flex justify-content-evenly align-items-center m-2"style="min-width: 6px;">
                     <img src="web/images/envio-24-02-2022.png" style="height: 3rem;" >
-                    <p class="m-2 fst-italic fs-6"> NATIONAL COVERAGE </p>
+                    <p class=" fst-italic fs-6"> NATIONAL COVERAGE </p>
                 </div>    
             </div>
             <div>
@@ -199,7 +239,7 @@
                 <div class="counter-box">
                   <i class="bi bi-upc-scan"></i>
                   <span class="counter">1563</span>
-                  <p>Order Done</p>
+                  <p>Orders Done</p>
                 </div>
               </div>
               </div>	
@@ -258,8 +298,66 @@
 
 
 
-        
-        
+        <!-- canvas -->
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                
+                <div class="master-container">
+                  <div class="card cart">
+                    
+                    <div class="products">
+                      <div class="product">
+                        <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+                        <div>
+                          <span>Cheese Burger</span>
+                          <p>Extra Spicy</p>
+                          <p>No mayo</p>
+                        </div>
+                        <div class="quantity">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                            </svg>
+                          </button>
+                          <input id="form1" min="0" name="quantity" value="1" type="number"
+                                    class="form-control form-control-sm label" style="width: 33px;" />
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <label class="price small">$23.99</label>
+                      </div>
+                    </div>
+                  </div>
+                
+                 
+                
+                  <div class="card checkout">
+                    <label class="titleCoupons">Checkout</label>
+                    <div class="details">
+                      <span>Your cart subtotal:</span>
+                      <span>47.99$</span>
+                      <span>Discount through applied coupons:</span>
+                      <span>3.99$</span>
+                      <span>Shipping fees:</span>
+                      <span>4.99$</span>
+                    </div>
+                    <div class="checkout--footer">
+                      <label class="price "><sup>$</sup>57.99</label>
+                      <button class="checkout-btn" :href="web/pages/checkout.html">Checkout</button>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
     </main>
 
     <footer class="site-footer">
@@ -268,122 +366,100 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="d-flex justify-content-sm-center">
-              <img src="web/images/TERRAPURA.png" class="d-block w-10" alt="...">
-              <img src="web/images/APALTAGUA.png" class="d-block w-10" alt="...">
-              <img src="web/images/CASASDELBOSQUE.png" class="d-block w-10" alt="..."></div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="d-flex justify-content-sm-center">
-              <img src="web/images/chocalan-2023.png" class="d-block w-10" alt="...">
-              <img src="web/images/freixenet-2023.png" class="d-block w-10" alt="...">
-              <img src="web/images/GARCESSILVA.png" class="d-block w-10" alt="...">
-            </div>
-
-          </div>
-
-          <div class="carousel-item">
-            <div class="d-flex justify-content-sm-center">
-              <img src="web/images/JBOUCHON.png" class="d-block w-10" alt="...">
-              <img src="web/images/KOYLE.png" class="d-block w-10" alt="...">
-              <img src="web/images/MATETIC.png" class="d-block w-10" alt="...">
+              <img src="web/images/TERRAPURA.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/APALTAGUA.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/CASASDELBOSQUE.png" class="d-block img-carru m-2" alt="...">
             </div>
           </div>
-
+  
           <div class="carousel-item">
             <div class="d-flex justify-content-sm-center">
-              <img src="web/images/morande-2023.png" class="d-block w-10" alt="...">
-              <img src="web/images/PATRONALES.png" class="d-block w-10" alt="...">
-              <img src="web/images/REQUINGUA.png" class="d-block w-10" alt="...">
+              <img src="web/images/chocalan-2023.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/freixenet-2023.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/GARCESSILVA.png" class="d-block img-carru m-2" alt="...">
             </div>
-
+  
           </div>
-
+  
           <div class="carousel-item">
             <div class="d-flex justify-content-sm-center">
-              <img src="web/images/SANTAEMA.png" class="d-block w-10" alt="...">
-              <img src="web/images/VERAMONTE.png" class="d-block w-10" alt="...">
-              <img src="web/images/VONSIEBENTHAL.png" class="d-block w-1 0" alt="...">
+              <img src="web/images/JBOUCHON.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/KOYLE.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/MATETIC.png" class="d-block img-carru m-2" alt="...">
             </div>
-
           </div>
-
+  
+          <div class="carousel-item">
+            <div class="d-flex justify-content-sm-center">
+              <img src="web/images/morande-2023.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/PATRONALES.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/REQUINGUA.png" class="d-block img-carru m-2" alt="...">
+            </div>
+  
+          </div>
+  
+          <div class="carousel-item">
+            <div class="d-flex justify-content-sm-center">
+              <img src="web/images/SANTAEMA.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/VERAMONTE.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/VONSIEBENTHAL.png" class="d-block img-carru m-2" alt="...">
+            </div>
+  
+          </div>
+  
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-
-      
-
+  
+  
+  
       <div class="container mt-5">
-        <div class="d-flex justify-content-center align-content-center">          
+        <div class="d-flex justify-content-center align-content-center">
           <img src="web/images/SELLO-SIN-FONDO.png" alt="" width="120" height="120">
           <img src="web/images/CCS-LOGOV2.png" alt="" width="120" height="120">
         </div>
-          <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center">
           <img src="web/images/logo-text-V1.png" alt="" class=" img-footer">
-          </div>
         </div>
-
-
-
-        <div class="row">
-
-          <div class="col-sm-12 col-md-6">
-            <h6>About</h6>
-            <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club where you can find the best of wine in different formats and only the best in the world. We also have our own online store where you can find the best variety and offers of wines. At WLS we offer you the most entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber members.</p>
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Categories</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-              <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-              <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-            </ul>
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Quick Links</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/about/">About Us</a></li>
-              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-              <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-              <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr>
       </div>
+  
+  
+  
+      <div class="m-2 row">
+  
+        <div class="col-sm-12 col-md-6 m-2">
+          <h6>About</h6>
+          <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club
+            where you can find the best of wine in different formats and only the best in the world. We also have our own
+            online store where you can find the best variety and offers of wines. At WLS we offer you the most
+            entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber
+            members.</p>
+        </div>
+      </div>
+      <hr>
+      
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by 
-         <a href="#">WINE LOVERS SOCIETY</a>.
+            <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+              <a href="#">WINE LOVERS SOCIETY</a>.
             </p>
           </div>
-
+  
           <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40" src="web/images/facebook (1).png" alt=""></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40" src="web/images/twitter.png" alt=""></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40" src="web/images/instagram (1).png" alt=""></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40" src="web/images/linkedin (1).png" alt=""></i></a></li>
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40"
+                      src="web/images/facebook (1).png" alt=""></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40"
+                      src="web/images/twitter.png" alt=""></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40"
+                      src="web/images/instagram (1).png" alt=""></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40"
+                      src="web/images/linkedin (1).png" alt=""></i></a></li>
             </ul>
           </div>
         </div>
       </div>
-</footer>
+    </footer>
 
 
 </div>    
@@ -394,6 +470,9 @@
 ></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script src="web/js/index.js"></script>
 </body>
 </html>
