@@ -318,14 +318,14 @@
                           <p>No mayo</p>
                         </div>
                         <div class="quantity">
-                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                          <button >
                             <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
                               <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
                             </svg>
                           </button>
                           <input id="form1" min="0" name="quantity" value="1" type="number"
                                     class="form-control form-control-sm label" style="width: 33px;" />
-                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                          <button >
                             <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
                               <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
                             </svg>
@@ -350,7 +350,7 @@
                     </div>
                     <div class="checkout--footer">
                       <label class="price "><sup>$</sup>57.99</label>
-                      <button class="checkout-btn" :href="web/pages/checkout.html">Checkout</button>
+                     <a href="/web/pages/checkout.html"> <button class="checkout-btn"  >Checkout</button></a> 
                     </div>
                   </div>
                 </div>
