@@ -299,13 +299,63 @@
 
 
         <!-- canvas -->
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
               <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div class="offcanvas-body">
-                <p>Try scrolling the rest of the page to see this option in action.</p>
+                
+                <div class="master-container">
+                  <div class="card cart">
+                    
+                    <div class="products">
+                      <div class="product">
+                        <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+                        <div>
+                          <span>Cheese Burger</span>
+                          <p>Extra Spicy</p>
+                          <p>No mayo</p>
+                        </div>
+                        <div class="quantity">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                            </svg>
+                          </button>
+                          <input id="form1" min="0" name="quantity" value="1" type="number"
+                                    class="form-control form-control-sm label" style="width: 33px;" />
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <label class="price small">$23.99</label>
+                      </div>
+                    </div>
+                  </div>
+                
+                 
+                
+                  <div class="card checkout">
+                    <label class="titleCoupons">Checkout</label>
+                    <div class="details">
+                      <span>Your cart subtotal:</span>
+                      <span>47.99$</span>
+                      <span>Discount through applied coupons:</span>
+                      <span>3.99$</span>
+                      <span>Shipping fees:</span>
+                      <span>4.99$</span>
+                    </div>
+                    <div class="checkout--footer">
+                      <label class="price "><sup>$</sup>57.99</label>
+                      <button class="checkout-btn" :href="web/pages/checkout.html">Checkout</button>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </div>
     </main>
