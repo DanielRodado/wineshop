@@ -19,11 +19,12 @@
     <header>
         
       <div class="d-flex justify-content-end align-items-center m-1 nav_1  " >
-        <img src="/web/images/account.svg" alt="Bootstrap" width="30" height="30">
-        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          ACCOUNT
-        </a>
-        
+        <div class=" iconNav">
+            <img src="/web/images/account.svg" alt="Bootstrap" width="30" height="30">
+            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ACCOUNT
+            </a>
+        </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -86,24 +87,81 @@
       
     
         <div class=" iconNav">
+          
             <a type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop" class="d-flex  justify-content-center align-items-center text-white text-decoration-none">
               
               <div class="offcanvas offcanvas-end bg-light" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
                 <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+                  <h5 class="offcanvas-title" id="staticBackdropLabel">Your Cart</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                  <div>
-                    I will not close if you click outside of me.
+                  <div class="modal-conte">
+                      <div class="master-container">
+                          <div class="ca cart">
+                             
+                              <div class="products">
+                                  <div class="product">
+                                      <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
+
+                                      <div>
+                                          <span>Wine Tinto</span>
+                                          <p>varietales</p>
+                                          <p>viña</p>
+                                      </div>
+                                      <div class="quantity">
+                                        <button>
+                                          <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                                          </svg>
+                                        </button>
+                                        <label>2</label>
+                                        <button>
+                                          <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                                          </svg>
+                                        </button>
+                                      </div>
+                                      <div class="align-self-center">
+                                          <label class="price small">$23.99</label>
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="ca coupons">
+                              <label class="titleCoupons">Apply coupons</label>
+                              <form class="form">
+                                  <input type="text" placeholder="Apply your coupons here" class="input_field">
+                                  <button>Apply</button>
+                              </form>
+                          </div>
+
+                          <div class="ca checkout">
+                              <label class="titleCoupons">Checkout</label>
+                              <div class="details">
+                                  <span>Your cart subtotal:</span>
+                                  <span>47.99$</span>
+                                  <span>Discount through applied coupons:</span>
+                                  <span>3.99$</span>
+                                  <span>Shipping fees:</span>
+                                  <span>4.99$</span>
+                              </div>
+                              <div class="checkout--footer">
+                                  <label class="price"><sup>$</sup>57.99</label>
+                                  <button class="checkout-btn">Checkout</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                   </div>
                 </div>
-              </div>
-            <img src="/web/images/canasta.svg" alt="Bootstrap" width="30" height="30" data-bs-toggle="modal"
-            data-bs-target="#carritoModal">
+              
+            <img src="/web/images/canasta.svg" alt="Bootstrap" width="30" height="30" >
             <p class="m-1 text-dark" >CART</p>
             </a>
-        </div>
+          </div>
       </div>
     <nav class="navbar navbar-expand-lg  d-flex justify-content-center nav_2  ">
         
@@ -151,17 +209,14 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ACCESORIES
+                    ACCESSORIES
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li v-for = "accessory of accessories"><a class="dropdown-item" href="#">{{accessory.name}}</a></li>
                 </ul>
               </li>
             </ul>
-            <form class="d-flex m-2" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-danger" type="submit">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
@@ -209,17 +264,17 @@
   
               </div>
             <div class="col-sm-6 d-lg-flex justify-content-center mt-3 p-2 mx-2  "style="min-width:100vw">
-                <div class="d-flex justify-content-center align-items-center m-2 " style="min-width:8px;">
+                <div class="d-flex justify-content-center align-items-center m-2 " style="min-width:6px;">
                     <img src="web/images/camion-24-02-2022.png" style="height: 3rem;">
                     <p class="m-2 fst-italic fs-6">FREE DELIVERY FOR PURCHASES OVER US$45</p>
                 </div>
-                <div class="d-flex justify-content-center align-items-center m-2" style="min-width: 8px;">
+                <div class="d-flex justify-content-center align-items-center m-2" style="min-width: 6px;">
                     <img src="web/images/tarjeta-de-credito-24-02-2022.png" style="height: 3rem;">
                     <p class="m-2 fst-italic fs-6">3 INTEREST-FREE INSTALLMENTS</p>
                 </div>
-                <div class="d-flex justify-content-center align-items-center m-2"style="min-width: 8px;">
+                <div class="d-flex justify-content-evenly align-items-center m-2"style="min-width: 6px;">
                     <img src="web/images/envio-24-02-2022.png" style="height: 3rem;" >
-                    <p class="m-2 fst-italic fs-6"> NATIONAL COVERAGE </p>
+                    <p class=" fst-italic fs-6"> NATIONAL COVERAGE </p>
                 </div>    
             </div>
             <div>
@@ -321,122 +376,100 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="d-flex justify-content-sm-center">
-              <img src="web/images/TERRAPURA.png" class="d-block w-10" alt="...">
-              <img src="web/images/APALTAGUA.png" class="d-block w-10" alt="...">
-              <img src="web/images/CASASDELBOSQUE.png" class="d-block w-10" alt="..."></div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="d-flex justify-content-sm-center">
-              <img src="web/images/chocalan-2023.png" class="d-block w-10" alt="...">
-              <img src="web/images/freixenet-2023.png" class="d-block w-10" alt="...">
-              <img src="web/images/GARCESSILVA.png" class="d-block w-10" alt="...">
-            </div>
-
-          </div>
-
-          <div class="carousel-item">
-            <div class="d-flex justify-content-sm-center">
-              <img src="web/images/JBOUCHON.png" class="d-block w-10" alt="...">
-              <img src="web/images/KOYLE.png" class="d-block w-10" alt="...">
-              <img src="web/images/MATETIC.png" class="d-block w-10" alt="...">
+              <img src="web/images/TERRAPURA.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/APALTAGUA.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/CASASDELBOSQUE.png" class="d-block img-carru m-2" alt="...">
             </div>
           </div>
-
+  
           <div class="carousel-item">
             <div class="d-flex justify-content-sm-center">
-              <img src="web/images/morande-2023.png" class="d-block w-10" alt="...">
-              <img src="web/images/PATRONALES.png" class="d-block w-10" alt="...">
-              <img src="web/images/REQUINGUA.png" class="d-block w-10" alt="...">
+              <img src="web/images/chocalan-2023.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/freixenet-2023.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/GARCESSILVA.png" class="d-block img-carru m-2" alt="...">
             </div>
-
+  
           </div>
-
+  
           <div class="carousel-item">
             <div class="d-flex justify-content-sm-center">
-              <img src="web/images/SANTAEMA.png" class="d-block w-10" alt="...">
-              <img src="web/images/VERAMONTE.png" class="d-block w-10" alt="...">
-              <img src="web/images/VONSIEBENTHAL.png" class="d-block w-1 0" alt="...">
+              <img src="web/images/JBOUCHON.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/KOYLE.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/MATETIC.png" class="d-block img-carru m-2" alt="...">
             </div>
-
           </div>
-
+  
+          <div class="carousel-item">
+            <div class="d-flex justify-content-sm-center">
+              <img src="web/images/morande-2023.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/PATRONALES.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/REQUINGUA.png" class="d-block img-carru m-2" alt="...">
+            </div>
+  
+          </div>
+  
+          <div class="carousel-item">
+            <div class="d-flex justify-content-sm-center">
+              <img src="web/images/SANTAEMA.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/VERAMONTE.png" class="d-block img-carru m-2" alt="...">
+              <img src="web/images/VONSIEBENTHAL.png" class="d-block img-carru m-2" alt="...">
+            </div>
+  
+          </div>
+  
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-
-      
-
+  
+  
+  
       <div class="container mt-5">
-        <div class="d-flex justify-content-center align-content-center">          
+        <div class="d-flex justify-content-center align-content-center">
           <img src="web/images/SELLO-SIN-FONDO.png" alt="" width="120" height="120">
           <img src="web/images/CCS-LOGOV2.png" alt="" width="120" height="120">
         </div>
-          <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center">
           <img src="web/images/logo-text-V1.png" alt="" class=" img-footer">
-          </div>
         </div>
-
-
-
-        <div class="row">
-
-          <div class="col-sm-12 col-md-6">
-            <h6>About</h6>
-            <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club where you can find the best of wine in different formats and only the best in the world. We also have our own online store where you can find the best variety and offers of wines. At WLS we offer you the most entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber members.</p>
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Categories</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-              <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-              <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-            </ul>
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Quick Links</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/about/">About Us</a></li>
-              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-              <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-              <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr>
       </div>
+  
+  
+  
+      <div class="m-2 row">
+  
+        <div class="col-sm-12 col-md-6 m-2">
+          <h6>About</h6>
+          <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club
+            where you can find the best of wine in different formats and only the best in the world. We also have our own
+            online store where you can find the best variety and offers of wines. At WLS we offer you the most
+            entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber
+            members.</p>
+        </div>
+      </div>
+      <hr>
+      
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by 
-         <a href="#">WINE LOVERS SOCIETY</a>.
+            <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+              <a href="#">WINE LOVERS SOCIETY</a>.
             </p>
           </div>
-
+  
           <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40" src="web/images/facebook (1).png" alt=""></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40" src="web/images/twitter.png" alt=""></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40" src="web/images/instagram (1).png" alt=""></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40" src="web/images/linkedin (1).png" alt=""></i></a></li>
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40"
+                      src="web/images/facebook (1).png" alt=""></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40"
+                      src="web/images/twitter.png" alt=""></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40"
+                      src="web/images/instagram (1).png" alt=""></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40"
+                      src="web/images/linkedin (1).png" alt=""></i></a></li>
             </ul>
           </div>
         </div>
       </div>
-</footer>
+    </footer>
 
 
 </div>    

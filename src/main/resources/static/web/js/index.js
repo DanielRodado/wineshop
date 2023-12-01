@@ -10,6 +10,7 @@ createApp({
       varieties: new Set(),
       sparkling: [],
       wineSparkling: new Set(),
+      accessories:[],
       email: "",
       password: "",
       showLogin: true,
@@ -38,6 +39,8 @@ createApp({
     });
 
     });
+
+    
 
     axios
       .get("/api/wines/varieties")
@@ -108,6 +111,8 @@ createApp({
       .then((response) => {
         this.accessories = response.data;
         console.log(this.accessories)
+
+
 
       })
       .catch((error) => {
@@ -181,6 +186,27 @@ createApp({
           this.password = "";
         });
     },
+
+    logOut(){
+      axios.post('/api/logout')
+      .then(response => {
+        console.log('signed out!!!');
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'Your session has been closed',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        setTimeout(()=> {
+          window.location.href = '/index.html';
+        },3000);
+        
+
+      })
+      .catch(err=>console.log("error"))
+     }, 
+
     register() {
       
       let registerInfo = {
