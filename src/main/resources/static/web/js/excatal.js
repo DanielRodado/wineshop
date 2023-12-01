@@ -63,10 +63,6 @@ new Vue({
         closeLoginPopup() {
             this.isLoginPopupOpen = false;
         },
-        login() {
-            // Aquí puedes agregar la lógica de autenticación con Vue.js
-            alert('Login successful!');
-            this.closeLoginPopup();
-        }
+        
     },
 });
