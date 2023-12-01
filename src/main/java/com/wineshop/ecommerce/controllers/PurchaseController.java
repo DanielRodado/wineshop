@@ -418,4 +418,19 @@ public class PurchaseController {
 
         return new ResponseEntity<>(purchaseStatus, HttpStatus.OK);
     }
+
+    @GetMapping("/purchase/status/admin")
+    public ResponseEntity<Object> getPurchaseStatusAdmin (@RequestParam Long purchaseId){
+
+        if (!purchaseService.existsPurchaseById(purchaseId)){
+            return new ResponseEntity<>("This order does not exist", HttpStatus.FORBIDDEN);
+        }
+
+
+        Purchase purchase = purchaseService.getPurchaseById(purchaseId);
+
+        PurchaseStatus purchaseStatus = purchase.getStatus();
+
+        return new ResponseEntity<>(purchaseStatus, HttpStatus.OK);
+    }
 }

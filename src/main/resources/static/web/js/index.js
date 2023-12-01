@@ -247,6 +247,9 @@ createApp({
           this.birthDate = "";
         });
     },
+    ToCheckout(){
+      location.pathname = "/web/pages/checkout.html";
+    }
 
     
   },

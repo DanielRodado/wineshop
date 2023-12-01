@@ -13,6 +13,15 @@ body {
 	box-sizing: border-box;
 }
 
+.tableScroll {
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.row {
+    justify-content: center;
+    align-items: center;
+}
 
 .cardCvv {
 	width: 30vw;
@@ -37,8 +46,6 @@ body {
 	border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
 }
-
-
 
 .rightside {
     background-color: #ffffff;
@@ -130,6 +137,12 @@ p{
 }
 @media (min-width: 1025px) {
     .h-custom {
-    height: 100vh !important;
+        height: 100vh !important;
     }
+}
+
+@media (max-width: 500px) {
+    .cartImg {
+        display: none;
     }
+}
