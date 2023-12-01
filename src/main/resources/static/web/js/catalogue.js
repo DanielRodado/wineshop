@@ -11,12 +11,14 @@ new Vue({
             imgURL: ["a", "b"],
             stock: 2,
             price: 2000,
-            variety: "A_A"
-        }
+            variety: "A_A",
+        },
+        cart: [],
+        priceOfTheCart: 0
     },
 
     created() {
-        this.getWines();
+        this.getWines(); // catantidad a comprar, precio total
     },
 
     methods: {
@@ -24,21 +26,21 @@ new Vue({
             axios
                 .get("/api/wines")
                 .then(({ data }) => {
-                    this.wines = data;
-                    this.winesFilter = data;
+                    this.wines = [...data];
+
+                    for (let wine of this.wines) {
+                        wine.amount = 0;
+                        wine.subTotal = 0;
+                    }
+
+                    this.winesFilter = this.wines;
                     this.winesFilter.sort((a, b) => b.price - a.price);
+
                     this.countPages();
+
+                    this.cart = JSON.parse(localStorage.getItem("cart")) || [];
+
                     this.loader = false;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        getAccessories() {
-            axios
-                .get("/api/accessories")
-                .then(({ data }) => {
-                    this.accessories = data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -68,16 +70,56 @@ new Vue({
         wineDetails(wine) {
             this.wineDetail = wine;
             console.log(wine);
+        },
+        addToCart(wine) {
+            wine.amount = 1;
+            wine.subTotal = wine.price * wine.amount;
+            this.cart.push(wine);
+            this.saveLocalStorage();
+        },
+        addMoreWinesToCart(wine) {
+            wine.amount++;
+            wine.subTotal = wine.price * wine.amount;
+            this.cart.push();
+            this.saveLocalStorage();
+        },
+        substractOneWine(wine) {
+            wine.amount--;
+            wine.subTotal = wine.price * wine.amount;
+            if (wine.amount === 0) {
+                this.cart = this.cart.filter((wines) => wines.amount >= 1);
+            }
+            this.saveLocalStorage();
+        },
+        deleteWineFromCart(wine) {
+            wine.amount = 0;
+            wine.subTotal = 0;
+            this.cart = this.cart.filter((wines) => wines.id !== wine.id);
+            this.saveLocalStorage();
+        },
+        saveLocalStorage() {
+            localStorage.setItem("cart", JSON.stringify(this.cart));
         }
     },
     computed: {
         pageNumber() {
-            this.winesFilter = this.winesFilter.slice((pageNumber-1)*16, pageNumber*16)
-        }
+            this.winesFilter = this.winesFilter.slice(
+                (pageNumber - 1) * 16,
+                pageNumber * 16
+            );
+        },
+
+        calculatePriceOfTheCart() {
+            this.priceOfTheCart = this.cart.reduce(
+                (accumulatedTotal, product) =>
+                    accumulatedTotal + product.subTotal,
+                0
+            );
+        },
     },
     watch: {
         winesFilter() {
             this.countPages();
-        }
+        },
     },
 });

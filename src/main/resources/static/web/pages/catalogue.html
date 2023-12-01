@@ -13,11 +13,13 @@
         <link rel="stylesheet" href="../css/product-card.css">
         <link rel="stylesheet" href="../css/card-modal.css">
         <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+        <link rel="stylesheet" href="../css/styleIndex.css">
         <title>Catalogue</title>
     </head>
 
     <body>
         <div id="app">
+          {{calculatePriceOfTheCart}}
             <header>
                 <nav
                     class="navbar bg-body-tertiary d-flex justify-content-center justify-content-md-end m-0"
@@ -33,7 +35,7 @@
                                 height="45"
                             />
                         </a>
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                             <img
                                 src="../images/canasta.svg"
                                 alt="Bootstrap"
@@ -227,20 +229,6 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <form class="d-flex" role="search">
-                                <input
-                                    class="form-control me-2"
-                                    type="search"
-                                    placeholder="Search"
-                                    aria-label="Search"
-                                />
-                                <button
-                                    class="btn btn-outline-light"
-                                    type="submit"
-                                >
-                                    Search
-                                </button>
-                            </form>
                         </div>
                     </div>
                 </nav>
@@ -414,9 +402,11 @@
                                       
                                                   
                                                   <div role="button" class="cart">
-                                                      <span class="price">${{wine.price}}</span>
+                                                      <span v-if="!cart.some(product => product.id === wine.id)" class="price">${{wine.price}}</span>
+                                                      <span v-else class="price" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden;">Delete from cart</span>
                                                       <span class="add-to-cart">
-                                                          <span class="txt">Add in cart</span>
+                                                          <span class="txt" v-if="!cart.some(product => product.id === wine.id)" @click="addToCart(wine)">Add to cart</span>
+                                                          <span class="txt" v-else @click="deleteWineFromCart(wine)">Delete from cart</span>
                                                       </span>
                                                   </div>
                                               </div>
@@ -449,7 +439,7 @@
                 <!-- Modal -->
             </main>
             
-          <div class="modal fade" id="staticDetailsWine" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal fade" id="staticDetailsWine" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -489,6 +479,66 @@
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              
+              <div class="master-container" v-if="cart.length >= 1">
+                <div v-for="product of cart" class="card--index cart--index">
+                  <div class="products">
+                    <div class="product">
+                      <img class="img-cart" :src="product.imgURL[0]" :alt="product.name">
+                      <div>
+                        <span>{{product.name}}</span>
+                      </div>
+                      <div class="quantity">
+                        <button @click="substractOneWine(product)">
+                          <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                          </svg>
+                        </button>
+                        <input id="form1" min="0" name="quantity" :value="product.amount" type="number" readonly
+                                  class="form-control form-control-sm label p-0" style="width: 50px; text-align: center !important;" />
+                        <button @click="addMoreWinesToCart(product)" v-if="product.stock >= product.amount">
+                          <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                          </svg>
+                        </button>
+                        <button v-else>
+                          <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#FF0000" d="M12 4V20M20 12H4"></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <label class="price small">${{product.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                    </div>
+                  </div>
+                </div>
+              
+               
+              
+                <div class="card--index checkout">
+                  <label class="titleCoupons">Checkout</label>
+                  <div class="details">
+                    <span>Your cart subtotal:</span>
+                    <span>{{priceOfTheCart.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</span>
+                    <span>Shipping fees:</span>
+                    <span>2.99$</span>
+                  </div>
+                  <div class="checkout--footer">
+                    <label class="price "><sup>$</sup>{{(priceOfTheCart+2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                   <a href="/web/pages/checkout.html"> <button class="checkout-btn"  >Checkout</button></a> 
+                  </div>
+                </div>
+              </div>
+              <h3 v-else class="text-center">Your cart is empty</h3>
+
             </div>
           </div>
         </div>  
