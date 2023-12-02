@@ -465,12 +465,19 @@
                           <img :src="wineDetail.imgURL[0]" :alt="wineDetail.name+' img'">
                         </div>
                       </div>
-                      <div class="half">
+                      <div class="half mb-2">
                         <div class="description">
                           <p class="text-center">{{wineDetail.description}}</p>
                         </div>
-                        <span v-if="wineDetail.stock >= 1" class="stock">In stock</span>
-                        <span v-else class="text-danger">Not stock</span>
+                        <p v-if="wineDetail.stock >= 1" class="stock mb-0">In stock</p>
+                        <p v-else class="text-danger mb-0">Not stock</p>
+                      </div>
+                      <div class="half">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><span><b>Vineyard:</b></span><p class="text-end mb-0">{{wineDetail.vineyard}}</p></li>
+                          <li class="list-group-item"><span><b>Valley:</b></span><p class="text-end mb-0">{{wineDetail.area}}</p></li>
+                          <li class="list-group-item"><span><b>Sparkling:</b></span><p class="text-end mb-0">{{wineDetail.wineType === "SPARKLING" ? "Yes" : "No"}}</p></li>
+                        </ul>
                       </div>
                     </div>
                     <div class="card--modal__footer">
