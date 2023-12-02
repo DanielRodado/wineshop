@@ -55,7 +55,7 @@
                                     <input id="form1" min="0" name="quantity" :value="product.amount" type="number"
                                       class="form-control form-control-sm" style="width: 50px;" readonly/>
                 
-                                    <button v-if="product.stock >= product.amount" class="btn btn-link px-2"
+                                    <button v-if="product.stock > product.amount" class="btn btn-link px-2"
                                       @click="addMoreWinesToCart(product)">
                                       <i class="bi bi-plus-circle"></i>
                                     </button>

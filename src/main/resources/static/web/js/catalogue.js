@@ -14,7 +14,11 @@ new Vue({
             variety: "A_A",
         },
         cart: [],
-        priceOfTheCart: 0
+        priceOfTheCart: 0,
+        vineyarsSelected: [],
+        areaSelected: [],
+        varietySelected: [],
+        typeWine: "",
     },
 
     created() {
@@ -89,6 +93,7 @@ new Vue({
             if (wine.amount === 0) {
                 this.cart = this.cart.filter((wines) => wines.amount >= 1);
             }
+            this.cart.push();
             this.saveLocalStorage();
         },
         deleteWineFromCart(wine) {
@@ -99,6 +104,41 @@ new Vue({
         },
         saveLocalStorage() {
             localStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        filterVineyard(winesList) {
+            return this.vineyarsSelected.length >= 1
+                ? winesList.filter((wine) =>
+                      this.vineyarsSelected.includes(wine.vineyard)
+                  )
+                : winesList;
+        },
+        filterArea(winesList) {
+            return this.areaSelected.length >= 1
+                ? winesList.filter((wine) =>
+                      this.areaSelected.includes(wine.area)
+                  )
+                : winesList;
+        },
+        filterVariety(winesList) {
+            return this.varietySelected.length >= 1
+                ? winesList.filter((wine) =>
+                      this.varietySelected.includes(wine.variety)
+                  )
+                : winesList;
+        },
+        filterSparkling(wineList) {
+            return ["SPARKLING", "WINE"].includes(this.typeWine)
+                ? wineList.filter((wine) => wine.wineType === this.typeWine)
+                : wineList;
+        },
+        wineFilters() {
+            this.winesFilter = this.filterSparkling(this.filterVariety(this.filterArea(this.filterVineyard(this.wines))));
+        },
+        resetFilters() {
+            this.vineyarsSelected = [];
+            this.areaSelected = [];
+            this.varietySelected = [];
+            this.typeWine = "";
         }
     },
     computed: {
@@ -107,6 +147,7 @@ new Vue({
                 (pageNumber - 1) * 16,
                 pageNumber * 16
             );
+            console.log(this.varietySelected);
         },
 
         calculatePriceOfTheCart() {
@@ -116,10 +157,24 @@ new Vue({
                 0
             );
         },
+
+        
     },
     watch: {
         winesFilter() {
             this.countPages();
         },
+        vineyarsSelected() {
+            this.wineFilters()
+        },
+        areaSelected() {
+            this.wineFilters()
+        },
+        varietySelected() {
+            this.wineFilters()
+        },
+        typeWine() {
+            this.wineFilters()
+        }
     },
 });

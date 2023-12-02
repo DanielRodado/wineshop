@@ -249,7 +249,7 @@
                             <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushFilterWine">
                               <div class="accordion-body position-relative options-filter-md--max" :class="{'loader-hg-max-md': loader}">
                                 <fieldset class="form-check" v-for="vineyard of new Set(wines.map(wine => wine.vineyard.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox" :id="vineyard">
+                                  <input class="form-check-input" type="checkbox" :id="vineyard" :value="vineyard" v-model="vineyarsSelected">
                                   <label  class="form-check-label" :for="vineyard">{{vineyard}}</label>
                                 </fieldset>
                                 <div v-if="loader" class="loader--loader">
@@ -267,7 +267,7 @@
                             <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushFilterWine">
                               <div class="accordion-body position-relative options-filter-md--max" :class="{'loader-hg-max-md': loader}">
                                 <fieldset class="form-check" v-for="area of new Set(wines.map(wine => wine.area.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox" :id="area">
+                                  <input class="form-check-input" type="checkbox" :id="area" :value="area" v-model="areaSelected">
                                   <label  class="form-check-label" :for="area">{{area}}</label>
                                 </fieldset>
                                 <div v-if="loader" class="loader--loader">
@@ -285,7 +285,7 @@
                             <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushFilterWine">
                               <div class="accordion-body position-relative options-filter-md--max" :class="{'loader-hg-max-md': loader}">
                                 <fieldset class="form-check" v-for="variety of new Set(wines.map(wine => wine.variety.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox">
+                                  <input class="form-check-input" type="checkbox" :id="variety" :value="variety" v-model="varietySelected">
                                   <label  class="form-check-label" :for="variety">{{variety.slice(0, 1)}}{{variety.slice(1).replace("_", " ").toLowerCase()}}</label>
                                 </fieldset>
                                 <div v-if="loader" class="loader--loader">
@@ -303,11 +303,11 @@
                             <div id="flush-four" class="accordion-collapse collapse" data-bs-parent="#accordionFlushFilterWine">
                               <div class="accordion-body position-relative options-filter-md--max" :class="{'loader-hg-max-md': loader}">
                                 <fieldset class="form-check" class="mb-2">
-                                  <input class="form-check-input" type="radio" id="SPARKLING" name="typeOfWine">
+                                  <input class="form-check-input" type="radio" id="SPARKLING" name="typeOfWine" value="SPARKLING" v-model="typeWine">
                                   <label  class="form-check-label" for="SPARKLING">Yes</label>
                                 </fieldset>
                                 <fieldset class="form-check" class="mb-2">
-                                  <input class="form-check-input" type="radio" id="WINE" name="typeOfWine">
+                                  <input class="form-check-input" type="radio" id="WINE" name="typeOfWine" value="WINE" v-model="typeWine">
                                   <label  class="form-check-label" for="WINE">No</label>
                                 </fieldset>
                                 <div v-if="loader" class="loader--loader">
@@ -328,7 +328,7 @@
                               <h3 class="title-option-filter mb-2">Vineyards</h3>
                               <div class="options-filter-lg">
                                 <fieldset class="form-check" v-for="vineyard of new Set(wines.map(wine => wine.vineyard.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox" :id="vineyard">
+                                  <input class="form-check-input" type="checkbox" :id="vineyard" :value="vineyard" v-model="vineyarsSelected">
                                   <label class="form-check-label color-elements-options-filter" :for="vineyard">{{vineyard}}</label>
                                 </fieldset>
                               </div>
@@ -338,7 +338,7 @@
                               <h3 class="title-option-filter mb-2">Valleys</h3>
                               <div class="options-filter-lg">
                                 <fieldset class="form-check" v-for="area of new Set(wines.map(wine => wine.area.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox" :id="area">
+                                  <input class="form-check-input" type="checkbox" :id="area" :value="area" v-model="areaSelected">
                                   <label class="form-check-label color-elements-options-filter" :for="area">{{area}}</label>
                                 </fieldset>
                               </div>
@@ -348,7 +348,7 @@
                               <h3 class="title-option-filter mb-2">Strains</h3>
                               <div class="options-filter-lg">
                                 <fieldset class="form-check" v-for="variety of new Set(wines.map(wine => wine.variety.trim()).sort())" class="mb-2">
-                                  <input class="form-check-input" type="checkbox" :id="variety">
+                                  <input class="form-check-input" type="checkbox" :id="variety" :value="variety" v-model="varietySelected">
                                   <label class="form-check-label color-elements-options-filter" :for="variety">{{variety.slice(0, 1)}}{{variety.slice(1).replace("_", " ").toLowerCase()}}</label>
                                 </fieldset>
                               </div>
@@ -358,14 +358,18 @@
                               <h3 class="title-option-filter mb-2">Sparkling</h3>
                               <div class="options-filter-lg">
                                 <fieldset class="form-check" class="mb-2">
-                                  <input class="form-check-input" type="radio" id="SPARKLING" name="typeOfWine">
+                                  <input class="form-check-input" type="radio" id="SPARKLING" name="typeOfWine" value="SPARKLING" v-model="typeWine">
                                   <label  class="form-check-label" for="SPARKLING">Yes</label>
                                 </fieldset>
                                 <fieldset class="form-check" class="mb-2">
-                                  <input class="form-check-input" type="radio" id="WINE" name="typeOfWine">
+                                  <input class="form-check-input" type="radio" id="WINE" name="typeOfWine" value="WINE" v-model="typeWine">
                                   <label  class="form-check-label" for="WINE">No</label>
                                 </fieldset>
                               </div>
+                            </section>
+                            <hr class="color-separator">
+                            <section class="mb-2">
+                              <button type="button" class="btn btn-danger" @click="resetFilters">Reset all filters</button>
                             </section>
                             <div v-if="loader" class="loader--loader d-none d-lg-block">
                               <div class="justify-content-center jimu-primary-loading"></div>
@@ -414,12 +418,13 @@
                                       </div>
                                   </div>
                               </div>
+                              <h1 v-if="winesFilter.length === 0" class="text-center">No results found</h1>
                               <div v-if="loader" class="loader--loader">
                                 <div class="justify-content-center jimu-primary-loading"></div>
                               </div>
                           </div>
                         </section>
-                        <div class="btn-group d-flex justify-content-center mt-4 mt-md-5" role="group" aria-label="Basic example">
+                        <div v-if="listOfPages.length >= 1" class="btn-group d-flex justify-content-center mt-4 mt-md-5" role="group" aria-label="Basic example">
                           <nav aria-label="Page navigation example" v-if="!loader">
                             <ul class="pagination justify-content-center">
                               <li class="page-item">
@@ -506,7 +511,7 @@
                         </button>
                         <input id="form1" min="0" name="quantity" :value="product.amount" type="number" readonly
                                   class="form-control form-control-sm label p-0" style="width: 50px; text-align: center !important;" />
-                        <button @click="addMoreWinesToCart(product)" v-if="product.stock >= product.amount">
+                        <button @click="addMoreWinesToCart(product)" v-if="product.stock > product.amount">
                           <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
                           </svg>

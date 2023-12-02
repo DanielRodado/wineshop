@@ -71,6 +71,7 @@ createApp({
         if (wine.amount === 0) {
             this.cart = this.cart.filter((wines) => wines.amount >= 1);
         }
+        this.cart.push();
         this.saveLocalStorage();
     },
     deleteWineFromCart(wine) {
