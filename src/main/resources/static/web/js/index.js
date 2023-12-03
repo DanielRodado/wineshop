@@ -3,14 +3,6 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      wines: [],
-      wineVarietiesList: [],
-      vineyards: new Set(),
-      areas: new Set(),
-      varieties: new Set(),
-      sparkling: [],
-      wineSparkling: new Set(),
-      accessories:[],
       email: "",
       password: "",
       showLogin: true,
@@ -20,6 +12,8 @@ createApp({
       registerLastName: "",
       registerPass: "",
       registerEmail: "",
+      cart: [],
+      priceOfTheCart: 0,
     };
   },
 
@@ -39,86 +33,7 @@ createApp({
     });
 
     });
-
-    
-
-    axios
-      .get("/api/wines/varieties")
-      .then((response) => {
-        this.wineVarietiesList = response.data;
-      })
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
-
-    axios
-      .get("/api/wines")
-      .then((response) => {
-        this.wines = response.data;
-        console.log(this.wines);
-        for (let wine of this.wines) {
-          this.vineyards.add(wine.vineyard);
-        }
-        this.vineyards = Array.from(this.vineyards).sort(
-          (vineyard1, vineyard2) => {
-            return vineyard1.localeCompare(vineyard2);
-          }
-        );
-
-        for (let wine of this.wines) {
-          this.areas.add(wine.area.trim());
-        }
-        this.areas = Array.from(this.areas).sort((area1, area2) => {
-          return area1.localeCompare(area2);
-        });
-
-        for (let wine of this.wines) {
-          const formattedVariety = wine.variety.trim().toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
-          this.varieties.add(formattedVariety);
-        }
-        this.varieties = Array.from(this.varieties).sort(
-          (variety1, variety2) => {
-            return variety1.localeCompare(variety2);
-          }
-        );
-
-        this.sparkling = this.wines.filter((wine) => {
-          return wine.wineType == "SPARKLING";
-        });
-        this.sparkling.forEach((wine) => {
-          wine.variety =
-            wine.variety[0] + wine.variety.substring(1).toLowerCase();
-        });
-
-        for (let wine of this.sparkling) {
-          this.wineSparkling.add(wine.variety);
-        }
-        this.wineSparkling = Array.from(this.wineSparkling).sort(
-          (variety1, variety2) => {
-            return variety1.localeCompare(variety2);
-          }
-        );
-      })
-
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
-
-    axios
-      .get("/api/accessories")
-      .then((response) => {
-        this.accessories = response.data;
-        console.log(this.accessories)
-
-
-
-      })
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
+    this.cart = JSON.parse(localStorage.getItem("cart")) || [];
   },
 
   methods: {
@@ -137,12 +52,32 @@ createApp({
       });
     },
 
+    addMoreWinesToCart(wine) {
+      wine.amount++;
+      wine.subTotal = wine.price * wine.amount;
+      this.cart.push();
+      this.saveLocalStorage();
+    },
+
+    substractOneWine(wine) {
+        wine.amount--;
+        wine.subTotal = wine.price * wine.amount;
+        if (wine.amount === 0) {
+            this.cart = this.cart.filter((wines) => wines.amount >= 1);
+        }
+        this.cart.push();
+        this.saveLocalStorage();
+    },
+
+    saveLocalStorage() {
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+    },
+
     catalogue() {
-      location.pathname = "/web/pages/catalo.html";
+      location.pathname = "/web/pages/catalogue.html";
     },
 
     login() {
-      
       let infoLogin = `email=${this.email}&password=${this.password}`;
 
       axios
@@ -155,10 +90,9 @@ createApp({
             icon: "success",
             title: "Welcome",
             showConfirmButton: false,
-            timer: 2000,
           });
           setTimeout(() => {
-            location.pathname = "/web/pages/catalo.html";
+            location.pathname = "/web/pages/catalogue.html";
           }, 1500);
         })
         .catch((err) => {
@@ -169,7 +103,7 @@ createApp({
               title: "Error...",
               text: "Please complete all information",
               showConfirmButton: false,
-              timer: 2000,
+
             });
           } else {
             Swal.fire({
@@ -223,16 +157,10 @@ createApp({
 
         .then((response) => {
           console.log("registered");
-
-          
-
-          
           let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
 
           axios.post("/api/login", infoLogin).then((response) => {
-            
-
-            location.pathname = "/web/pages/catalo.html";
+            location.pathname = "/web/pages/catalogue.html";
           });
         })
         .catch((err) => {
@@ -247,10 +175,28 @@ createApp({
           this.birthDate = "";
         });
     },
-    ToCheckout(){
-      location.pathname = "/web/pages/checkout.html";
-    }
 
-    
+    isLoggedIn(){
+      return document.cookie.includes("JSESSIONID");
+    },
+
+    goToCheckout(){
+      if(this.isLoggedIn()){
+        location.pathname = "/web/pages/checkout.html"
+      }
+      else {
+        $("#exampleModal").modal("show");
+        $("#offcanvasScrolling").offcanvas("hide");
+      }
+    }
   },
+  computed: {
+    calculatePriceOfTheCart() {
+      this.priceOfTheCart = this.cart.reduce(
+          (accumulatedTotal, product) =>
+              accumulatedTotal + product.subTotal,
+          0
+      );
+    },
+  }
 }).mount("#app");

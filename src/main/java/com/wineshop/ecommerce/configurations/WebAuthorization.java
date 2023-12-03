@@ -2,6 +2,7 @@ package com.wineshop.ecommerce.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,7 +20,20 @@ public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("**").permitAll();
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/index.html",
+                        "/web/pages/catalogue.html", "/web/pages/accessories.html",
+                        "/web/css/**", "/web/js/**", "/web/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/wines", "/api/accessories").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients", "/api/login", "api/logout").permitAll()
+                .antMatchers(HttpMethod.GET, "/web/pages/checkout.html", "/api/clients/current",
+                        "/api/purchase/status").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/purchase").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET, "/api/clients", "/api/purchase/status/admin",
+                        "/web/admin/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/wines/edit/**", "/api/purchase/status").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/wines/create", "/api/accessories/create").hasAuthority("ADMIN")
+                .anyRequest().denyAll();
 
 
         // turn off checking for CSRF tokens

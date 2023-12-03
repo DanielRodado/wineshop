@@ -19,10 +19,19 @@ new Vue({
         areaSelected: [],
         varietySelected: [],
         typeWine: "",
+        email: "",
+        password: "",
+        showLogin: true,
+        errorEmail: false,
+        registerBirthDate: "",
+        registerName: "",
+        registerLastName: "",
+        registerPass: "",
+        registerEmail: "",
     },
 
     created() {
-        this.getWines(); // catantidad a comprar, precio total
+        this.getWines();
     },
 
     methods: {
@@ -139,7 +148,112 @@ new Vue({
             this.areaSelected = [];
             this.varietySelected = [];
             this.typeWine = "";
-        }
+        },
+        login() {
+            let infoLogin = `email=${this.email}&password=${this.password}`;
+      
+            axios
+              .post("/api/login", infoLogin)
+              .then((response) => {
+                console.log("Successful request", response.data);
+      
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Welcome",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+                setTimeout(() => {
+                  location.pathname = "/web/pages/catalogue.html";
+                }, 1500);
+              })
+              .catch((err) => {
+                console.log(err);
+                if ((this.email = "" || this.password === "")) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Error...",
+                    text: "Please complete all information",
+                    showConfirmButton: false,
+                    timer: 2000,
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Invalid user",
+                    text: "User or password is invalid",
+                    showConfirmButton: false,
+                    timer: 2000,
+                  });
+                }
+              })
+              .finally(() => {
+                this.email = "";
+                this.password = "";
+              });
+          },
+      
+          logOut(){
+            axios.post('/api/logout')
+            .then(response => {
+              console.log('signed out!!!');
+              Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Your session has been closed',
+                showConfirmButton: false,
+                timer: 2000
+              })
+              setTimeout(()=> {
+                window.location.href = '/index.html';
+              },3000);
+              
+      
+            })
+            .catch(err=>console.log("error"))
+           }, 
+      
+          register() {
+            
+            let registerInfo = {
+              firstName: this.registerName,
+              lastName: this.registerLastName,
+              email: this.registerEmail,
+              password: this.registerPass,
+              birthDate: this.registerBirthDate,
+            };
+            console.log(registerInfo);
+      
+            axios
+              .post("/api/clients", registerInfo)
+      
+              .then((response) => {
+                console.log("registered");
+      
+                
+      
+                
+                let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
+      
+                axios.post("/api/login", infoLogin).then((response) => {
+                  
+      
+                  location.pathname = "/web/pages/catalogue.html";
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+                this.messageError(err.response.data);
+              })
+              .finally(() => {
+                this.email = "";
+                this.password = "";
+                this.name = "";
+                this.lastName = "";
+                this.birthDate = "";
+              });
+          },
     },
     computed: {
         pageNumber() {

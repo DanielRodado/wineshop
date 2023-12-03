@@ -16,8 +16,6 @@ createApp({
 
   created() {
     this.cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // buscar una forma de separar en wines y accessories
-    
   },
 
   methods: {
@@ -29,7 +27,7 @@ createApp({
         numberCard: this.cardNumber,
         cvvCard: this.cvv,
         description: "Wine Lovers Society payment",
-        amount: this.checkoutSubtotal + 2.99
+        amount: this.checkoutSubtotal
       }
       let purchaseInfo = {
         deliveryAddress: this.deliveryAddress,
@@ -57,8 +55,26 @@ createApp({
         .then(response => {
           console.log(response)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          this.messageError(error.response.data)
+        })
     },
+
+    messageError(message) {
+      Swal.fire({
+        icon: "error",
+        title: "<span style='color: #000;'>An error has occurred</span>",
+        text: message,
+        customClass: {
+          popup: "text-center",
+        },
+        titleColor: "#000",
+        color: "#000",
+        background: "#fff",
+        confirmButtonColor: "#880000",
+      });
+    },
+
     addMoreWinesToCart(wine) {
       wine.amount++;
       wine.subTotal = wine.price * wine.amount;

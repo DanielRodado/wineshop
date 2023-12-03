@@ -11,144 +11,110 @@
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <link rel="stylesheet" href="web/css/styleIndex.css">
 </head>
 <body>
 <div id="app" v-cloak>
-    <header>
-        
-      <div class="d-flex justify-content-end align-items-center m-1 nav_1  " >
-        <div class=" iconNav">
-            <img src="/web/images/account.svg" alt="Bootstrap" width="30" height="30">
-            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            ACCOUNT
-            </a>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  {{calculatePriceOfTheCart}}
+  <!--Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-center align-items-center">
+            <div class="form-box m-5">
+              <form class="form">
+                  <span class="title">Log in</span>
+                  <span class="subtitle">Welcome!</span>
+                  <div class="form-container">
+  
+                      <input type="email" class="input" placeholder="Email" v-model="email">
+                      <input type="password" class="input" placeholder="Password" v-model="password">
               </div>
-              <div class="modal-body">
-                <div class="form-box m-5">
-                  <form class="form">
-                      <span class="title">Log in</span>
-                      <span class="subtitle">Welcome!</span>
-                      <div class="form-container">
-      
-                          <input type="email" class="input" placeholder="Email" v-model="email">
-                          <input type="password" class="input" placeholder="Password" v-model="password">
-                  </div>
-                      <button @click.prevent="login">Log in</button>
-                  </form>
-                  <div class="form-section">
-                    <p>You do not have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</a></p>
-                  </div>
-                  </div>
+                  <button @click.prevent="login">Log in</button>
+              </form>
+              <div class="form-section">
+                <p>You do not have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</a></p>
               </div>
-              
-            </div>
+              </div>
           </div>
         </div>
-        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="form-box m-5">
-                  <form class="form">
-                      <span class="title">Sign up</span>
-                      <span class="subtitle">Create a free account with your email.</span>
-                      <div class="form-container">
-                              <input type="name" class="input" placeholder="First name" v-model="registerName">
-                              <input type="lastName" class="input" placeholder="Last name" v-model="registerLastName">
-                              <input type="email" class="input" placeholder="Email" v-model="registerEmail">
-                              <input type="password" class="input" placeholder="Password" v-model="registerPass">
-                              <input type="date" class="input" placeholder="BirthDay" v-model="registerBirthDate">
-                      </div>
-                      <button @click.prevent="register" >Sign up</button>
-                  </form>
-                  <div class="form-section">
-                    <p>Have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</a> </p>
-                  </div>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-    
-      
-    
-        <div class=" iconNav">
-          
-            <a role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="d-flex  justify-content-center align-items-center text-white text-decoration-none">
-              
-            <img src="/web/images/canasta.svg" alt="Bootstrap" width="30" height="30" >
-            <p class="m-1 text-dark" >CART</p>
-            </a>
-        </div>  
       </div>
+    </div>  
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-center align-items-center">
+            <div class="form-box m-5">
+              <form class="form">
+                  <span class="title">Sign up</span>
+                  <span class="subtitle">Create a free account with your email.</span>
+                  <div class="form-container">
+                          <input type="name" class="input" placeholder="First name" v-model="registerName">
+                          <input type="lastName" class="input" placeholder="Last name" v-model="registerLastName">
+                          <input type="email" class="input" placeholder="Email" v-model="registerEmail">
+                          <input type="password" class="input" placeholder="Password" v-model="registerPass">
+                          <input type="date" class="input" placeholder="BirthDay" v-model="registerBirthDate">
+                  </div>
+                  <button @click.prevent="register">Sign up</button>
+              </form>
+              <div class="form-section">
+                <p>Have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</a> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <!--Modal-->
+  <header>
     <nav class="navbar navbar-expand-lg  d-flex justify-content-center nav_2  ">
-        
-        
-        <div class="d-flex justify-content-center align-content-center m-2 p-1"><a class="navbar-brand text-body" href="#"><img class=" style-logo rounded-circle d-flex align-items-center" src="web/images/Red_and_Cream_Minimalist_Wine_Brand_Logo.png" alt="logo"></a></div>
-        <div class="container-fluid">
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <div class="d-flex justify-content-center align-content-center m-2 p-1">
+          <a class="navbar-brand text-body" href="#">
+            <img class="rounded-circle d-flex align-items-center" style="width: 12rem;" src="web/images/Red_and_Cream_Minimalist_Wine_Brand_Logo.png" alt="logo">
+          </a>
+      </div>
+        <div class="container-fluid">
+          <button style="color: white;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    VINEYARDS
-                </a>
-                <ul class="dropdown-menu">
-                  <li v-for = "vineyard of vineyards"><a class="dropdown-item" href="#">{{ vineyard }}</a></li>
-                 
-                </ul>
+              <li class="nav-item me-4 d-flex gap-2 align-items-center">
+                <i class="bi bi-house text-light fs-5"></i>
+                <a href="#" class="nav-link text-light fs-5">HOME</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    VALLEYS
-                </a>
-                <ul class="dropdown-menu">
-                  <li v-for = "area of areas"><a class="dropdown-item" href="#">{{area }}</a></li>
-                </ul>
+              <li class="nav-item me-4 d-flex gap-2 align-items-center">
+                <i class="fa-solid fa-wine-glass text-light fs-5"></i>
+                <a href="/web/pages/catalogue.html" class="nav-link text-light fs-5">WINES</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    VARIETY
-                </a>
-                <ul class="dropdown-menu">
-                  <li v-for = "variety of varieties"><a class="dropdown-item" href="#">{{variety}}</a></li>               
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    SPARKLING WINES
-                </a>
-                <ul class="dropdown-menu">
-                  <li v-for = "variety of wineSparkling"><a class="dropdown-item" href="#">{{variety}}</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ACCESSORIES
-                </a>
-                <ul class="dropdown-menu">
-                  <li v-for = "accessory of accessories"><a class="dropdown-item" href="#">{{accessory.name}}</a></li>
-                </ul>
+              <li class="nav-item me-4 d-flex gap-2 align-items-center">
+                <i class="fa-solid fa-store text-light fs-5"></i>
+                <a href="/web/pages/accessories.html" class="nav-link text-light fs-5">ACCESSORIES</a>
               </li>
             </ul>
-            
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="iconNav">
+                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
+                  <i class="fa-solid fa-circle-user text-light fs-5"></i>
+                  <p class="m-1 text-light fs-5">ACCOUNT</p>
+                </a>
+            </div>
+            <div class="iconNav">
+                <a role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
+                  <i class="fa-solid fa-cart-shopping text-light fs-5"></i>
+                  <p class="m-1 text-light fs-5">CART</p>
+                </a>
+            </div>
           </div>
         </div>
       </nav>
@@ -157,7 +123,7 @@
         <p class="fw-semibold fs-6 m-2">FREE SHIPPING</p>
         <P class="fw-normal fs-6 m-2 "> ON ALL ORDERS OVER US$ 45,00</P>
       </div>
-    </header>
+  </header>
     <main >
         <div class=" container-fluid mt-1">
             
@@ -186,15 +152,12 @@
           </div>
                 <div class=" d-flex">                 
                         <div class="m-2" >
-                            <img src="web/images/image-banner-8.png " class="card-img-top rounded h-100 " @click="catalogue" >
+                            <img src="web/images/image-banner-8.png " class="card-img-top rounded h-100" @click="catalogue" >
                         </div>                                           
                         <div class="m-2">
                           <img src="web/images/img-4.png " class="card-img-top rounded h-100" @click="catalogue" >
                         </div>      
                 </div>
-                  
-  
-</div>
             <div class="col-sm-6 d-lg-flex justify-content-center mt-3 p-2 mx-2 m-auto">
                 <div class="d-flex justify-content-center align-items-center m-2 " style="min-width:6px;">
                     <img src="web/images/camion-24-02-2022.png" style="height: 3rem;">
@@ -209,49 +172,38 @@
                     <p class=" fst-italic fs-6"> NATIONAL COVERAGE </p>
                 </div>    
             </div>
-            <div>
             <div class="container">
-    
-                <div class="row">
-            
-              <div class="four col-md-3">
-                <div class="counter-box colored">
-                  <i class="bi bi-hand-thumbs-up"></i>
-                  <span class="counter">2147</span>
-                  <p>Happy Customers</p>
+              <div class="row">
+                <div class="four col-md-3">
+                  <div class="counter-box colored">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                    <span class="counter">2147</span>
+                    <p>Happy Customers</p>
+                  </div>
                 </div>
-              </div>
-              <div class="four col-md-3">
-                <div class="counter-box">
-                  <i class="bi bi-people-fill"></i>
-                  <span class="counter">3275</span>
-                  <p>Registered Members</p>
+                <div class="four col-md-3">
+                  <div class="counter-box">
+                    <i class="bi bi-people-fill"></i>
+                    <span class="counter">3275</span>
+                    <p>Registered Members</p>
+                  </div>
                 </div>
-              </div>
-              <div class="four col-md-3">
-                <div class="counter-box">
-                  <i class="bi bi-cart3"></i>
-                  <span class="counter">289</span>
-                  <p>Available Products</p>
+                <div class="four col-md-3">
+                  <div class="counter-box">
+                    <i class="bi bi-cart3"></i>
+                    <span class="counter">289</span>
+                    <p>Available Products</p>
+                  </div>
                 </div>
-              </div>
-              <div class="four col-md-3">
-                <div class="counter-box">
-                  <i class="bi bi-upc-scan"></i>
-                  <span class="counter">1563</span>
-                  <p>Orders Done</p>
+                <div class="four col-md-3">
+                  <div class="counter-box">
+                    <i class="bi bi-upc-scan"></i>
+                    <span class="counter">1563</span>
+                    <p>Orders Done</p>
+                  </div>
                 </div>
-              </div>
               </div>	
-            </div>
-            </div>
-            <div>
-              <h1>CARD OTROS PRODUCTOS</h1>
-            </div>
-            <div>
-              <h1>CARRUSEL LO MEJOR EVALUADO</h1>
-              
-            </div>
+          </div>
             <div class="mt-3">
                 <div class="card-group">
                     <div class="card">
@@ -266,98 +218,66 @@
                   </div>  
 
             </div>
-            <div>
-              
-
-              
-            <div class="suscribe d-flex justify-content-center align-items-center mt-5 mb-5">
-              <div class="container"> 
-              <div class="container mt-3 ">
-                  <div class="d-flex flex-column justify-content-center align-items-center ">
-                    <h3 class="text-white">NEWSLETTER</h3>
-                    <p class="text-white fw-light fs-5">Learn more about our promotions</p>
-                  </div>
-              </div>
-              <div>
-                <div class="container d-flex">
-                  <div class="container col-sm-6 ">
-                    <input type="text" name="name" placeholder="Name" class="form-control text-white">
-                  </div>
-                  <div class="container col-sm-6">
-                    <input type="text" name="name" placeholder="Email" class="form-control text-white">
-                  </div>
-                </div>  
-                  <div class="container mt-2">
-                    <div class="container col-sm-2 d-flex justify-content-center">
-                      <a href="" class="btn btn-dark text-white">Suscribme</a>
-                    </div>
-                  </div>
-              </div>
-              </div>
-            </div>
-
-
 
         <!-- canvas -->
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-body">
-                
-                <div class="master-container">
-                  <div class="card cart">
-                    
-                    <div class="products">
-                      <div class="product">
-                        <img class="img-cart" src="../images/01PR24_1.jpg" alt="">
-                        <div>
-                          <span>Cheese Burger</span>
-                          <p>Extra Spicy</p>
-                          <p>No mayo</p>
-                        </div>
-                        <div class="quantity">
-                          <button >
-                            <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
-                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
-                            </svg>
-                          </button>
-                          <input id="form1" min="0" name="quantity" value="1" type="number"
-                                    class="form-control form-control-sm label" style="width: 33px;" />
-                          <button >
-                            <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
-                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
-                            </svg>
-                          </button>
-                        </div>
-                        <label class="price small">$23.99</label>
-                      </div>
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="master-container" v-if="cart.length >= 1">
+              <div v-for="product of cart" class="card--index cart--index">
+                <div class="products">
+                  <div class="product">
+                    <img class="img-cart" style="width: 10rem;" :src="product.imgURL[0]" :alt="product.name">
+                    <div>
+                      <span>{{product.name}}</span>
                     </div>
-                  </div>
-                
-                 
-                
-                  <div class="card checkout">
-                    <label class="titleCoupons">Checkout</label>
-                    <div class="details">
-                      <span>Your cart subtotal:</span>
-                      <span>47.99$</span>
-                      <span>Discount through applied coupons:</span>
-                      <span>3.99$</span>
-                      <span>Shipping fees:</span>
-                      <span>4.99$</span>
+                    <div class="quantity">
+                      <button @click="substractOneWine(product)">
+                        <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                        </svg>
+                      </button>
+                      <input id="form1" min="0" name="quantity" :value="product.amount" type="number" readonly
+                                class="form-control form-control-sm label p-0" style="width: 50px; text-align: center !important;" />
+                      <button @click="addMoreWinesToCart(product)" v-if="product.stock > product.amount">
+                        <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                        </svg>
+                      </button>
+                      <button v-else>
+                        <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#FF0000" d="M12 4V20M20 12H4"></path>
+                        </svg>
+                      </button>
                     </div>
-                    <div class="checkout--footer">
-                      <label class="price "><sup>$</sup>57.99</label>
-                     <a href="/web/pages/checkout.html"> <button class="checkout-btn"  >Checkout</button></a> 
-                    </div>
+                    <label class="price small">${{product.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
                   </div>
                 </div>
-
-
+              </div>
+            
+             
+            
+              <div class="card--index checkout">
+                <label class="titleCoupons">Checkout</label>
+                <div class="details">
+                  <span>Your cart subtotal:</span>
+                  <span>{{priceOfTheCart.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</span>
+                  <span>Shipping fees:</span>
+                  <span>2.99$</span>
+                </div>
+                <div class="checkout--footer">
+                  <label class="price "><sup>$</sup>{{(priceOfTheCart+2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                  <button class="checkout-btn" @click="goToCheckout">Checkout</button>
+                </div>
               </div>
             </div>
+            <h3 v-else class="text-center">Your cart is empty</h3>
+
+          </div>
+        </div>
     </main>
 
     <footer class="site-footer">
@@ -451,7 +371,7 @@
                       src="web/images/facebook (1).png" alt=""></i></a></li>
               <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40"
                       src="web/images/twitter.png" alt=""></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40"
+              <li><a class="dribbble" href="#"><i class="fa fa-instagram"><img width="40" height="40"
                       src="web/images/instagram (1).png" alt=""></i></a></li>
               <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40"
                       src="web/images/linkedin (1).png" alt=""></i></a></li>
@@ -473,6 +393,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="https://kit.fontawesome.com/1087e59517.js" crossorigin="anonymous"></script>
 <script src="web/js/index.js"></script>
 </body>
 </html>

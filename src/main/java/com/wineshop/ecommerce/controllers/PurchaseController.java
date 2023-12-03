@@ -191,7 +191,7 @@ public class PurchaseController {
 
         Purchase purchase = purchaseService.getPurchaseById((Long) purchaseResponse.getBody());
 
-        if (!Objects.equals(priceOrderPurchase + 2.99, purchasePaymentWithCardApp.getPayWithCardApp().getAmount())) {
+        if (!Objects.equals(priceOrderPurchase + 2.99, purchasePaymentWithCardApp.getPayWithCardApp().getAmount() + 2.99)) {
 
             deletePurchaseAndProductPurchase(winePurchaseService, accessoryPurchaseService, purchaseService,
                     purchasePaymentWithCardApp.getNewPurchaseApp().getWines(),

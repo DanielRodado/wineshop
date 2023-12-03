@@ -24,10 +24,6 @@ createApp({
   },
 
   created() {
-      
-
-    
-
     axios
       .get("/api/wines/varieties")
       .then((response) => {
