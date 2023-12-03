@@ -1,449 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="../css/styles.css"/>
+        <link rel="stylesheet" href="../css/product-card.css">
+        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/card-modal.css">
+        <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/styleIndex.css">
+        <title>Catalogue</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="shortcut icon" href="web/images/favicon.png" type="image/x-icon">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-
-    <title>Accessories</title>
-</head>
-
-<body>
- <div id="app">
-        <header>
-          <nav class="navbar bg-body-tertiary d-flex justify-content-center justify-content-md-end m-0">
-            <div
-                class="container d-flex justify-content-around justify-content-md-end m-0"
-            >
-              <a class="navbar-brand" href="#">
-                  <img
-                      src="../images/account.svg "
-                      alt="Bootstrap"
-                      width="45"
-                      height="45"
-                  />
-              </a>
-              <a class="navbar-brand" href="#">
-                  <img
-                      src="../images/canasta.svg"
-                      alt="Bootstrap"
-                      width="45"
-                      height="45"
-                      data-bs-toggle="modal"
-                      data-bs-target="#carritoModal"
-                  />
-              </a>
-            </div>
-      </nav>
-      <nav
-          class="navbar navbar-expand-lg bg-body-1 d-flex justify-content-center"
-      >
-          <div class="">
-              <a class="navbar-brand" href="#"
-                  ><img
-                      class="style-logo rounded-circle"
-                      src="../images/1234.png"
-                      alt=""
-              /></a>
-          </div>
-          <div class="container-fluid">
-              <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-              >
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div
-                  class="collapse navbar-collapse"
-                  id="navbarSupportedContent"
-              >
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                          <a
-                              class="nav-link active text-light"
-                              aria-current="page"
-                              href="#"
-                              >HOME</a
-                          >
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a
-                              class="nav-link dropdown-toggle text-light"
-                              href="#"
-                              role="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                          >
-                              VINEYARDS
-                          </a>
-                          <ul class="dropdown-menu">
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Altair</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Amayna</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Antigal</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Antiyal</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Casa del bosque</a
-                                  >
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a
-                              class="nav-link dropdown-toggle text-light"
-                              href="#"
-                              role="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                          >
-                              VALLEYS
-                          </a>
-                          <ul class="dropdown-menu">
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Acouncagua</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Apalta</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Barcelona</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Chile</a
-                                  >
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a
-                              class="nav-link dropdown-toggle text-light"
-                              href="#"
-                              role="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                          >
-                              STRAINS
-                          </a>
-                          <ul class="dropdown-menu">
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Cavernet suavigon</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Carignan</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Chardonnay</a
-                                  >
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a
-                              class="nav-link dropdown-toggle text-light"
-                              href="#"
-                              role="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                          >
-                              SPARKLING WINES
-                          </a>
-                          <ul class="dropdown-menu">
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Brut</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >Brut nature</a
-                                  >
-                              </li>
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >CAVA</a
-                                  >
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a
-                              class="nav-link dropdown-toggle text-light"
-                              href="#"
-                              role="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                          >
-                              ACCESSORIES
-                          </a>
-                          <ul class="dropdown-menu">
-                              <li>
-                                  <a class="dropdown-item" href="#"
-                                      >x</a
-                                  >
-                              </li>
-                          </ul>
-                      </li>
-                  </ul>
-                  <form class="d-flex" role="search">
-                      <input
-                          class="form-control me-2"
-                          type="search"
-                          placeholder="Enter N° Order"
-                          aria-label="Search"
-                      />
-                      <button
-                          class="btn btn-outline-light"
-                          type="submit"
-                      >
-                          Search
-                      </button>
-                  </form>
-              </div>
-          </div>
-      </nav>
-
-
-
-        </header>
-
-        <main>
-
-            <div class="d-flex justify-content-center">
-                <div class="contenedor d-flex col m-1">
-                    <div class="card m-4 d-flex justify-content-center card-hover" v-for="accessorie of accessories"
-                        style="width: 18rem;">
-                        <a class="text-decoration-none" :href="`./details-accessories.html?id=${accessorie.id}`"><img :src="accessorie.imagesURL[1]"
-                            class="card-img-top" :alt="accessorie.name"></a>
-                        
-
-                            <h6 class="card-title align-content-center">{{accessorie.name}}</h6>
-                            <div class="d-flex justify-content-center">
-                                <h4 class="card-price">US$ {{accessorie.price }}</h4>
-                            </div>
-                            
-                            <!-- <div class="ratings d-flex justify-content-end">
-                    <div class="stars m-2" v-html="starRating"></div>
-                    <div class="percentage m-2">{{productRating}}</div>
-                  </div> -->
-                            <!-- <div class="d-flex justify-content-between">
-                                <button type="button" class="button">
-                                    <span class="button__text">Add Item</span>
-                                    <span class="button__icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-                                            stroke="currentColor" height="24" fill="none" class="svg">
-                                            <line y2="19" y1="5" x2="12" x1="12"></line>
-                                            <line y2="12" y1="12" x2="19" x1="5"></line>
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div class="quantity-container">
-                                    <div class="quantity-buttons d-flex justify-content-center m-1">
-                                        <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold"
-                                            @click="decreaseQuantity">-</button>
-                                        <div class="quantity d-flex align-content-centerc m-1 fw-bold"><span>{{ quantity
-                                                }}</span></div>
-                                        <button class="btn rounded-pill btn-cant text-dark fs-4 fw-bold"
-                                            @click="increaseQuantity">+</button>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
+    <body>
+        <div id="app">
+          {{calculatePriceOfTheCart}}
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                  <div class="form-box m-5">
+                    <form class="form">
+                        <span class="title">Log in</span>
+                        <span class="subtitle">Welcome!</span>
+                        <div class="form-container">
+                          <input type="email" class="input" placeholder="Email" v-model="email">
+                          <input type="password" class="input" placeholder="Password" v-model="password">
+                        </div>
+                        <button @click.prevent="login">Log in</button>
+                    </form>
+                    <div class="form-section">
+                      <p>You do not have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>  
+            <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body d-flex justify-content-center align-items-center">
+                    <div class="form-box m-5">
+                      <form class="form">
+                          <span class="title">Sign up</span>
+                          <span class="subtitle">Create a free account with your email.</span>
+                          <div class="form-container">
+                                  <input type="name" class="input" placeholder="First name" v-model="registerName">
+                                  <input type="lastName" class="input" placeholder="Last name" v-model="registerLastName">
+                                  <input type="email" class="input" placeholder="Email" v-model="registerEmail">
+                                  <input type="password" class="input" placeholder="Password" v-model="registerPass">
+                                  <input type="date" class="input" placeholder="BirthDay" v-model="registerBirthDate">
+                          </div>
+                          <button @click.prevent="register">Sign up</button>
+                      </form>
+                      <div class="form-section">
+                        <p>Have an account?<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</a> </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <header>
+            <nav class="navbar navbar-expand-lg  d-flex justify-content-center nav_2  ">
+                <div class="d-flex justify-content-center align-content-center m-2 p-1">
+                  <a class="navbar-brand text-body" href="#">
+                    <img class="rounded-circle d-flex align-items-center" style="width: 12rem;" src="../images/Red_and_Cream_Minimalist_Wine_Brand_Logo.png" alt="logo">
+                  </a>
+              </div>
+                <div class="container-fluid">
+                  <button style="color: white;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list fs-1"></i>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item me-4 d-flex gap-2 align-items-center">
+                        <i class="bi bi-house text-light fs-5"></i>
+                        <a href="../../index.html" class="nav-link text-light fs-5">HOME</a>
+                      </li>
+                      <li class="nav-item me-4 d-flex gap-2 align-items-center">
+                        <i class="fa-solid fa-wine-glass text-light fs-5"></i>
+                        <a href="#" class="nav-link text-light fs-5">WINES</a>
+                      </li>
+                      <li class="nav-item me-4 d-flex gap-2 align-items-center">
+                        <i class="fa-solid fa-store text-light fs-5"></i>
+                        <a href="accessories.html" class="nav-link text-light fs-5">ACCESSORIES</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <div class="iconNav">
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
+                          <i class="fa-solid fa-circle-user text-light fs-5"></i>
+                          <p class="m-1 text-light fs-5">ACCOUNT</p>
+                        </a>
+                    </div>
+                    <div class="iconNav">
+                        <a role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
+                          <i class="fa-solid fa-cart-shopping text-light fs-5"></i>
+                          <p class="m-1 text-light fs-5">CART</p>
+                        </a>
+                    </div>
+                  </div>
+              </div>
+            </nav>
+          </header>
 
+            <main>
+                <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-12">
+                        <section>
+                          <div class="d-flex flex-column flex-md-row flex-wrap mt-3 position-relative" :class="{'hg-loading': loader}">
+                              <div v-for="accessory of accessoriesFilter.slice((pageNumber-1)*16, pageNumber*16)" class="container-lg page-wrapper border-style-filter mb-3">
+                                  <div class="page-inner">
+                                      <div class="row">
+                                          <div class="el-wrapper">
+                                              <div class="box-up">
+                                                  <img class="img" :src="accessory.imgURL[0]" :alt="accessory.name">
+                                                  <div class="img-info">
+                                                    <div class="info-inner">
+                                                        <span class="p-name">{{accessory.name}}</span>
+                                                    </div>
+                                                    <div class="a-size">
+                                                        Stock: <span class="size">{{accessory.stock}}</span>
+                                                        <br>
+                                                        <span class="size" role="button" data-bs-toggle="modal" data-bs-target="#staticDetailsaccessory" @click="accessoryDetails(accessory)">See details</span>
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                      
+                                              <div class="box-down">
+                                                  <div class="h-bg">
+                                                  <div class="h-bg-inner"></div>
+                                                  </div>
+                                      
+                                                  
+                                                  <div role="button" class="cart">
+                                                      <span v-if="!cart.some(product => product.id === accessory.id)" class="price">${{accessory.price}}</span>
+                                                      <span v-else class="price" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden;">Delete from cart</span>
+                                                      <span class="add-to-cart">
+                                                          <span class="txt" v-if="!cart.some(product => product.id === accessory.id)" @click="addToCart(accessory)">Add to cart</span>
+                                                          <span class="txt" v-else @click="deleteaccessoryFromCart(accessory)">Delete from cart</span>
+                                                      </span>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <h1 v-if="accessoriesFilter.length === 0" class="text-center">No results found</h1>
+                              <div v-if="loader" class="loader--loader">
+                                <div class="justify-content-center jimu-primary-loading"></div>
+                              </div>
+                          </div>
+                        </section>
+                        <div v-if="listOfPages.length >= 1" class="btn-group d-flex justify-content-center mt-4 mt-md-5" role="group" aria-label="Basic example">
+                          <nav aria-label="Page navigation example" v-if="!loader">
+                            <ul class="pagination justify-content-center">
+                              <li class="page-item">
+                                <button type="button" class="page-link btn btn-primary rounded-0" :class="{'disabled': !listOfPages.includes(pageNumber-1)}" @click="topWindows(pageNumber-1)">Prev</button>
+                              </li>
+                              <li class="page-item" v-for="pagesIndex in listOfPages"><button type="button" class="page-link btn btn-primary rounded-0" @click="topWindows(pagesIndex)" :disabled="pagesIndex===pageNumber">{{pagesIndex}}</button></li>
+                              <li class="page-item">
+                                <button type="button" class="page-link btn btn-primary rounded-0" :class="{'disabled': !listOfPages.includes(pageNumber+1)}" @click="topWindows(pageNumber+1)">Next</button>
+                              </li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                  </div>
+                </div>
 
-        </main>
-    </div>
+                <!-- Modal -->
+            </main>
+            
+          <div class="modal fade" id="staticDetailsWine" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="card--modal">
+                    <div class="card--modal__title">
+                      <h3>{{accessoryDetail.name}}</h3>
+                    </div>
+                    <div class="card--modal__body d-flex flex-column">
+                      <div class="half">
+                        <div class="featured_text">
+                          <p class="price">${{accessoryDetail.price.toLocaleString()}}</p>
+                        </div>
+                        <div class="image">
+                          <img :src="accessoryDetail.imgURL[0]" :alt="accessoryDetail.name+' img'">
+                        </div>
+                      </div>
+                      <div class="half mb-2">
+                        <div class="description">
+                          <p class="text-center">{{accessoryDetail.description}}</p>
+                        </div>
+                        <p v-if="accessoryDetail.stock >= 1" class="stock mb-0">In stock</p>
+                        <p v-else class="text-danger mb-0">No stock</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <footer class="site-footer">
+          <!--Cart-->
+          <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div v-if="loader" class="loader--loader">
+                <div class="justify-content-center jimu-primary-loading"></div>
+              </div>
+              <div v-else>
+                <div class="master-container" v-if="cart.length >= 1">
+                  <div v-for="product of cart" class="card--index cart--index">
+                    <div class="products">
+                      <div class="product">
+                        <img class="img-cart" :src="product.imgURL[0]" :alt="product.name">
+                        <div>
+                          <span>{{product.name}}</span>
+                        </div>
+                        <div class="quantity">
+                          <button @click="substractOneWine(product)">
+                            <svg fill="none" viewBox="0 0 24 24" height="15" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                            </svg>
+                          </button>
+                          <input id="form1" min="0" name="quantity" :value="product.amount" type="number" readonly
+                                    class="form-control form-control-sm label p-0" style="width: 50px; text-align: center !important;" />
+                          <button @click="addMoreWinesToCart(product)" v-if="product.stock > product.amount">
+                            <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                            </svg>
+                          </button>
+                          <button v-else>
+                            <svg fill="none" viewBox="0 0 24 24" height="14" width="10" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#FF0000" d="M12 4V20M20 12H4"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <label class="price small">${{product.subTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card--index checkout">
+                    <label class="titleCoupons">Checkout</label>
+                    <div class="details">
+                      <span>Your cart subtotal:</span>
+                      <span>{{priceOfTheCart.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</span>
+                      <span>Shipping fees:</span>
+                      <span>2.99$</span>
+                    </div>
+                    <div class="checkout--footer">
+                      <label class="price "><sup>$</sup>{{(priceOfTheCart+2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                     <a href="/web/pages/checkout.html"> <button class="checkout-btn"  >Checkout</button></a> 
+                    </div>
+                  </div>
+                </div>
+                <h3 v-else class="text-center">Your cart is empty</h3>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <footer class="site-footer">
 
-        <div id="carouselExampleAutoplaying" class="carousel slide d-flex justify-content-center" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/TERRAPURA.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/APALTAGUA.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/CASASDELBOSQUE.png" class="d-block img-carru m-2" alt="...">
+          <div id="carouselExampleAutoplaying" class="carousel slide d-flex justify-content-center" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="d-flex justify-content-sm-center">
+                  <img src="../images/TERRAPURA.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/APALTAGUA.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/CASASDELBOSQUE.png" class="d-block img-carru m-2" alt="...">
+                </div>
+              </div>
+      
+              <div class="carousel-item">
+                <div class="d-flex justify-content-sm-center">
+                  <img src="../images/chocalan-2023.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/freixenet-2023.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/GARCESSILVA.png" class="d-block img-carru m-2" alt="...">
+                </div>
+      
+              </div>
+      
+              <div class="carousel-item">
+                <div class="d-flex justify-content-sm-center">
+                  <img src="../images/JBOUCHON.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/KOYLE.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/MATETIC.png" class="d-block img-carru m-2" alt="...">
+                </div>
+              </div>
+      
+              <div class="carousel-item">
+                <div class="d-flex justify-content-sm-center">
+                  <img src="../images/morande-2023.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/PATRONALES.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/REQUINGUA.png" class="d-block img-carru m-2" alt="...">
+                </div>
+      
+              </div>
+      
+              <div class="carousel-item">
+                <div class="d-flex justify-content-sm-center">
+                  <img src="../images/SANTAEMA.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/VERAMONTE.png" class="d-block img-carru m-2" alt="...">
+                  <img src="../images/VONSIEBENTHAL.png" class="d-block img-carru m-2" alt="...">
+                </div>     
               </div>
             </div>
-    
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/chocalan-2023.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/freixenet-2023.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/GARCESSILVA.png" class="d-block img-carru m-2" alt="...">
-              </div>
-    
-            </div>
-    
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/JBOUCHON.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/KOYLE.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/MATETIC.png" class="d-block img-carru m-2" alt="...">
-              </div>
-            </div>
-    
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/morande-2023.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/PATRONALES.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/REQUINGUA.png" class="d-block img-carru m-2" alt="...">
-              </div>
-    
-            </div>
-    
-            <div class="carousel-item">
-              <div class="d-flex justify-content-sm-center">
-                <img src="../images/SANTAEMA.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/VERAMONTE.png" class="d-block img-carru m-2" alt="...">
-                <img src="../images/VONSIEBENTHAL.png" class="d-block img-carru m-2" alt="...">
-              </div>
-    
-            </div>
-    
           </div>
-          <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button> -->
-        </div>
-    
-    
-    
-        <div class="container mt-5">
-          <div class="d-flex justify-content-center align-content-center">
-            <img src="../images/SELLO-SIN-FONDO.png" alt="" width="120" height="120">
-            <img src="../images/CCS-LOGOV2.png" alt="" width="120" height="120">
-          </div>
-          <div class="container d-flex justify-content-center">
-            <img src="../images/logo-text-V1.png" alt="" class=" img-footer">
-          </div>
-        </div>
-    
-    
-    
-        <div class="m-2 row">
-    
-          <div class="col-sm-12 col-md-6 m-2">
-            <h6>About</h6>
-            <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club
-              where you can find the best of wine in different formats and only the best in the world. We also have our own
-              online store where you can find the best variety and offers of wines. At WLS we offer you the most
-              entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber
-              members.</p>
-          </div>
-    
-          <!-- <div class="col-xs-6 col-md-3">
-            <h6>Categories</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-              <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-              <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-            </ul>
-          </div> -->
-    
-          <!-- <div class="col-xs-6 col-md-3">
-            <h6>Quick Links</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/about/">About Us</a></li>
-              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-              <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-              <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-            </ul>
-          </div> -->
-        </div>
-        <hr>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
-                <a href="#">WINE LOVERS SOCIETY</a>.
-              </p>
+
+      
+      
+          <div class="container mt-5">
+            <div class="d-flex justify-content-center align-content-center">
+              <img src="../images/SELLO-SIN-FONDO.png" alt="" width="120" height="120">
+              <img src="../images/CCS-LOGOV2.png" alt="" width="120" height="120">
             </div>
-    
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <ul class="social-icons">
-                <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40"
-                        src="../images/facebook (1).png" alt=""></i></a></li>
-                <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40"
-                        src="../images/twitter.png" alt=""></i></a></li>
-                <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40"
-                        src="../images/instagram (1).png" alt=""></i></a></li>
-                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40"
-                        src="../images/linkedin (1).png" alt=""></i></a></li>
+            <div class="container d-flex justify-content-center">
+              <img src="../images/logo-text-V1.png" alt="" class=" img-footer">
+            </div>
+          </div>
+      
+      
+      
+          <div class="m-2 row">
+      
+            <div class="col-sm-12 col-md-6 m-2">
+              <h6>About</h6>
+              <p class="text-justify">We are Wine Lovers Society, a wine, sparkling wine and accessories subscription club
+                where you can find the best of wine in different formats and only the best in the world. We also have our own
+                online store where you can find the best variety and offers of wines. At WLS we offer you the most
+                entertaining and convenient way to drink wines and sparkling wines with exclusive benefits for our subscriber
+                members.</p>
+            </div>
+              <h6>Quick Links</h6>
+              <ul class="footer-links">
+                <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
               </ul>
+          </div>
+          </div>
+          <hr>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+                  <a href="#">WINE LOVERS SOCIETY</a>.
+                </p>
+              </div>
+      
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                  <li><a class="facebook" href="#"><i class="fa fa-facebook"><img width="40" height="40"
+                          src="../images/facebook (1).png" alt=""></i></a></li>
+                  <li><a class="twitter" href="#"><i class="fa fa-twitter"><img width="40" height="40"
+                          src="../images/twitter.png" alt=""></i></a></li>
+                  <li><a class="dribbble" href="#"><i class="fa fa-dribbble"><img width="40" height="40"
+                          src="../images/instagram (1).png" alt=""></i></a></li>
+                  <li><a class="linkedin" href="#"><i class="fa fa-linkedin"><img width="40" height="40"
+                          src="../images/linkedin (1).png" alt=""></i></a></li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+    </body>
 
-
-</body>
-
-
-<!-- AXIOS -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="../js/accessories.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://kit.fontawesome.com/1087e59517.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="../js/accessories.js"></script>
 </html>

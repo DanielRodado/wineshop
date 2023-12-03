@@ -1,16 +1,20 @@
-const { createApp } = Vue;
-
-createApp({
-  data() {
-    return {
-      wines: [],
-      wineVarietiesList: [],
-      vineyards: new Set(),
-      areas: new Set(),
-      varieties: new Set(),
-      sparkling: [],
-      wineSparkling: new Set(),
-      accessories:[],
+new Vue({
+  el: "#app",
+  data: {
+      accessories: [],
+      accessoriesFilter: [],
+      loader: true,
+      listOfPages: [],
+      pageNumber: 1,
+      pagesN: 1,
+      accessoryDetail: {
+          imgURL: ["a", "b"],
+          stock: 2,
+          price: 2000,
+          variety: "A_A",
+      },
+      cart: [],
+      priceOfTheCart: 0,
       email: "",
       password: "",
       showLogin: true,
@@ -20,217 +24,218 @@ createApp({
       registerLastName: "",
       registerPass: "",
       registerEmail: "",
-    };
   },
 
   created() {
-    axios
-      .get("/api/wines/varieties")
-      .then((response) => {
-        this.wineVarietiesList = response.data;
-      })
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
-
-    axios
-      .get("/api/wines")
-      .then((response) => {
-        this.wines = response.data;
-        console.log(this.wines);
-        for (let wine of this.wines) {
-          this.vineyards.add(wine.vineyard);
-        }
-        this.vineyards = Array.from(this.vineyards).sort(
-          (vineyard1, vineyard2) => {
-            return vineyard1.localeCompare(vineyard2);
-          }
-        );
-
-        for (let wine of this.wines) {
-          this.areas.add(wine.area.trim());
-        }
-        this.areas = Array.from(this.areas).sort((area1, area2) => {
-          return area1.localeCompare(area2);
-        });
-
-        for (let wine of this.wines) {
-          const formattedVariety = wine.variety.trim().toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
-          this.varieties.add(formattedVariety);
-        }
-        this.varieties = Array.from(this.varieties).sort(
-          (variety1, variety2) => {
-            return variety1.localeCompare(variety2);
-          }
-        );
-
-        this.sparkling = this.wines.filter((wine) => {
-          return wine.wineType == "SPARKLING";
-        });
-        this.sparkling.forEach((wine) => {
-          wine.variety =
-            wine.variety[0] + wine.variety.substring(1).toLowerCase();
-        });
-
-        for (let wine of this.sparkling) {
-          this.wineSparkling.add(wine.variety);
-        }
-        this.wineSparkling = Array.from(this.wineSparkling).sort(
-          (variety1, variety2) => {
-            return variety1.localeCompare(variety2);
-          }
-        );
-      })
-
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
-
-    axios
-      .get("/api/accessories")
-      .then((response) => {
-        this.accessories = response.data;
-        console.log(this.accessories)
-
-
-
-      })
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
+      this.getAccessories();
   },
 
   methods: {
-    messageError(message) {
-      Swal.fire({
-        icon: "error",
-        title: "<span style='color: #000;'>An error has occurred</span>",
-        text: message,
-        customClass: {
-          popup: "text-center",
-        },
-        titleColor: "#000",
-        color: "#000",
-        background: "#fff",
-        confirmButtonColor: "#880000",
-      });
-    },
+      getAccessories() {
+          axios
+              .get("/api/accessories")
+              .then(({ data }) => {
+                  this.accessories = [...data];
 
-    catalogue() {
-      location.pathname = "/web/pages/catalo.html";
-    },
+                  for (let accessory of this.accessories) {
+                      accessory.amount = 0;
+                      accessory.subTotal = 0;
+                  }
 
-    login() {
-      
-      let infoLogin = `email=${this.email}&password=${this.password}`;
+                  this.accessoriesFilter = this.accessories;
+                  this.accessoriesFilter.sort((a, b) => b.price - a.price);
 
-      axios
-        .post("/api/login", infoLogin)
-        .then((response) => {
-          console.log("Successful request", response.data);
+                  this.countPages();
 
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Welcome",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          setTimeout(() => {
-            location.pathname = "/web/pages/catalo.html";
-          }, 1500);
-        })
-        .catch((err) => {
-          console.log(err);
-          if ((this.email = "" || this.password === "")) {
-            Swal.fire({
-              icon: "error",
-              title: "Error...",
-              text: "Please complete all information",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Invalid user",
-              text: "User or password is invalid",
-              showConfirmButton: false,
-              timer: 2000,
-            });
+                  this.cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                  this.loader = false;
+              })
+              .catch((error) => {
+                  console.log(error);
+              });
+      },
+      countPages() {
+          this.listOfPages = [];
+          for (
+              let i = 1;
+              i <= (this.accessoriesFilter.length / 16).toFixed(0);
+              i++
+          ) {
+              this.listOfPages.push(i);
           }
-        })
-        .finally(() => {
-          this.email = "";
-          this.password = "";
-        });
-    },
-
-    logOut(){
-      axios.post('/api/logout')
-      .then(response => {
-        console.log('signed out!!!');
-        Swal.fire({
-          position: 'center',
-          icon: 'warning',
-          title: 'Your session has been closed',
-          showConfirmButton: false,
-          timer: 2000
-        })
-        setTimeout(()=> {
-          window.location.href = '/index.html';
-        },3000);
-        
-
-      })
-      .catch(err=>console.log("error"))
-     }, 
-
-    register() {
-      
-      let registerInfo = {
-        firstName: this.registerName,
-        lastName: this.registerLastName,
-        email: this.registerEmail,
-        password: this.registerPass,
-        birthDate: this.registerBirthDate,
-      };
-      console.log(registerInfo);
-
-      axios
-        .post("/api/clients", registerInfo)
-
-        .then((response) => {
-          console.log("registered");
-
-          
-
-          
-          let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
-
-          axios.post("/api/login", infoLogin).then((response) => {
-            
-
-            location.pathname = "/web/pages/catalo.html";
+      },
+      toggleCheckbox(id) {
+          const checkbox = document.getElementById(id);
+          checkbox.checked = !checkbox.checked;
+      },
+      topWindows(page) {
+          this.pageNumber = page === 0 ? 1 : page;
+          window.scrollTo({
+              top: 0,
+              behavior: "smooth",
           });
-        })
-        .catch((err) => {
-          console.log(err);
-          this.messageError(err.response.data);
-        })
-        .finally(() => {
-          this.email = "";
-          this.password = "";
-          this.name = "";
-          this.lastName = "";
-          this.birthDate = "";
-        });
-    },
-   
-
+      },
+      accessoryDetails(accessory) {
+          this.accessoryDetail = accessory;
+          console.log(accessory);
+      },
+      addToCart(wine) {
+          wine.amount = 1;
+          wine.subTotal = wine.price * wine.amount;
+          this.cart.push(wine);
+          this.saveLocalStorage();
+      },
+      addMoreWinesToCart(wine) {
+          wine.amount++;
+          wine.subTotal = wine.price * wine.amount;
+          this.cart.push();
+          this.saveLocalStorage();
+      },
+      substractOneWine(wine) {
+          wine.amount--;
+          wine.subTotal = wine.price * wine.amount;
+          if (wine.amount === 0) {
+              this.cart = this.cart.filter((wines) => wines.amount >= 1);
+          }
+          this.cart.push();
+          this.saveLocalStorage();
+      },
+      deleteWineFromCart(wine) {
+          wine.amount = 0;
+          wine.subTotal = 0;
+          this.cart = this.cart.filter((wines) => wines.id !== wine.id);
+          this.saveLocalStorage();
+      },
+      saveLocalStorage() {
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+      },
+      
+      login() {
+          let infoLogin = `email=${this.email}&password=${this.password}`;
     
+          axios
+            .post("/api/login", infoLogin)
+            .then((response) => {
+              console.log("Successful request", response.data);
+    
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Welcome",
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              setTimeout(() => {
+                location.pathname = "/web/pages/catalogue.html";
+              }, 1500);
+            })
+            .catch((err) => {
+              console.log(err);
+              if ((this.email = "" || this.password === "")) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Error...",
+                  text: "Please complete all information",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Invalid user",
+                  text: "User or password is invalid",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              }
+            })
+            .finally(() => {
+              this.email = "";
+              this.password = "";
+            });
+        },
+    
+        logOut(){
+          axios.post('/api/logout')
+          .then(response => {
+            console.log('signed out!!!');
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: 'Your session has been closed',
+              showConfirmButton: false,
+              timer: 2000
+            })
+            setTimeout(()=> {
+              window.location.href = '/index.html';
+            },3000);
+            
+    
+          })
+          .catch(err=>console.log("error"))
+         }, 
+    
+        register() {
+          
+          let registerInfo = {
+            firstName: this.registerName,
+            lastName: this.registerLastName,
+            email: this.registerEmail,
+            password: this.registerPass,
+            birthDate: this.registerBirthDate,
+          };
+          console.log(registerInfo);
+    
+          axios
+            .post("/api/clients", registerInfo)
+    
+            .then((response) => {
+              console.log("registered");
+    
+              
+    
+              
+              let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
+    
+              axios.post("/api/login", infoLogin).then((response) => {
+                
+    
+                location.pathname = "/web/pages/catalogue.html";
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              this.messageError(err.response.data);
+            })
+            .finally(() => {
+              this.email = "";
+              this.password = "";
+              this.name = "";
+              this.lastName = "";
+              this.birthDate = "";
+            });
+        },
   },
-}).mount("#app");
+  computed: {
+      pageNumber() {
+          this.winesFilter = this.winesFilter.slice(
+              (pageNumber - 1) * 16,
+              pageNumber * 16
+          );
+          console.log(this.varietySelected);
+      },
+
+      calculatePriceOfTheCart() {
+          this.priceOfTheCart = this.cart.reduce(
+              (accumulatedTotal, product) =>
+                  accumulatedTotal + product.subTotal,
+              0
+          );
+      },
+
+      
+  },
+  watch: {
+  },
+});
