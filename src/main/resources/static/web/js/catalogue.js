@@ -254,6 +254,14 @@ new Vue({
                 this.birthDate = "";
               });
           },
+          winesFilterer() {
+            if(this.winesFilter.length <= 16) {
+                return this.winesFilter
+            }
+            else {
+                return this.winesFilter.slice((this.pageNumber-1)*16, this.pageNumber*16)
+            }
+          }
     },
     computed: {
         pageNumber() {

@@ -16,7 +16,7 @@
         <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/styleIndex.css">
-        <title>Catalogue</title>
+      <title>Wines catalogue || WLS</title>
     </head>
 
     <body>
@@ -269,48 +269,48 @@
                       <div class="col-12 col-lg-8">
                         <section>
                           <div class="d-flex flex-column flex-md-row flex-wrap mt-3 position-relative" :class="{'hg-loading': loader}">
-                              <div v-for="wine of winesFilter.slice((pageNumber-1)*16, pageNumber*16)" class="container-lg page-wrapper border-style-filter mb-3">
-                                  <div class="page-inner">
-                                      <div class="row">
-                                          <div class="el-wrapper">
-                                              <div class="box-up">
-                                                  <img class="img" :src="wine.imgURL[0]" :alt="wine.name">
-                                                  <div class="img-info">
-                                                  <div class="info-inner">
-                                                      <span class="p-name">{{wine.name}}</span>
-                                                      <span class="p-company fw-bold">{{wine.variety.replace("_", " ")}}</span>
-                                                  </div>
-                                                  <div class="a-size">
-                                                      Stock: <span class="size">{{wine.stock}}</span>
-                                                      <br>
-                                                      <span class="size" role="button" data-bs-toggle="modal" data-bs-target="#staticDetailsWine" @click="wineDetails(wine)">See details</span>
-                                                  </div>
-                                                  </div>
-                                              </div>
-                                      
-                                              <div class="box-down">
-                                                  <div class="h-bg">
-                                                  <div class="h-bg-inner"></div>
-                                                  </div>
-                                      
-                                                  
-                                                  <div role="button" class="cart">
-                                                      <span v-if="!cart.some(product => product.id === wine.id)" class="price">${{wine.price}}</span>
-                                                      <span v-else class="price" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden;">Delete from cart</span>
-                                                      <span class="add-to-cart">
-                                                          <span class="txt" v-if="!cart.some(product => product.id === wine.id)" @click="addToCart(wine)">Add to cart</span>
-                                                          <span class="txt" v-else @click="deleteWineFromCart(wine)">Delete from cart</span>
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <h1 v-if="winesFilter.length === 0" class="text-center">No results found</h1>
-                              <div v-if="loader" class="loader--loader">
-                                <div class="justify-content-center jimu-primary-loading"></div>
-                              </div>
+                            <div v-for="wine of winesFilterer()" class="container-lg page-wrapper border-style-filter mb-3">
+                                <div class="page-inner">
+                                    <div class="row">
+                                        <div class="el-wrapper">
+                                            <div class="box-up">
+                                                <img class="img" :src="wine.imgURL[0]" :alt="wine.name">
+                                                <div class="img-info">
+                                                <div class="info-inner">
+                                                    <span class="p-name">{{wine.name}}</span>
+                                                    <span class="p-company fw-bold">{{wine.variety.replace("_", " ")}}</span>
+                                                </div>
+                                                <div class="a-size">
+                                                    Stock: <span class="size">{{wine.stock}}</span>
+                                                    <br>
+                                                    <span class="size" role="button" data-bs-toggle="modal" data-bs-target="#staticDetailsWine" @click="wineDetails(wine)">See details</span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="box-down">
+                                                <div class="h-bg">
+                                                <div class="h-bg-inner"></div>
+                                                </div>
+                                    
+                                                
+                                                <div role="button" class="cart">
+                                                    <span v-if="!cart.some(product => product.id === wine.id)" class="price">${{wine.price}}</span>
+                                                    <span v-else class="price" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden;">Delete from cart</span>
+                                                    <span class="add-to-cart">
+                                                        <span class="txt" v-if="!cart.some(product => product.id === wine.id)" @click="addToCart(wine)">Add to cart</span>
+                                                        <span class="txt" v-else @click="deleteWineFromCart(wine)">Delete from cart</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 v-if="winesFilter.length === 0" class="text-center">No results found</h1>
+                            <div v-if="loader" class="loader--loader">
+                              <div class="justify-content-center jimu-primary-loading"></div>
+                            </div>
                           </div>
                         </section>
                         <div v-if="listOfPages.length >= 1" class="btn-group d-flex justify-content-center mt-4 mt-md-5" role="group" aria-label="Basic example">
@@ -329,8 +329,6 @@
                       </div>
                   </div>
                 </div>
-
-                <!-- Modal -->
             </main>
             
           <div class="modal fade" id="staticDetailsWine" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
