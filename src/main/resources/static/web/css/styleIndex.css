@@ -536,3 +536,11 @@ html {
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
 }
+
+.navbar-active {
+    display: inline;
+    background-color: #000000;
+    color: #860000;
+    padding: 5px 10px;
+    border-radius: 10px;
+}

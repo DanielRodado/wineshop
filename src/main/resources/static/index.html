@@ -16,9 +16,10 @@
 <body>
 <div id="app" v-cloak>
   {{calculatePriceOfTheCart}}
+  <!--{{isLoggedIn()}}-->
   <!--Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div v-if="!isLoggedIn()" class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
@@ -43,6 +44,19 @@
           </div>
         </div>
       </div>
+      <!-- modal de logout
+      <div v-else class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-center align-items-center">
+              <button class="btn btn-danger">Logout</button>
+          </div>
+        </div>
+      </div>
+      -->
     </div>  
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -126,7 +140,6 @@
   </header>
     <main >
         <div class=" container-fluid mt-1">
-            
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" >
                     <div class="carousel-inner">
                       <div class="carousel-item active">

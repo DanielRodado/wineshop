@@ -31,7 +31,7 @@ public class WebAuthorization {
                         "/api/purchase/status").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/purchase").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.GET, "/api/clients", "/api/purchase/status/admin",
-                        "/web/admin/**").hasAuthority("ADMIN")
+                        "/web/admin/**", "/api/wines/varieties").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/api/wines/edit/**", "/api/purchase/status").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/wines/create", "/api/accessories/create").hasAuthority("ADMIN")
                 .anyRequest().denyAll();
