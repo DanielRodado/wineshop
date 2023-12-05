@@ -14,6 +14,7 @@ createApp({
             registerEmail: "",
             cart: [],
             priceOfTheCart: 0,
+            isAuthenticated: false
         };
     },
 
@@ -37,6 +38,7 @@ createApp({
             });
         });
         this.cart = JSON.parse(localStorage.getItem("cart")) || [];
+        this.isLoggedIn();
     },
 
     methods: {
@@ -86,12 +88,12 @@ createApp({
             axios
                 .post("/api/login", infoLogin)
                 .then((response) => {
-                    console.log("Successful request", response.data);
-
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Welcome",
+                        title: "<span style='color: #000;'>Welcome!</span>",
+                        color: "#000",
+                        background: "#fff",
                         showConfirmButton: false,
                     });
                     setTimeout(() => {
@@ -103,17 +105,20 @@ createApp({
                     if ((this.email = "" || this.password === "")) {
                         Swal.fire({
                             icon: "error",
-                            title: "Error...",
+                            title: "<span style='color: #000;'>Please complete all information!</span>",
                             text: "Please complete all information",
                             showConfirmButton: false,
+                            color: "#000",
+                            background: "#fff",
                         });
                     } else {
                         Swal.fire({
                             icon: "error",
-                            title: "Invalid user",
+                            title: "<span style='color: #000;'>Error...</span>",
                             text: "User or password is invalid",
                             showConfirmButton: false,
-                            timer: 2000,
+                            color: "#000",
+                            background: "#fff",
                         });
                     }
                 })
@@ -126,17 +131,18 @@ createApp({
         logOut() {
             axios
                 .post("/api/logout")
-                .then((response) => {
-                    console.log("signed out!!!");
+                .then(() => {
+                    this.isLoggedIn();
                     Swal.fire({
-                        position: "center",
-                        icon: "warning",
-                        title: "Your session has been closed",
-                        showConfirmButton: false
+                        icon: "success",
+                        title: "<span style='color: #000;'>Your session has been closed!</span>",
+                        customClass: {
+                            popup: "text-center",
+                        },
+                        color: "#000",
+                        background: "#fff",
+                        confirmButtonColor: "#880000",
                     });
-                    setTimeout(() => {
-                        window.location.href = "/index.html";
-                    }, 3000);
                 })
                 .catch((err) => console.log("error"));
         },
@@ -154,12 +160,29 @@ createApp({
             axios
                 .post("/api/clients", registerInfo)
 
-                .then((response) => {
+                .then(() => {
                     console.log("registered");
                     let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
 
-                    axios.post("/api/login", infoLogin).then((response) => {
-                        location.pathname = "/web/pages/catalogue.html";
+                    axios.post("/api/login", infoLogin).then(() => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "<span style='color: #000;'>Welcome!</span>",
+                            text: "Successful registration",
+                            customClass: {
+                                popup: "text-center",
+                            },
+                            color: "#000",
+                            background: "#fff",
+                            confirmButtonColor: "#880000",
+                        });
+
+                        setTimeout(
+                            () =>
+                                (location.pathname =
+                                    "/web/pages/catalogue.html"),
+                            1500
+                        );
                     });
                 })
                 .catch((err) => {
@@ -174,18 +197,24 @@ createApp({
                     this.birthDate = "";
                 });
         },
-
         isLoggedIn() {
-            return document.cookie.includes("JSESSIONID");
+            axios("/api/clients/online")
+                .then(() => {
+                    this.isAuthenticated = true;
+                })
+                .catch(() => {
+                    this.isAuthenticated = false;
+                });
         },
-
         goToCheckout() {
-            if (this.isLoggedIn()) {
-                location.pathname = "/web/pages/checkout.html";
-            } else {
-                $("#exampleModal").modal("show");
-                $("#offcanvasScrolling").offcanvas("hide");
-            }
+            axios("/api/clients/online")
+                .then((res) => {
+                    location.pathname = "/web/pages/checkout.html";
+                })
+                .catch((err) => {
+                    $("#exampleModal").modal("show");
+                    $("#offcanvasScrolling").offcanvas("hide");
+                });
         },
     },
     computed: {
