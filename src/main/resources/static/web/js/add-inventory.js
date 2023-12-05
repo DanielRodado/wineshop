@@ -72,7 +72,6 @@ createApp({
   },
 
   methods: {
-
     addNewWineImgURL() {
       if(this.newWineImg.length != 0){
         this.wineImgURLs.push(this.newWineImg);
