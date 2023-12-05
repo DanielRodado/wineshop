@@ -17,6 +17,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ import java.util.Set;
 
 import static com.wineshop.ecommerce.utils.ProductUtil.calculatePriceOrder;
 import static com.wineshop.ecommerce.utils.PurchaseUtil.deletePurchaseAndProductPurchase;
+import static com.wineshop.ecommerce.utils.PurchaseUtil.numberFormat;
 import static java.awt.Color.BLACK;
 
 @RestController
@@ -177,18 +179,20 @@ public class PurchaseController {
 
     @PostMapping("/purchase")
     @Transactional
-    public ResponseEntity<Object> payAndCreatePurchase(Authentication authentication,
-                                                       @RequestBody PurchasePaymentWithCardApplicationDTO purchasePaymentWithCardApp)
+    public void payAndCreatePurchase(Authentication authentication,
+                                     @RequestBody PurchasePaymentWithCardApplicationDTO purchasePaymentWithCardApp,
+                                     HttpServletResponse response)
     throws Exception {
 
         ResponseEntity<Object> purchaseResponse = createPurchase(authentication, purchasePaymentWithCardApp.getNewPurchaseApp());
 
         if (purchaseResponse.getStatusCode().value() != 201) {
-            return purchaseResponse;
+            response.sendError(purchaseResponse.getStatusCodeValue(), Objects.requireNonNull(purchaseResponse.getBody()).toString());
+            return;
         }
 
-        Double priceOrderPurchase = purchaseService.getPriceOrderOfPurchaseById((Long) purchaseResponse.getBody());
 
+        Double priceOrderPurchase = purchaseService.getPriceOrderOfPurchaseById((Long) purchaseResponse.getBody());
         Purchase purchase = purchaseService.getPurchaseById((Long) purchaseResponse.getBody());
 
         if (!Objects.equals(priceOrderPurchase + 2.99, purchasePaymentWithCardApp.getPayWithCardApp().getAmount() + 2.99)) {
@@ -197,182 +201,185 @@ public class PurchaseController {
                     purchasePaymentWithCardApp.getNewPurchaseApp().getWines(),
                     purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories(), purchase);
 
-            return new ResponseEntity<>("Payment amount doesn't match the order's price", HttpStatus.FORBIDDEN);
+            response.sendError(403, "Payment amount doesn't match the order's price");
+            return;
         }
-
-        // crear pdf
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("Order receipt.pdf"));
-
-        document.open();
-        Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, BLACK);
-        Font notBoldFont = FontFactory.getFont(FontFactory.HELVETICA, 12, BLACK);
-
-        // agregamos logo
-        PdfPTable logo = new PdfPTable(1);
-        logo.setWidthPercentage(100);
-
-        Image img = Image.getInstance(Objects.requireNonNull(getClass().getResource("/static/web/images/main-logo.png")));
-
-        img.scaleToFit(300, 120);
-        img.setAlignment(Image.ALIGN_BASELINE);
-        PdfPCell imageCell = new PdfPCell(img);
-        imageCell.setBorder(PdfPCell.NO_BORDER);
-        logo.addCell(imageCell);
-
-        document.add(logo);
-
-        // tabla para los vinos
-        if ( !purchasePaymentWithCardApp.getNewPurchaseApp().getWines().isEmpty() ) {
-            // agregamos tabla
-            PdfPTable tableTitle = new PdfPTable(1);
-            PdfPCell cell = new PdfPCell();
-            cell.setBorder(PdfPCell.NO_BORDER);
-            cell.setPaddingBottom(20);
-            cell.addElement(new Paragraph("Your wines:", boldFont));
-            tableTitle.addCell(cell);
-            document.add(tableTitle);
-
-            PdfPTable table = new PdfPTable(3);
-            table.setWidthPercentage(100); // Asegurar que la tabla ocupe el ancho completo
-
-            PdfPCell headerCell1 = new PdfPCell(new Phrase("Wine name", boldFont));
-            headerCell1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell1.setPadding(10);
-            table.addCell(headerCell1);
-
-            PdfPCell headerCell2 = new PdfPCell(new Phrase("Amount", boldFont));
-            headerCell2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell2.setPadding(10);
-            table.addCell(headerCell2);
-
-            PdfPCell headerCell3 = new PdfPCell(new Phrase("Price", boldFont));
-            headerCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell3.setPadding(10);
-            table.addCell(headerCell3);
-
-            Set<ProductRecieverDTO> wines = purchasePaymentWithCardApp.getNewPurchaseApp().getWines();
-
-            for (ProductRecieverDTO wine : wines) {
-                PdfPCell wineName = new PdfPCell(new Phrase(wineService.getWineNameById(wine.getProductId()), notBoldFont));
-                wineName.setHorizontalAlignment(Element.ALIGN_CENTER);
-                wineName.setPadding(7);
-                table.addCell(wineName);
-
-                PdfPCell wineAmount = new PdfPCell(new Phrase("" +  wine.getAmount(), notBoldFont));
-                wineAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
-                wineAmount.setPadding(7);
-                table.addCell(wineAmount);
-
-                PdfPCell winePrice = new PdfPCell(new Phrase("$" + calculatePriceOrder(wine.getAmount(), wineService.getPriceWineById(wine.getProductId())), notBoldFont));
-                winePrice.setHorizontalAlignment(Element.ALIGN_CENTER);
-                winePrice.setPadding(7);
-                table.addCell(winePrice);
-            }
-            document.add(table);
-        }
-
-        // salto de linea
-        document.add(new Paragraph("\n"));
-        document.add(new Paragraph("\n"));
-
-        // tabla para los accesorios
-        if ( !purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories().isEmpty() ) {
-            // agregamos tabla
-            PdfPTable tableTitle = new PdfPTable(1);
-            PdfPCell cell = new PdfPCell();
-            cell.setBorder(PdfPCell.NO_BORDER);
-            cell.setPaddingBottom(20);
-            cell.addElement(new Paragraph("Your accessories:", boldFont));
-            tableTitle.addCell(cell);
-            document.add(tableTitle);
-
-            PdfPTable table = new PdfPTable(3);
-            table.setWidthPercentage(100); // Asegurar que la tabla ocupe el ancho completo
-
-            PdfPCell headerCell1 = new PdfPCell(new Phrase("Accessory name", boldFont));
-            headerCell1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell1.setPadding(10);
-            table.addCell(headerCell1);
-
-            PdfPCell headerCell2 = new PdfPCell(new Phrase("Amount", boldFont));
-            headerCell2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell2.setPadding(10);
-            table.addCell(headerCell2);
-
-            PdfPCell headerCell3 = new PdfPCell(new Phrase("Price", boldFont));
-            headerCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell3.setPadding(10);
-            table.addCell(headerCell3);
-
-            Set<ProductRecieverDTO> accessories = purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories();
-
-            for (ProductRecieverDTO accessory : accessories) {
-                PdfPCell accessoryName = new PdfPCell(new Phrase(accessoryService.getAccessoryNameById(accessory.getProductId()), notBoldFont));
-                accessoryName.setHorizontalAlignment(Element.ALIGN_CENTER);
-                accessoryName.setPadding(7);
-                table.addCell(accessoryName);
-
-                PdfPCell accessoryAmount = new PdfPCell(new Phrase("" +  accessory.getAmount(), notBoldFont));
-                accessoryAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
-                accessoryAmount.setPadding(7);
-                table.addCell(accessoryAmount);
-
-                PdfPCell accessoryPrice = new PdfPCell(new Phrase("$" + calculatePriceOrder(accessory.getAmount(), accessoryService.getPriceAccessoryById(accessory.getProductId())), notBoldFont));
-                accessoryPrice.setHorizontalAlignment(Element.ALIGN_CENTER);
-                accessoryPrice.setPadding(7);
-                table.addCell(accessoryPrice);
-
-            }
-            document.add(table);
-        }
-
-        document.add(new Paragraph("\n"));
-
-        // id de la orden
-        Paragraph orderId = new Paragraph("Order ID: ");
-        Chunk boldOrderId = new Chunk("" + purchase.getId(), boldFont);
-        orderId.add(boldOrderId);
-
-        document.add(orderId);
-
-        // salto de linea
-        document.add(new Paragraph("\n"));
-
-        // valor total de la compra
-
-        Paragraph totalPrice = new Paragraph("Order total price: ");
-        Chunk boldPriceNumber = new Chunk("$" + priceOrderPurchase, boldFont);
-        totalPrice.add(boldPriceNumber);
-
-        document.add(totalPrice);
-
-        // salto de linea
-        document.add(new Paragraph("\n"));
-
-        // direccion de envio
-
-        Paragraph deliveryAddress = new Paragraph("Delivery address: ");
-        Chunk deliveryAddressBold = new Chunk(purchase.getDeliveryAddress(), boldFont);
-        deliveryAddress.add(deliveryAddressBold);
-
-        document.add(deliveryAddress);
-
-        // cerramos el documento
-
-        document.close();
 
         ResponseEntity<Object> paymentResponse = payWithCard(purchasePaymentWithCardApp.getPayWithCardApp());
 
         if (paymentResponse.getStatusCode().value() == 200) {
 
-            // enviamos la respuesta en el body
-            return new ResponseEntity<>(document, HttpStatus.OK);
+            // crear pdf
+            Document document = new Document();
+            PdfWriter.getInstance(document, response.getOutputStream());
+//        PdfWriter.getInstance(document, new FileOutputStream("Order receipt.pdf"));
+
+            document.open();
+            Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, BLACK);
+            Font notBoldFont = FontFactory.getFont(FontFactory.HELVETICA, 12, BLACK);
+
+            // agregamos logo
+            PdfPTable logo = new PdfPTable(1);
+            logo.setWidthPercentage(100);
+
+            Image img = Image.getInstance(Objects.requireNonNull(getClass().getResource("/static/web/images/main-logo.png")));
+
+            img.scaleToFit(300, 120);
+            img.setAlignment(Image.ALIGN_BASELINE);
+            PdfPCell imageCell = new PdfPCell(img);
+            imageCell.setBorder(PdfPCell.NO_BORDER);
+            logo.addCell(imageCell);
+
+            document.add(logo);
+
+            // tabla para los vinos
+            if ( !purchasePaymentWithCardApp.getNewPurchaseApp().getWines().isEmpty() ) {
+                // agregamos tabla
+                PdfPTable tableTitle = new PdfPTable(1);
+                PdfPCell cell = new PdfPCell();
+                cell.setBorder(PdfPCell.NO_BORDER);
+                cell.setPaddingBottom(20);
+                cell.addElement(new Paragraph("Your wines:", boldFont));
+                tableTitle.addCell(cell);
+                document.add(tableTitle);
+
+                PdfPTable table = new PdfPTable(3);
+                table.setWidthPercentage(100); // Asegurar que la tabla ocupe el ancho completo
+
+                PdfPCell headerCell1 = new PdfPCell(new Phrase("Wine name", boldFont));
+                headerCell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell1.setPadding(10);
+                table.addCell(headerCell1);
+
+                PdfPCell headerCell2 = new PdfPCell(new Phrase("Amount", boldFont));
+                headerCell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell2.setPadding(10);
+                table.addCell(headerCell2);
+
+                PdfPCell headerCell3 = new PdfPCell(new Phrase("Price", boldFont));
+                headerCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell3.setPadding(10);
+                table.addCell(headerCell3);
+
+                Set<ProductRecieverDTO> wines = purchasePaymentWithCardApp.getNewPurchaseApp().getWines();
+
+                for (ProductRecieverDTO wine : wines) {
+                    PdfPCell wineName = new PdfPCell(new Phrase(wineService.getWineNameById(wine.getProductId()), notBoldFont));
+                    wineName.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    wineName.setPadding(7);
+                    table.addCell(wineName);
+
+                    PdfPCell wineAmount = new PdfPCell(new Phrase("" +  wine.getAmount(), notBoldFont));
+                    wineAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    wineAmount.setPadding(7);
+                    table.addCell(wineAmount);
+
+                    PdfPCell winePrice = new PdfPCell(new Phrase("$" + numberFormat(calculatePriceOrder(wine.getAmount(),
+                            wineService.getPriceWineById(wine.getProductId()))), notBoldFont));
+                    winePrice.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    winePrice.setPadding(7);
+                    table.addCell(winePrice);
+                }
+                document.add(table);
+            }
+
+            // salto de linea
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+
+            // tabla para los accesorios
+            if ( !purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories().isEmpty() ) {
+                // agregamos tabla
+                PdfPTable tableTitle = new PdfPTable(1);
+                PdfPCell cell = new PdfPCell();
+                cell.setBorder(PdfPCell.NO_BORDER);
+                cell.setPaddingBottom(20);
+                cell.addElement(new Paragraph("Your accessories:", boldFont));
+                tableTitle.addCell(cell);
+                document.add(tableTitle);
+
+                PdfPTable table = new PdfPTable(3);
+                table.setWidthPercentage(100); // Asegurar que la tabla ocupe el ancho completo
+
+                PdfPCell headerCell1 = new PdfPCell(new Phrase("Accessory name", boldFont));
+                headerCell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell1.setPadding(10);
+                table.addCell(headerCell1);
+
+                PdfPCell headerCell2 = new PdfPCell(new Phrase("Amount", boldFont));
+                headerCell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell2.setPadding(10);
+                table.addCell(headerCell2);
+
+                PdfPCell headerCell3 = new PdfPCell(new Phrase("Price", boldFont));
+                headerCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                headerCell3.setPadding(10);
+                table.addCell(headerCell3);
+
+                Set<ProductRecieverDTO> accessories = purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories();
+
+                for (ProductRecieverDTO accessory : accessories) {
+                    PdfPCell accessoryName = new PdfPCell(new Phrase(accessoryService.getAccessoryNameById(accessory.getProductId()), notBoldFont));
+                    accessoryName.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    accessoryName.setPadding(7);
+                    table.addCell(accessoryName);
+
+                    PdfPCell accessoryAmount = new PdfPCell(new Phrase("" +  accessory.getAmount(), notBoldFont));
+                    accessoryAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    accessoryAmount.setPadding(7);
+                    table.addCell(accessoryAmount);
+
+                    PdfPCell accessoryPrice =
+                            new PdfPCell(new Phrase("$" + numberFormat(calculatePriceOrder(accessory.getAmount(),
+                                    accessoryService.getPriceAccessoryById(accessory.getProductId()))), notBoldFont));
+                    accessoryPrice.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    accessoryPrice.setPadding(7);
+                    table.addCell(accessoryPrice);
+
+                }
+                document.add(table);
+            }
+
+            document.add(new Paragraph("\n"));
+
+            // id de la orden
+            Paragraph orderId = new Paragraph("Order ID: ");
+            Chunk boldOrderId = new Chunk("" + purchase.getId(), boldFont);
+            orderId.add(boldOrderId);
+
+            document.add(orderId);
+
+            // salto de linea
+            document.add(new Paragraph("\n"));
+
+            // valor total de la compra
+
+            Paragraph totalPrice = new Paragraph("Order total price: ");
+            Chunk boldPriceNumber = new Chunk("$" + numberFormat(priceOrderPurchase), boldFont);
+            totalPrice.add(boldPriceNumber);
+
+            document.add(totalPrice);
+
+            // salto de linea
+            document.add(new Paragraph("\n"));
+
+            // direccion de envio
+
+            Paragraph deliveryAddress = new Paragraph("Delivery address: ");
+            Chunk deliveryAddressBold = new Chunk(purchase.getDeliveryAddress(), boldFont);
+            deliveryAddress.add(deliveryAddressBold);
+
+            document.add(deliveryAddress);
+
+            // cerramos el documento
+
+            document.close();
+
         } else {
             deletePurchaseAndProductPurchase(winePurchaseService, accessoryPurchaseService, purchaseService,
                     purchasePaymentWithCardApp.getNewPurchaseApp().getWines(),
                     purchasePaymentWithCardApp.getNewPurchaseApp().getAccessories(), purchase);
-            return paymentResponse;
+            response.sendError(paymentResponse.getStatusCodeValue(), Objects.requireNonNull(paymentResponse.getBody()).toString());
         }
     }
 

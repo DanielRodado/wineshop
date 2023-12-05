@@ -37,6 +37,11 @@ public class ClientController {
         return new ClientDTO( clientService.findClientByEmail(authentication.getName()) );
     }
 
+    @GetMapping("/clients/online")
+    public ResponseEntity<Object> clientOnline(Authentication authentication) {
+        return new ResponseEntity<>(authentication != null ? HttpStatus.OK : HttpStatus.FORBIDDEN);
+    }
+
     @PostMapping("/clients")
     public ResponseEntity<Object> registerNewClient (
             @RequestBody NewClientApplicationDTO newClientApp) {

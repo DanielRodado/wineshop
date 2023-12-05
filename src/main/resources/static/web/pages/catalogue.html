@@ -295,10 +295,12 @@
                                     
                                                 
                                                 <div role="button" class="cart">
-                                                    <span v-if="!cart.some(product => product.id === wine.id)" class="price">${{wine.price}}</span>
+                                                    <span v-if="wine.stock === 0" class="price text-danger">NO STOCK</span>
+                                                    <span v-else-if="!cart.some(product => product.id === wine.id)" class="price">${{wine.price}}</span>
                                                     <span v-else class="price" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden;">Delete from cart</span>
                                                     <span class="add-to-cart">
-                                                        <span class="txt" v-if="!cart.some(product => product.id === wine.id)" @click="addToCart(wine)">Add to cart</span>
+                                                      <span v-if="wine.stock === 0" class="txt">NO STOCK</span>
+                                                        <span class="txt" v-else-if="!cart.some(product => product.id === wine.id)" @click="addToCart(wine)">Add to cart</span>
                                                         <span class="txt" v-else @click="deleteWineFromCart(wine)">Delete from cart</span>
                                                     </span>
                                                 </div>
@@ -357,7 +359,7 @@
                           <p class="text-center">{{wineDetail.description}}</p>
                         </div>
                         <p v-if="wineDetail.stock >= 1" class="stock mb-0">In stock</p>
-                        <p v-else class="text-danger mb-0">Not stock</p>
+                        <p v-else class="stock text-danger mb-0">Not stock</p>
                       </div>
                       <div class="half">
                         <ul class="list-group list-group-flush">
@@ -387,7 +389,7 @@
               <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div class="offcanvas-body position-relative">
               <div v-if="loader" class="loader--loader">
                 <div class="justify-content-center jimu-primary-loading"></div>
               </div>
@@ -433,7 +435,7 @@
                     </div>
                     <div class="checkout--footer">
                       <label class="price "><sup>$</sup>{{(priceOfTheCart+2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
-                     <a href="/web/pages/checkout.html"> <button class="checkout-btn"  >Checkout</button></a> 
+                     <button class="checkout-btn" type="button" @click="goToCheckout">Checkout</button>
                     </div>
                   </div>
                 </div>
@@ -560,5 +562,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://kit.fontawesome.com/1087e59517.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/catalogue.js"></script>
 </html>
