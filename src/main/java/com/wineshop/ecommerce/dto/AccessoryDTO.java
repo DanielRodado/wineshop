@@ -14,7 +14,7 @@ public class AccessoryDTO {
 
     private String name, description;
 
-    private List<String> imagesURL;
+    private List<String> imgURL;
 
     private Double price;
 
@@ -28,7 +28,7 @@ public class AccessoryDTO {
         this.id = accessory.getId();
         this.name = accessory.getName();
         this.description = accessory.getDescription();
-        this.imagesURL = accessory.getImgURL();
+        this.imgURL = accessory.getImgURL();
         this.price = accessory.getPrice();
         this.stock = accessory.getStock();
         this.accessoryPurchases = accessory.getAccessoryPurchases().stream().map(AccessoryPurchaseDTO::new).collect(Collectors.toSet());
@@ -48,8 +48,8 @@ public class AccessoryDTO {
         return description;
     }
 
-    public List<String> getImagesURL() {
-        return imagesURL;
+    public List<String> getImgURL() {
+        return imgURL;
     }
 
     public Double getPrice() {

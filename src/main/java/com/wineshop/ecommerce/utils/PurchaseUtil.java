@@ -1,22 +1,13 @@
 package com.wineshop.ecommerce.utils;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.Image;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
 import com.wineshop.ecommerce.dto.ProductRecieverDTO;
 import com.wineshop.ecommerce.models.Purchase;
 import com.wineshop.ecommerce.services.AccessoryPurchaseService;
 import com.wineshop.ecommerce.services.PurchaseService;
 import com.wineshop.ecommerce.services.WinePurchaseService;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.util.Set;
-
-import static java.awt.Color.BLACK;
 
 public final class PurchaseUtil {
 
@@ -40,5 +31,7 @@ public final class PurchaseUtil {
 
     }
 
-
+    public static String numberFormat(Double number) {
+        return new DecimalFormat("#.##").format(number);
+    }
 }

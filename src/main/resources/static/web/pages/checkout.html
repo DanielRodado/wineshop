@@ -80,7 +80,7 @@
                                 <div class="col-12 col-xl-6 pt-5">
                                   <div class="form-outline mb-4 mb-xl-5">
                                     <input type="text" class="form-control form-control-lg" siez="17"
-                                      placeholder="1111 2222 3333 4444" minlength="19" maxlength="19" v-model="cardNumber"/>
+                                      placeholder="1111-2222-3333-4444" minlength="19" maxlength="19" v-model="cardNumber"/>
                                     <label class="form-label">Card Number</label>
                                   </div>
               
@@ -125,7 +125,7 @@
               
                         </div>
                       </div>
-              
+                      <a v-if="pdfURL !== null" :href="pdfURL" download="Order-summary.pdf">Download PDF</a>
                     </div>
                   </div>
                 </div>

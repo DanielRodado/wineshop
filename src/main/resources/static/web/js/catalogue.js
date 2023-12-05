@@ -28,10 +28,12 @@ new Vue({
         registerLastName: "",
         registerPass: "",
         registerEmail: "",
+        isAuthenticated: false
     },
 
     created() {
         this.getWines();
+        this.isLoggedIn();
     },
 
     methods: {
@@ -141,7 +143,11 @@ new Vue({
                 : wineList;
         },
         wineFilters() {
-            this.winesFilter = this.filterSparkling(this.filterVariety(this.filterArea(this.filterVineyard(this.wines))));
+            this.winesFilter = this.filterSparkling(
+                this.filterVariety(
+                    this.filterArea(this.filterVineyard(this.wines))
+                )
+            );
         },
         resetFilters() {
             this.vineyarsSelected = [];
@@ -151,117 +157,159 @@ new Vue({
         },
         login() {
             let infoLogin = `email=${this.email}&password=${this.password}`;
-      
+
             axios
-              .post("/api/login", infoLogin)
-              .then((response) => {
-                console.log("Successful request", response.data);
-      
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Welcome",
-                  showConfirmButton: false,
-                  timer: 2000,
+                .post("/api/login", infoLogin)
+                .then((response) => {
+                    console.log("Successful request", response.data);
+                    Swal.fire({
+                        icon: "success",
+                        title: "<span style='color: #000;'>Welcome!</span>",
+                        text: "Successful login",
+                        customClass: {
+                            popup: "text-center",
+                        },
+                        color: "#000",
+                        background: "#fff",
+                        confirmButtonColor: "#880000",
+                    });
+                })
+                .catch((err) => {
+                    if ((this.email = "" || this.password === "")) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "<span style='color: #000;'>Please complete all information!</span>",
+                            customClass: {
+                                popup: "text-center",
+                            },
+                            color: "#000",
+                            background: "#fff",
+                            confirmButtonColor: "#880000",
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "<span style='color: #000;'>Error...</span>",
+                            text: "User or password is invalid",
+                            customClass: {
+                                popup: "text-center",
+                            },
+                            color: "#000",
+                            background: "#fff",
+                            confirmButtonColor: "#880000",
+                        });
+                    }
+                })
+                .finally(() => {
+                    this.email = "";
+                    this.password = "";
                 });
-                setTimeout(() => {
-                  location.pathname = "/web/pages/catalogue.html";
-                }, 1500);
-              })
-              .catch((err) => {
-                console.log(err);
-                if ((this.email = "" || this.password === "")) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Error...",
-                    text: "Please complete all information",
-                    showConfirmButton: false,
-                    timer: 2000,
-                  });
-                } else {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Invalid user",
-                    text: "User or password is invalid",
-                    showConfirmButton: false,
-                    timer: 2000,
-                  });
-                }
-              })
-              .finally(() => {
-                this.email = "";
-                this.password = "";
-              });
-          },
-      
-          logOut(){
-            axios.post('/api/logout')
-            .then(response => {
-              console.log('signed out!!!');
-              Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'Your session has been closed',
-                showConfirmButton: false,
-                timer: 2000
-              })
-              setTimeout(()=> {
-                window.location.href = '/index.html';
-              },3000);
-              
-      
-            })
-            .catch(err=>console.log("error"))
-           }, 
-      
-          register() {
-            
+        },
+        logOut() {
+            axios
+                .post("/api/logout")
+                .then(() => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "<span style='color: #000;'>Your session has been closed</span>",
+                        color: "#000",
+                        background: "#fff",
+                        showConfirmButton: false,
+                    });
+                    setTimeout(() => {
+                        location.pathname = "/index.html";
+                    }, 1875);
+                })
+                .catch((err) => console.log("error"));
+        },
+        register() {
             let registerInfo = {
-              firstName: this.registerName,
-              lastName: this.registerLastName,
-              email: this.registerEmail,
-              password: this.registerPass,
-              birthDate: this.registerBirthDate,
+                firstName: this.registerName,
+                lastName: this.registerLastName,
+                email: this.registerEmail,
+                password: this.registerPass,
+                birthDate: this.registerBirthDate,
             };
             console.log(registerInfo);
-      
+
             axios
-              .post("/api/clients", registerInfo)
-      
-              .then((response) => {
-                console.log("registered");
-      
-                
-      
-                
-                let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
-      
-                axios.post("/api/login", infoLogin).then((response) => {
-                  
-      
-                  location.pathname = "/web/pages/catalogue.html";
+                .post("/api/clients", registerInfo)
+
+                .then((response) => {
+                    console.log("registered");
+
+                    let infoLogin = `email=${this.registerEmail}&password=${this.registerPass}`;
+
+                    axios.post("/api/login", infoLogin).then((response) => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "<span style='color: #000;'>Welcome!</span>",
+                            text: "Successful registration",
+                            customClass: {
+                                popup: "text-center",
+                            },
+                            color: "#000",
+                            background: "#fff",
+                            confirmButtonColor: "#880000",
+                        });
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.messageError(err.response.data);
+                })
+                .finally(() => {
+                    this.email = "";
+                    this.password = "";
+                    this.name = "";
+                    this.lastName = "";
+                    this.birthDate = "";
                 });
-              })
-              .catch((err) => {
-                console.log(err);
-                this.messageError(err.response.data);
-              })
-              .finally(() => {
-                this.email = "";
-                this.password = "";
-                this.name = "";
-                this.lastName = "";
-                this.birthDate = "";
-              });
-          },
-          winesFilterer() {
-            if(this.winesFilter.length <= 16) {
-                return this.winesFilter
+        },
+        winesFilterer() {
+            if (this.winesFilter.length <= 16) {
+                return this.winesFilter;
+            } else {
+                return this.winesFilter.slice(
+                    (this.pageNumber - 1) * 16,
+                    this.pageNumber * 16
+                );
             }
-            else {
-                return this.winesFilter.slice((this.pageNumber-1)*16, this.pageNumber*16)
-            }
-          }
+        },
+        isLoggedIn() {
+            axios("/api/clients/online")
+                .then(() => {
+                    this.isAuthenticated = true;
+                })
+                .catch(() => {
+                    this.isAuthenticated = false;
+                });
+        },
+        goToCheckout() {
+            axios("/api/clients/online")
+                .then((res) => {
+                    location.pathname = "/web/pages/checkout.html";
+                })
+                .catch((err) => {
+                    $("#exampleModal").modal("show");
+                    $("#offcanvasScrolling").offcanvas("hide");
+                });
+        },
+        messageError(message) {
+            Swal.fire({
+                icon: "error",
+                title: "<span style='color: #000;'>An error has occurred</span>",
+                text: message,
+                customClass: {
+                    popup: "text-center",
+                },
+                titleColor: "#000",
+                color: "#000",
+                background: "#fff",
+                confirmButtonColor: "#880000",
+            });
+        },
     },
     computed: {
         pageNumber() {
@@ -279,24 +327,22 @@ new Vue({
                 0
             );
         },
-
-        
     },
     watch: {
         winesFilter() {
             this.countPages();
         },
         vineyarsSelected() {
-            this.wineFilters()
+            this.wineFilters();
         },
         areaSelected() {
-            this.wineFilters()
+            this.wineFilters();
         },
         varietySelected() {
-            this.wineFilters()
+            this.wineFilters();
         },
         typeWine() {
-            this.wineFilters()
-        }
+            this.wineFilters();
+        },
     },
 });
