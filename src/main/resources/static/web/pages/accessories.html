@@ -124,11 +124,11 @@
           </header>
 
             <main>
-                <div class="container-fluid">
+                <div class="container-fluid mt-2 mb-2 mb-md-4 mt-md-4">
                   <div class="row">
                       <div class="col-12">
-                        <section>
-                          <div class="d-flex flex-column flex-md-row flex-wrap mt-3 position-relative" :class="{'hg-loading': loader}">
+                        <section class="container-lg">
+                          <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-between flex-wrap mt-3 position-relative" :class="{'hg-loading': loader}">
                               <div v-for="accessory of accessoriesFilter.slice((pageNumber-1)*16, pageNumber*16)" class="container-lg page-wrapper border-style-filter mb-3">
                                   <div class="page-inner">
                                       <div class="row">
@@ -142,7 +142,7 @@
                                                     <div class="a-size">
                                                         Stock: <span class="size">{{accessory.stock}}</span>
                                                         <br>
-                                                        <span class="size" role="button" data-bs-toggle="modal" data-bs-target="#staticDetailsaccessory" @click="accessoryDetails(accessory)">See details</span>
+                                                        <span class="size" role="button" data-bs-toggle="modal" data-bs-target="#staticDetailsAccessory" @click="accessoryDetails(accessory)">See details</span>
                                                     </div>
                                                   </div>
                                               </div>
@@ -154,10 +154,12 @@
                                       
                                                   
                                                   <div role="button" class="cart">
-                                                      <span v-if="!cart.some(product => product.id === accessory.id)" class="price">${{accessory.price}}</span>
+                                                    <span v-if="accessory.stock === 0" class="price text-danger">NO STOCK</span>
+                                                      <span v-else-if="!cart.some(product => product.id === accessory.id)" class="price">${{accessory.price}}</span>
                                                       <span v-else class="price" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden;">Delete from cart</span>
                                                       <span class="add-to-cart">
-                                                          <span class="txt" v-if="!cart.some(product => product.id === accessory.id)" @click="addToCart(accessory)">Add to cart</span>
+                                                          <span v-if="accessory.stock === 0" class="txt">NO STOCK</span>
+                                                          <span class="txt" v-else-if="!cart.some(product => product.id === accessory.id)" @click="addToCart(accessory)">Add to cart</span>
                                                           <span class="txt" v-else @click="deleteaccessoryFromCart(accessory)">Delete from cart</span>
                                                       </span>
                                                   </div>
@@ -192,43 +194,43 @@
                 <!-- Modal -->
             </main>
             
-          <div class="modal fade" id="staticDetailsWine" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="card--modal">
-                    <div class="card--modal__title">
-                      <h3>{{accessoryDetail.name}}</h3>
-                    </div>
-                    <div class="card--modal__body d-flex flex-column">
-                      <div class="half">
-                        <div class="featured_text">
-                          <p class="price">${{accessoryDetail.price.toLocaleString()}}</p>
-                        </div>
-                        <div class="image">
-                          <img :src="accessoryDetail.imgURL[0]" :alt="accessoryDetail.name+' img'">
-                        </div>
+            <div class="modal fade" id="staticDetailsAccessory" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card--modal">
+                      <div class="card--modal__title">
+                        <h3>{{accessoryDetail.name}}</h3>
                       </div>
-                      <div class="half mb-2">
-                        <div class="description">
-                          <p class="text-center">{{accessoryDetail.description}}</p>
+                      <div class="card--modal__body d-flex flex-column">
+                        <div class="half">
+                          <div class="featured_text">
+                            <p class="price">${{accessoryDetail.price.toLocaleString()}}</p>
+                          </div>
+                          <div class="image">
+                            <img :src="accessoryDetail.imgURL[0]" :alt="accessoryDetail.name+' img'">
+                          </div>
                         </div>
-                        <p v-if="accessoryDetail.stock >= 1" class="stock mb-0">In stock</p>
-                        <p v-else class="text-danger mb-0">No stock</p>
+                        <div class="half mb-2">
+                          <div class="description">
+                            <p class="text-center">{{accessoryDetail.description}}</p>
+                          </div>
+                          <p v-if="accessoryDetail.stock >= 1" class="stock mb-0">In stock</p>
+                          <p v-else class="stock text-danger mb-0">Not stock</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
           <!--Cart-->
           <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
@@ -236,7 +238,7 @@
               <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div class="offcanvas-body position-relative">
               <div v-if="loader" class="loader--loader">
                 <div class="justify-content-center jimu-primary-loading"></div>
               </div>
@@ -282,7 +284,7 @@
                     </div>
                     <div class="checkout--footer">
                       <label class="price "><sup>$</sup>{{(priceOfTheCart+2.99).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
-                     <a href="/web/pages/checkout.html"> <button class="checkout-btn"  >Checkout</button></a> 
+                     <button class="checkout-btn" type="button" @click="goToCheckout">Checkout</button>
                     </div>
                   </div>
                 </div>
