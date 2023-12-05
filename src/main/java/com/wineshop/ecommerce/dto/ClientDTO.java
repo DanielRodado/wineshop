@@ -18,6 +18,8 @@ public class ClientDTO {
 
     private Set<PurchaseDTO> purchases;
 
+    private Boolean isAdmin;
+
     // Constructor
 
     public ClientDTO (Client client) {
@@ -27,6 +29,7 @@ public class ClientDTO {
         this.email = client.getEmail();
         this.birthDate = client.getBirthDate();
         this.purchases = client.getPurchases().stream().map(PurchaseDTO::new).collect(Collectors.toSet());
+        this.isAdmin = client.getAdmin();
     }
 
     // Getters
@@ -53,5 +56,9 @@ public class ClientDTO {
 
     public Set<PurchaseDTO> getPurchases() {
         return purchases;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
     }
 }

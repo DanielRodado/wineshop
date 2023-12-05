@@ -8,7 +8,8 @@ createApp({
         orderNotFound: false,
         orderRecieved: false,
         orderStatus: "",
-        newOrderStatus: ""
+        newOrderStatus: "",
+        loader: false,
     };
   },
 
@@ -17,9 +18,6 @@ createApp({
   },
 
   methods: {
-    compareIds(a, b) {
-      return a.id - b.id;
-    },
 
     getOrderStatus() {
         this.orderNotFound = false
@@ -32,20 +30,20 @@ createApp({
             .then((response) => {
                 this.orderStatus = response.data
                 this.orderRecieved = true
-                console.log(response)
             })
             .catch(error => {
                 this.orderNotFound = true
                 this.orderStatus = error.response.data
-                console.log(error);
             })
 
     },
 
     updateStatus(){
+      this.loader = true;
       axios
         .patch("/api/purchase/status", `purchaseId=${this.orderId}&purchaseStatus=${this.newOrderStatus}`)
         .then(response => {
+          this.loader = false;
           Swal.fire({
             icon: "success",
             title: "Order status changed",
@@ -57,6 +55,7 @@ createApp({
         setTimeout(() => location.pathname = "/web/admin/manage-order-status.html", 3000)
         })
         .catch(error =>{
+          this.loader = false;
           this.errorMessage(error.response.data)
         })
     },

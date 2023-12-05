@@ -51,7 +51,7 @@ createApp({
     axios
         .get("/api/wines")
         .then((response) => {
-          this.wines = response.data.sort(this.compareIds);
+          this.wines = response.data.sort(this.compareStocks);
           this.filteredWines = this.wines;
         })
         .catch((error) => {
@@ -62,7 +62,7 @@ createApp({
     axios
         .get("/api/accessories")
         .then((response) => {
-          this.accessories = response.data.sort(this.compareIds);
+          this.accessories = response.data.sort(this.compareStocks);
         })
         .catch((error) => {
           console.log("error")
@@ -95,6 +95,10 @@ createApp({
 
     compareIds(a, b) {
       return a.id - b.id;
+    },
+
+    compareStocks(a, b) {
+      return a.stock - b.stock;
     },
 
     setWineToEdit(wine){

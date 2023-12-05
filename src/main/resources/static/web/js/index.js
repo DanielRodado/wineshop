@@ -14,6 +14,7 @@ createApp({
       registerEmail: "",
       cart: [],
       priceOfTheCart: 0,
+      clientIsAdmin: false
     };
   },
 
@@ -34,9 +35,21 @@ createApp({
 
     });
     this.cart = JSON.parse(localStorage.getItem("cart")) || [];
+    this.getCurrentClient()
   },
 
   methods: {
+    getCurrentClient() {
+      axios
+      .get("/api/clients/current")
+      .then((response) => {
+          this.clientIsAdmin = response.data.admin
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+    },
+
     messageError(message) {
       Swal.fire({
         icon: "error",

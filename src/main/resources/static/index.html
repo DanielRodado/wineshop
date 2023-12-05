@@ -16,7 +16,6 @@
 <body>
 <div id="app" v-cloak>
   {{calculatePriceOfTheCart}}
-  <!--{{isLoggedIn()}}-->
   <!--Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div v-if="!isLoggedIn()" class="modal-dialog">
@@ -44,19 +43,7 @@
           </div>
         </div>
       </div>
-      <!-- modal de logout
-      <div v-else class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body d-flex justify-content-center align-items-center">
-              <button class="btn btn-danger">Logout</button>
-          </div>
-        </div>
-      </div>
-      -->
+      
     </div>  
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -114,20 +101,32 @@
                 <i class="fa-solid fa-store text-light fs-5"></i>
                 <a href="/web/pages/accessories.html" class="nav-link text-light fs-5">ACCESSORIES</a>
               </li>
+              
             </ul>
           </div>
-          <div class="d-flex align-items-center">
-            <div class="iconNav">
-                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
-                  <i class="fa-solid fa-circle-user text-light fs-5"></i>
-                  <p class="m-1 text-light fs-5">ACCOUNT</p>
-                </a>
+          <div class="d-flex flex-column gap-2 justify-content-center align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="iconNav">
+                  <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
+                    <i class="fa-solid fa-circle-user text-light fs-5"></i>
+                    <p class="m-1 text-light fs-5">ACCOUNT</p>
+                  </a>
+              </div>
+              <div class="iconNav">
+                  <a role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
+                    <i class="fa-solid fa-cart-shopping text-light fs-5"></i>
+                    <p class="m-1 text-light fs-5">CART</p>
+                  </a>
+              </div>
             </div>
-            <div class="iconNav">
-                <a role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="d-flex justify-content-center align-items-center text-white text-decoration-none gap-2">
-                  <i class="fa-solid fa-cart-shopping text-light fs-5"></i>
-                  <p class="m-1 text-light fs-5">CART</p>
-                </a>
+            <div v-if="clientIsAdmin" class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                ADMIN PAGES
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/web/admin/add-inventory.html">INVENTORY</a></li>
+                <li><a class="dropdown-item" href="/web/admin/manage-order-status.html">ORDERS</a></li>
+              </ul>
             </div>
           </div>
         </div>
@@ -182,7 +181,7 @@
                 </div>
                 <div class="d-flex justify-content-evenly align-items-center m-2"style="min-width: 6px;">
                     <img src="web/images/envio-24-02-2022.png" style="height: 3rem;" >
-                    <p class=" fst-italic fs-6"> NATIONAL COVERAGE </p>
+                    <p class=" fst-italic fs-6"> NATIONAL COVERAGE</p>
                 </div>    
             </div>
             <div class="container">

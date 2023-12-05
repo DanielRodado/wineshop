@@ -80,31 +80,31 @@ new Vue({
           this.accessoryDetail = accessory;
           console.log(accessory);
       },
-      addToCart(wine) {
-          wine.amount = 1;
-          wine.subTotal = wine.price * wine.amount;
-          this.cart.push(wine);
+      addToCart(accessory) {
+          accessory.amount = 1;
+          accessory.subTotal = accessory.price * accessory.amount;
+          this.cart.push(accessory);
           this.saveLocalStorage();
       },
-      addMoreWinesToCart(wine) {
-          wine.amount++;
-          wine.subTotal = wine.price * wine.amount;
+      addMoreWinesToCart(accessory) {
+          accessory.amount++;
+          accessory.subTotal = accessory.price * accessory.amount;
           this.cart.push();
           this.saveLocalStorage();
       },
-      substractOneWine(wine) {
-          wine.amount--;
-          wine.subTotal = wine.price * wine.amount;
-          if (wine.amount === 0) {
-              this.cart = this.cart.filter((wines) => wines.amount >= 1);
+      substractOneWine(accessory) {
+          accessory.amount--;
+          accessory.subTotal = accessory.price * accessory.amount;
+          if (accessory.amount === 0) {
+              this.cart = this.cart.filter((accessories) => accessories.amount >= 1);
           }
           this.cart.push();
           this.saveLocalStorage();
       },
-      deleteWineFromCart(wine) {
-          wine.amount = 0;
-          wine.subTotal = 0;
-          this.cart = this.cart.filter((wines) => wines.id !== wine.id);
+      deleteWineFromCart(accessory) {
+          accessory.amount = 0;
+          accessory.subTotal = 0;
+          this.cart = this.cart.filter((accessories) => accessories.id !== wine.id);
           this.saveLocalStorage();
       },
       saveLocalStorage() {
@@ -219,11 +219,10 @@ new Vue({
   },
   computed: {
       pageNumber() {
-          this.winesFilter = this.winesFilter.slice(
+          this.accessoriesFilter = this.accessoriesFilter.slice(
               (pageNumber - 1) * 16,
               pageNumber * 16
           );
-          console.log(this.varietySelected);
       },
 
       calculatePriceOfTheCart() {
