@@ -14,6 +14,38 @@ createApp({
     },
 
     methods: {
+        getOrderDetails(id) {
+            axios({
+                method: "post",
+                url: `/api/purchase/order/receipt?purchaseId=${id}`,
+                responseType: "blob",
+            })
+                .then((response) => {
+
+                    let link = document.createElement("a");
+                    link.href = URL.createObjectURL(
+                        new Blob([response.data], { type: "application/pdf" })
+                    );
+                    link.setAttribute("download", "account-details.pdf");
+                    link.click();
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "<span style='color: #000;'>Done!</span>",
+                        text: "Order receipt downloaded",
+                        customClass: {
+                            popup: "text-center",
+                        },
+                        color: "#000",
+                        background: "#fff",
+                        confirmButtonColor: "#880000",
+                    });
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+        },
+
         getOrders(){
             axios
             .get('/api/purchase/client')
