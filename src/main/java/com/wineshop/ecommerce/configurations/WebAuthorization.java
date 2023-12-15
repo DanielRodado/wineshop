@@ -29,7 +29,7 @@ public class WebAuthorization {
                 .antMatchers(HttpMethod.POST, "/api/clients", "/api/login", "api/logout").permitAll()
                 .antMatchers(HttpMethod.GET, "/web/pages/checkout.html", "/web/pages/orders.html", "/api/clients/current",
                         "/api/purchase/status", "/api/purchase/client").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST, "/api/purchase", "/api/purchase/order/receipt").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/purchase", "/api/purchase/order/receipt", "/api/wines/ranking").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.GET, "/api/clients", "/api/purchase/status/admin",
                         "/web/admin/**", "/api/wines/varieties").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/api/wines/edit/**", "/api/purchase/status").hasAuthority("ADMIN")

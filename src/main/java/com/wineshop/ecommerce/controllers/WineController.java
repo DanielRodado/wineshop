@@ -34,7 +34,7 @@ public class WineController {
             return new ResponseEntity<>("The wine you are trying to value does not exist", HttpStatus.FORBIDDEN);
         }
 
-        if (valuation < 1 || valuation > 10) {
+        if (valuation < 1 || valuation > 5) {
             return new ResponseEntity<>("Valuation score has to be between 1 and 10", HttpStatus.FORBIDDEN);
         }
 
