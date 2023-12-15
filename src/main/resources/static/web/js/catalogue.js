@@ -28,7 +28,8 @@ new Vue({
         registerLastName: "",
         registerPass: "",
         registerEmail: "",
-        isAuthenticated: false
+        isAuthenticated: false,
+        rankingWine: 0
     },
 
     created() {
