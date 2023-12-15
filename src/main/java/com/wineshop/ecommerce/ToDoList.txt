@@ -1,0 +1,7 @@
+Order tracking
+- pagina para clientes para que puedan ver sus purchases asociadas y el estado de esta
+
+Valuations
+- habilitar que se vea la valuation en las cards y descripcion de los vinos y accesorios
+- buscar una forma en la que clientes puedan valorar un vino o accesorio
+- dar valoraciones para que no quede vacio

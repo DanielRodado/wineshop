@@ -100,7 +100,7 @@ new Vue({
             this.cart.push();
             this.saveLocalStorage();
         },
-      deleteWineFromCart(wine) {
+        deleteWineFromCart(wine) {
           wine.amount = 0;
           wine.subTotal = 0;
           this.cart = this.cart.filter((wines) => wines.id !== wine.id);
@@ -109,7 +109,6 @@ new Vue({
         saveLocalStorage() {
             localStorage.setItem("cart", JSON.stringify(this.cart));
         },
-      },
         login() {
             let infoLogin = `email=${this.email}&password=${this.password}`;
 
@@ -272,5 +271,4 @@ new Vue({
             );
         },
     },
-    watch: {},
 });

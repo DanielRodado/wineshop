@@ -3,19 +3,19 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            email: "",
-            password: "",
-            showLogin: true,
-            errorEmail: false,
-            registerBirthDate: "",
-            registerName: "",
-            registerLastName: "",
-            registerPass: "",
-            registerEmail: "",
-            cart: [],
-            priceOfTheCart: 0,
-           clientIsAdmin: false
-           isAuthenticated: false
+          email: "",
+          password: "",
+          showLogin: true,
+          errorEmail: false,
+          registerBirthDate: "",
+          registerName: "",
+          registerLastName: "",
+          registerPass: "",
+          registerEmail: "",
+          cart: [],
+          priceOfTheCart: 0,
+          clientIsAdmin: false,
+          isAuthenticated: false
         };
     },
 
@@ -44,16 +44,16 @@ createApp({
     },
 
     methods: {
-    getCurrentClient() {
-      axios
-      .get("/api/clients/current")
-      .then((response) => {
-          this.clientIsAdmin = response.data.admin
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-    },
+        getCurrentClient() {
+          axios
+          .get("/api/clients/current")
+          .then((response) => {
+              this.clientIsAdmin = response.data.admin
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+        },
 
         messageError(message) {
             Swal.fire({
@@ -146,6 +146,7 @@ createApp({
                 .post("/api/logout")
                 .then(() => {
                     this.isLoggedIn();
+                    this.clientIsAdmin = false
                     Swal.fire({
                         icon: "success",
                         title: "<span style='color: #000;'>Your session has been closed!</span>",

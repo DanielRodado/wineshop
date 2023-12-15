@@ -9,7 +9,6 @@ createApp({
         orderRecieved: false,
         orderStatus: "",
         newOrderStatus: "",
-        loader: false,
     };
   },
 
@@ -39,11 +38,9 @@ createApp({
     },
 
     updateStatus(){
-      this.loader = true;
       axios
         .patch("/api/purchase/status", `purchaseId=${this.orderId}&purchaseStatus=${this.newOrderStatus}`)
         .then(response => {
-          this.loader = false;
           Swal.fire({
             icon: "success",
             title: "Order status changed",
@@ -55,7 +52,6 @@ createApp({
         setTimeout(() => location.pathname = "/web/admin/manage-order-status.html", 3000)
         })
         .catch(error =>{
-          this.loader = false;
           this.errorMessage(error.response.data)
         })
     },

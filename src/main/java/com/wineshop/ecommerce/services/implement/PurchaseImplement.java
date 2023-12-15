@@ -1,11 +1,15 @@
 package com.wineshop.ecommerce.services.implement;
 
+import com.wineshop.ecommerce.dto.PurchaseDTO;
 import com.wineshop.ecommerce.models.Client;
 import com.wineshop.ecommerce.models.Purchase;
 import com.wineshop.ecommerce.repositories.PurchaseRepository;
 import com.wineshop.ecommerce.services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PurchaseImplement implements PurchaseService {
@@ -47,5 +51,15 @@ public class PurchaseImplement implements PurchaseService {
     @Override
     public Boolean existsPurchaseByIdAndClient(Long id, Client client) {
         return purchaseRepository.existsByIdAndClient(id, client);
+    }
+
+    @Override
+    public Set<Purchase> getPurchasesByClient(Client client) {
+        return purchaseRepository.getPurchasesByClient(client);
+    }
+
+    @Override
+    public Set<PurchaseDTO> getPurchaseDTOByClient(Client client) {
+        return getPurchasesByClient(client).stream().map(PurchaseDTO::new).collect(Collectors.toSet());
     }
 }

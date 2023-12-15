@@ -440,4 +440,11 @@ public class PurchaseController {
 
         return new ResponseEntity<>(purchaseStatus, HttpStatus.OK);
     }
+
+    @GetMapping("/purchase/client")
+    public ResponseEntity<Object> getClientsPurchases (Authentication authentication) {
+        Client client = clientService.findClientByEmail(authentication.getName());
+
+        return new ResponseEntity<>(purchaseService.getPurchaseDTOByClient(client), HttpStatus.OK);
+    }
 }

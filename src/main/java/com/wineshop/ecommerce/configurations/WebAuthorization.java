@@ -27,8 +27,8 @@ public class WebAuthorization {
                         "/web/css/**", "/web/js/**", "/web/images/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/wines", "/api/accessories", "/api/clients/online").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients", "/api/login", "api/logout").permitAll()
-                .antMatchers(HttpMethod.GET, "/web/pages/checkout.html", "/api/clients/current",
-                        "/api/purchase/status").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET, "/web/pages/checkout.html", "/web/pages/orders.html", "/api/clients/current",
+                        "/api/purchase/status", "/api/purchase/client").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/purchase").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.GET, "/api/clients", "/api/purchase/status/admin",
                         "/web/admin/**", "/api/wines/varieties").hasAuthority("ADMIN")

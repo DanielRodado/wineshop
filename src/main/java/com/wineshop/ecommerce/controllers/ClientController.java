@@ -94,4 +94,6 @@ public class ClientController {
 
         return new ResponseEntity<>("Register successful", HttpStatus.CREATED);
     }
+
+
 }
